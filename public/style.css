@@ -6717,9 +6717,9 @@ h3.widget-title-modal {
 }
 .account__form .forget_pass {
   color: #e59285;
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 18px;
-  display: block;
+  display: inline-block;
 }
 
 .account__form .form__btn .label-for-checkbox {
