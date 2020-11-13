@@ -6,6 +6,8 @@ const  path = require("path");
 const  cookieParser = require("cookie-parser");
 const  logger = require("morgan");
 const  hbs = require('express-handlebars');
+const hbshelpers = require('handlebars-helpers');
+const multihelpers = hbshelpers();
 
 const  indexRouter = require("./routes/index");
 const  usersRouter = require("./routes/users");
@@ -17,6 +19,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 app.engine( 'hbs', hbs( {
   extname: 'hbs',
+  helpers: multihelpers,
   defaultView: 'default',
   layoutsDir: __dirname + '/views/layout/',
   partialsDir: __dirname + '/views/partials/'

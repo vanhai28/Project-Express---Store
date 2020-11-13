@@ -133,7 +133,7 @@
                     <div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
                         <div class="row">
                             <!-- Start Single Product -->
-                            {{#each books}}
+                             {{#each books}}
                             <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                                 <div class="product__thumb">
                                     <a class="first__img" href="single-product.html"><img src={{image_book}} alt="product image"></a>
@@ -171,14 +171,13 @@
                             </div>
                             {{/each}}
                             <!-- End Single Product -->
-                         
-                  
+
                        
                     </div>
                      <ul class="wn__pagination">
                             {{#gt prevPage 0}}
                                 <li>
-                                    <a href="/book-shop?page={{prevPage}}" aria-label="Previous">
+                                    <a href="/book-shop?page={{prevPage}}" >
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Previous</span>
                                     </a>
@@ -198,12 +197,12 @@
                             <!--thay 10 bang so trang toi da -->
                              {{#gt nextPage 0}}
                                  <li>
-                                    <a href="/book-shop?page={{nextPage}} aria-label="Next">
+                                    <a href="/book-shop?page={{nextPage}}" >
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Next</span>
                                     </a>
                                 </li>
-                            {{/gt}}
+                            {{/gt}} 
                         </ul>
                     <div class="shop-grid tab-pane fade" id="nav-list" role="tabpanel">
                         <div class="list__view__wrapper">

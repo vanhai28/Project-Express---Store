@@ -5,7 +5,7 @@ const bookController = require('../controllers/book.controller')
 /* GET home page. */
 router.get('/',controllerDef.index);
 
-router.get('login/login',controllerDef.login);
+router.get('/login',controllerDef.login);
 
 router.get('/register', controllerDef.register);
 
