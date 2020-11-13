@@ -1,3 +1,6 @@
+const numPagePerPagination = 4;
+MAX_NUMBER_PAGE = 9 //this is got by API
+
 module.exports.listBook = ()=>{
     return  [{
   "image_book": "https://loremflickr.com/270/340",
@@ -603,5 +606,56 @@ module.exports.listBook = ()=>{
 }
 
 module.exports.getDisplayedBook = (page) => {
+  const bookList = this.listBook();
+  const productPerPage = 12;
+  const startIndex = (page-1) * productPerPage;
+  const endIndex = page*productPerPage;
 
+  return bookList.slice(startIndex, endIndex) ;
+}
+
+module.exports.pagination = (page) => {
+  let paginationArr = [];
+
+  let temp = 0;
+
+  if (page % numPagePerPagination == 0 ){
+    temp = numPagePerPagination - 1;
+
+    while (temp >=0){
+      paginationArr.push({'number': page - temp});
+      temp --;
+    } 
+
+    return paginationArr;
+  }
+
+  temp = 1;
+
+  while( page % numPagePerPagination - temp >= 0 ){
+     paginationArr.push({'number': page - (page % numPagePerPagination - temp)});
+      temp ++;
+  }
+
+  while( temp <= numPagePerPagination &&   page + (temp - page % numPagePerPagination ) <= MAX_NUMBER_PAGE){
+    paginationArr.push({'number': page + (temp - page % numPagePerPagination )});
+      temp ++;
+  }
+
+  return paginationArr;
+}
+
+module.exports.prevPage = ( currentMinPage )=>{
+  if (currentMinPage <  numPagePerPagination){
+    return 0;
+  }
+
+  return currentMinPage - 1;
+}
+module.exports.nextPage = ( currentMinPage )=>{
+  if (currentMinPage + numPagePerPagination <= MAX_NUMBER_PAGE ){
+    return currentMinPage + numPagePerPagination;
+  }
+
+  return 0;
 }
