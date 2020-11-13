@@ -1,9 +1,14 @@
-var express = require('express');
-var router = express.Router();
-
+const express = require('express');
+const router = express.Router();
+const controllerDef = require('../controllers/controller.default');
+const bookController = require('../controllers/book.controller')
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/',controllerDef.index);
+
+router.get('login/login',controllerDef.login);
+
+router.get('/register', controllerDef.register);
+
+router.get('/book-shop', bookController.bookShop)
 
 module.exports = router;
