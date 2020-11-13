@@ -9,7 +9,12 @@ module.exports.login =  function(req, res, next) {
 module.exports.register = function(req, res, next) {
  res.render('register/register', { title: 'Register' });
 }
-
+const bookListModel = require('../model/book/bookListModel');
 module.exports.bookShop = function(req, res, next){
-  res.render('./book/bookShop', {title:"book shop"})
+  const bookList = bookListModel.listBook();
+  const page = parseInt(req.query.page) ||1;
+  const productPerPage = 12;
+  const startIndex = (page-1) * productPerPage;
+  const endIndex = page*productPerPage;
+  res.render('./book/bookShop', {title:"book shop", books :bookList.slice(startIndex, endIndex) })
 }
