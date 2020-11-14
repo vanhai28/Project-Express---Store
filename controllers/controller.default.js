@@ -1,5 +1,13 @@
+const bookModel = require('../model/bookModel')
+
 module.exports.index =  function(req, res, next) {
-  res.render('index', { title: 'Home' });
+  res.render('index', { 
+    title: 'Home', 
+    newBook : bookModel.getNewProduct(),
+    listBook : bookModel.listBook(),
+    bestSellerBook : bookModel.getBestSellerBook()
+  }   
+    );
 };
 
 module.exports.login =  function(req, res, next) {
