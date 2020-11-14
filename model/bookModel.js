@@ -662,7 +662,7 @@ module.exports.nextPage = ( currentMinPage )=>{
 
 module.exports.getNewProduct = () =>{
   let listBook = this.listBook();
-  return listBook.slice(0, 6) ;
+  return listBook.slice(0, 7) ;
 }
 module.exports.getBestSellerBook = () =>{
   let listBook = this.listBook();

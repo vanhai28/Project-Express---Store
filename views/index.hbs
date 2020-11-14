@@ -142,7 +142,7 @@
 			</div>
 		</section>
 		<!-- End NEwsletter Area -->
-		<!-- Start Best Seller Area -->
+		<!-- Start s Area -->
 		<section class="wn__bestseller__area bg--white pt--80  pb--30">
 			<div class="container">
 				<div class="row">
@@ -169,53 +169,13 @@
 					<div class="row single__tab tab-pane fade show active" id="nav-all" role="tabpanel">
 						<div class="product__indicator--4 arrows_style owl-carousel owl-theme">
 							<div class="single__product">
-								{{!-- {{#each listBook}}
+								
 								<!-- Start Single Product -->
 								<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 									<div class="product product__style--3">
 										<div class="product__thumb">
-											<a class="first__img" href="single-product.html"><img src={{image_book}} alt={{book_name}}"></a>
-											<a class="second__img animation1" href="single-product.html"><img src={{image_book}} alt={{book_name}}></a>
-											<div class="hot__box">
-												<span class="hot-label">BEST SALER</span>
-											</div>
-										</div>
-										<div class="product__content content--center content--center">
-											<h4><a href="single-product.html">Ghost</a></h4>
-											<ul class="prize d-flex">
-												<li>{{current_cost}}</li>
-												<li class="old_prize">{{old_cost}}</li>
-											</ul>
-											<div class="action">
-												<div class="actions_inner">
-													<ul class="add_to_links">
-														<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-														<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-														<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-														<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-													</ul>
-												</div>
-											</div>
-											<div class="product__hover--content">
-												<ul class="rating d-flex">
-													<li class="on"><i class="fa fa-star-o"></i></li>
-													<li class="on"><i class="fa fa-star-o"></i></li>
-													<li class="on"><i class="fa fa-star-o"></i></li>
-													<li><i class="fa fa-star-o"></i></li>
-													<li><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-								{{/each}} --}}
-								<!-- Start Single Product -->
-								<!-- Start Single Product -->
-								<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-									<div class="product product__style--3">
-										<div class="product__thumb">
-											<a class="first__img" href="single-product.html"><img src="images/books/3.jpg" alt="product image"></a>
-											<a class="second__img animation1" href="single-product.html"><img src="images/books/9.jpg" alt="product image"></a>
+											<a class="first__img" href="single-product.html"><img src="images/books/1.jpg" alt="product image"></a>
+											<a class="second__img animation1" href="single-product.html"><img src="images/books/2.jpg" alt="product image"></a>
 											<div class="hot__box">
 												<span class="hot-label">BEST SALER</span>
 											</div>
@@ -248,6 +208,8 @@
 										</div>
 									</div>
 								</div>
+								<!-- Start Single Product -->
+								<!-- Start Single Product -->
 								<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 									<div class="product product__style--3">
 										<div class="product__thumb">
@@ -2238,7 +2200,7 @@
 			</div>
 		</section>
 
-		<!-- Best Seller Book -->
+		<!-- Best Seller Book Area -->
 		<section class="best-seel-area pt--10 pb--60">
 			<div class="container">
 				<div class="row">
@@ -2251,10 +2213,11 @@
 				</div>
 			</div>
 			<div class="slider center">
+				<!-- Single product start -->
 				{{#each bestSellerBook}}
 				<div class="product product__style--3">
 					<div class="product__thumb">
-						<a class="first__img" href="single-product.html"><img src={{image_book}} alt="product image"></a>
+						<a class="first__img" href="single-product.html"><img src={{image_book}} alt={{book_name}}></a>
 					</div>
 					<div class="product__content content--center">
 						<div class="action">
@@ -2278,19 +2241,12 @@
 						</div>
 					</div>
 				</div>
-			{{/each}}
-
+				{{/each}}
+			
 			</div>
 		</section>
 		<!-- Best Sale Area Area -->
+	
+	
 	</div>
 	<!-- //Main wrapper -->
-
-	<!-- JS Files -->
-	<script src="js/vendor/jquery-3.2.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/plugins.js"></script>
-	<script src="js/active.js"></script>
-	
-</body>
