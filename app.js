@@ -11,8 +11,13 @@ const multihelpers = hbshelpers();
 
 const  indexRouter = require("./routes/index");
 const  usersRouter = require("./routes/users");
+const mongoose = require('./config/db')
 
 const  app = express();
+
+// run mongoose
+mongoose.mongoose();
+
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
