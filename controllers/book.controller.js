@@ -20,7 +20,7 @@ module.exports.bookDetail = function(req, res, next){
    const array = bookModel.listBook();
 
    const f = array.find(x => x.ID_book == req.params.id );
-   res.render('./book/bookDetail', 
+   res.render('./pages/book/bookDetail', 
    { title:"Detail", 
     book_name_main: f.book_name, 
     current_cost_main: f.current_cost, 
