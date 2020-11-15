@@ -18,42 +18,18 @@ module.exports.bookShop = function(req, res, next){
 };
 
 module.exports.bookDetail = function(req, res, next){
-  const array = bookModel.listBook();
+   const array = bookModel.listBook();
 
    const f = array.find(x => x.ID_book == req.params.id );
    res.render('./book/bookDetail', 
-   { title:"Detail", book_name: f.book_name, current_cost: f.current_cost});
-}
+   { title:"Detail", 
+    book_name_main: f.book_name, 
+    current_cost_main: f.current_cost, 
+    image_book_main: f.image_book,
+    relatedBooks: bookModel.getRelatedBook(/*type*/),
+    upsellProducts: bookModel.getUpsellProduct(),
+    image_book_newProduct: array[20].image_book,
+   });
+  }
 
-// module.exports.bookDetail = async (req, res) => {
-//   var courses = await Courses.find().lean();
-//   coursesRender = courses.map(function (item) {
-//       item._id = item._id.toString();
-//       return item;
-//   })
-//   console.log(req.params.page);
-//   console.log(req.params.name);
-//   if (req.params.page ) {
-//       coursesRender = coursesRender.filter( x => x.categoryId === req.params.name);
-//       coursesRender = coursesRender.filter( x => x.topicId === req.params.page);
-      
-//   }
-//   if(req.query.topic)
-//   {
-//       if (req.query.sort === 'price_reduction') {
-//           coursesRender.sort(function (a, b) { return b.price - a.price });
-//       } else if (req.query.sort === 'price_increase') {
-  
-//           coursesRender.sort(function (a, b) { return a.price - b.price });
-//       } 
-//   }
-//   res.render('courses.hbs', {
-//       user: {
-//           sourse: "My Courses",
-//       },
-//       title: req.params.page,
-//       courses: coursesRender,
-//       sortCategory: req.params.name,
-//       sortTopic: req.params.page
-//   });
-// };
+
