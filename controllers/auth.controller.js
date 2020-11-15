@@ -7,7 +7,7 @@ exports.authLoginUser = async (req, res, next) => {
   const err = await authModel.authLoginAcc(emailOrUserName, pass);
 
   if (err) {
-    res.render("login/login", { title: "Login", err: err });
+    res.render("pages/login", { title: "Login", err: err });
   } else {
     res.redirect("/");
   }
