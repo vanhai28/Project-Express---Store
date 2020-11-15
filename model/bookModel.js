@@ -668,3 +668,13 @@ module.exports.getBestSellerBook = () =>{
   let listBook = this.listBook();
   return listBook.slice(0, 10) ;
 }
+
+module.exports.getRelatedBook = ()=>{
+  let listBook = this.listBook();
+  return listBook.slice(0, 6) ;
+}
+
+module.exports.getUpsellProduct = ()=>{
+  let listBook = this.listBook();
+  return listBook.slice(10, 16) ;
+}
