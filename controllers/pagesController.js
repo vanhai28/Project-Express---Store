@@ -1,11 +1,25 @@
 const bookModel = require("../model/bookModel");
-
+const arrModel = require("../model/arrayModel");
 module.exports.index = function (req, res, next) {
+  let aventureBook = bookModel.getBookByCatory("adventure", 12);
+  let biographicBook = bookModel.getBookByCatory("biographicBook", 12);
+  let cookBook = bookModel.getBookByCatory("cookBook", 12);
+  let childrenBook = bookModel.getBookByCatory("childrenBook", 12);
+
+  aventureBook = arrModel.modifyArray(aventureBook);
+  biographicBook = arrModel.modifyArray(biographicBook);
+  cookBook = arrModel.modifyArray(cookBook);
+  childrenBook = arrModel.modifyArray(childrenBook);
+
   res.render("index", {
     title: "Home",
     newBook: bookModel.getNewProduct(),
     listBook: bookModel.listBook(),
     bestSellerBook: bookModel.getBestSellerBook(),
+    biographicBook,
+    aventureBook,
+    childrenBook,
+    cookBook,
   });
 };
 

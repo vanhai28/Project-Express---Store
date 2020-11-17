@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const controllerDef = require("../controllers/controller.default");
-const bookController = require("../controllers/book.controller");
-const authController = require("../controllers/auth.controller");
+const controllerDef = require("../controllers/pagesController");
+const bookController = require("../controllers/bookController");
+const authController = require("../controllers/authController");
 
 /* GET home page. */
 router.get("/", controllerDef.index);
