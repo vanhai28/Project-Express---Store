@@ -11,8 +11,19 @@ const multihelpers = hbshelpers();
 
 const  indexRouter = require("./routes/index");
 const  usersRouter = require("./routes/users");
+const mongoose = require('./config/db')
 
 const  app = express();
+const bodyParser = require('body-parser')
+// const multer = require('multer') // v1.0.5
+// const upload = multer() // for parsing multipart/form-data
+
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+// run mongoose
+mongoose.mongoose();
+
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
