@@ -10,14 +10,14 @@ exports.validAccount = async (req, res, next) => {
   const checkUserEmail = await userMongooseModel.findOne({ user_email });
 
   if (checkUserName) {
-    res.render("register/register", {
+    res.render("pages/register", {
       title: "Register",
       err: "user name is already exist",
     });
     return;
   }
   if (checkUserEmail) {
-    res.render("register/register", {
+    res.render("pages/register", {
       title: "Register",
       err: "email is already exist",
     });
@@ -25,7 +25,7 @@ exports.validAccount = async (req, res, next) => {
   }
 
   if (password !== re_password) {
-    res.render("register/register", {
+    res.render("pages/register", {
       title: "Register",
       err: "password is not match",
     });

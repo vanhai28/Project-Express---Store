@@ -14,7 +14,7 @@ exports.addUser = async function (req, res) {
       res.redirect("/login");
     });
   } catch (err) {
-    res.render("register/register", {
+    res.render("pages/register", {
       title: "Register",
       err: "You can’t create an account right now. Try again later!!",
     });
