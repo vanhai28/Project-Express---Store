@@ -70,18 +70,26 @@ const Book = require("../model/mongooseModel/bookMongooseModel");
     //  });
   
   
-    // const bookId = req.params.id;
-    // Book.findOne({_id: bookID}).then(function(f){
-    //   res.render('./pages/book/bookDetail', 
-    //   { title:"Detail", 
-    //     book_name_main: f.book_name, 
-    //     current_cost_main: f.current_cost, 
-    //     image_book_main: f.image_book,
-    //     relatedBooks: bookModel.getRelatedBook(/*type*/),
-    //     upsellProducts: bookModel.getUpsellProduct(),
-    //     image_book_newProduct: array[20].image_book,
-    //   });
-    // });
+    const bookId = req.params.id;
+
+    const relatedBooks = bookModel.getRelatedBook(/*type*/);
+    const upsellProducts = bookModel.getUpsellProduct();
+    
+
+    Book.findOne({_id: bookId}).then(function(f){
+      console.log(f);
+      
+      res.render('./pages/book/bookDetail', 
+      { title:"Detail", 
+        book_name_main: f.name, 
+        current_cost_main: parseInt(f.price), 
+        image_book_main: f.cover,
+        // main_detail1 = f.detail.toString(),
+        relatedBooks: relatedBooks,
+        upsellProducts: upsellProducts,
+        
+      });
+    });
      
   
   };
