@@ -902,3 +902,12 @@ module.exports.getBookByCatory = (catory, number = -1) => {
 
   return listBook;
 };
+
+module.exports.getItemsInPage = (page, ItemList) => {
+  const bookList = ItemList;
+  const productPerPage = 12;
+  const startIndex = (page - 1) * productPerPage;
+  const endIndex = page * productPerPage;
+
+  return bookList.slice(startIndex, endIndex);
+};

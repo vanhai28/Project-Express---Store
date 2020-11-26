@@ -137,18 +137,18 @@
                         {{#each books}}
                         <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                             <div class="product__thumb">
-                                <a class="first__img" href="/book-detail/{{ID_book}}"><img src={{image_book}}
-                                        alt="product image"></a>
-                                {{!-- <a class="second__img animation1" href="/book-detail/{{ID_book}}"><img src="/images/books/2.jpg" alt="product image"></a> --}}
+                                <a class="first__img" href="/book-detail/{{id}}"><img src={{picture1}}
+                                        alt="product image" class="imgBook"></a>
+                                <a class="second__img animation1" href="/book-detail/{{id}}"><img src={{picture2}}alt="product image" class="imgBook"></a>
                                 <div class="hot__box">
                                     <span class="hot-label">BEST SELLER</span>
                                 </div>
                             </div>
                             <div class="product__content content--center">
-                                <h4><a href="/book-detail/{{ID_book}}">{{book_name}}</a></h4>
+                                <h4><a href="/book-detail/{{id}}">{{name}}</a></h4>
                                 <ul class="prize d-flex">
-                                    <li>{{current_cost}}</li>
-                                    <li class="old_prize">{{old_cost}}</li>
+                                    <li>{{price}}</li>
+                                    <li class="old_prize">{{old_price}}</li>
                                 </ul>
                                 <div class="action">
                                     <div class="actions_inner">
@@ -222,16 +222,16 @@
 
                         <div class="list__view mt--40">
                             <div class="thumb">
-                                <a class="first__img" href="/book-detail/{{ID_book}}"><img src={{image_book}}
-                                        alt="product image""></a>
-                                {{!-- <a class="second__img animation1" href="single-product.html"><img
-                                        src="images/product/2.jpg" alt="product images"></a> --}}
+                                <a class="first__img" href="/book-detail/{{id}}"><img src={{picture1}}
+                                        alt="product image" class="imgBook"></a>
+                                <a class="second__img animation1" href="single-product.html"><img
+                                        src="{{picture2}}" alt="product images" class="imgBook"></a>
                                         <div class=" hot__box">
                                     <span class="hot-label">BEST SELLER</span>
                             </div>
                         </div>
                         <div class="content">
-                            <h2><a href="/book-detail/{{ID_book}}">{{book_name}}</a></h2>
+                            <h2><a href="/book-detail/{{id}}">{{name}}</a></h2>
                             <ul class="rating d-flex">
                                 <li class="on"><i class="fa fa-star-o"></i></li>
                                 <li class="on"><i class="fa fa-star-o"></i></li>
@@ -241,8 +241,8 @@
                                 <li><i class="fa fa-star-o"></i></li>
                             </ul>
                             <ul class="prize__box">
-                                <li>{{current_cost}}</li>
-                                <li class="old__prize">{{old_cost}}</li>
+                                <li>{{price}}</li>
+                                <li class="old__prize">{{old_price}}</li>
                             </ul>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec
                                 est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare

@@ -7909,6 +7909,11 @@ a.checkout__title {
   padding: 0;
 }
 
+.imgBook{
+  width: 270px;
+  height: 350px;
+}
+
 /*  Home Box Css */
 .wrapper-boxed-layout {
   margin: 0 100px;
