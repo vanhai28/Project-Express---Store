@@ -52,14 +52,17 @@
         						<div class="col-lg-6 col-12">
         							<div class="wn__fotorama__wrapper">
 	        							<div class="fotorama wn__fotorama__action" data-nav="thumbs">
+		        							  {{!-- <a href=""><img src="{{image_book_main_cover}}" alt="" class="imgBook"></a>
+		        							  <a href=""><img src="{{image_book_main_1}}" alt=""></a>
+		        							  <a href=""><img src="{{image_book_main_2}}" alt=""></a> --}}
+		        							  {{!-- <a href=""><img src="{{image_book_main}}" alt=""></a>
 		        							  <a href=""><img src="{{image_book_main}}" alt=""></a>
 		        							  <a href=""><img src="{{image_book_main}}" alt=""></a>
 		        							  <a href=""><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href=""><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href=""><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href=""><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href=""><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href=""><img src="{{image_book_main}}" alt=""></a>
+		        							  <a href=""><img src="{{image_book_main}}" alt=""></a> --}}
+											  {{#each images}}
+											  <a href=""><img src="{{this}}" alt=""></a>
+											  {{/each}}
 	        							</div>
         							</div>
         						</div>
@@ -75,12 +78,27 @@
     											<li class="off"><i class="zmdi zmdi-star-outline"></i></li>
         									</ul>
         								</div>
-        								<div class="price-box">
-        									<span>{{current_cost_main}}</span>
+        								<div>
+											<ul class="prize d-flex">
+												<li>{{current_cost_main}}</li>
+											</ul>
+        									
         								</div>
 										<div class="product__overview">
-        									<p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.</p>
-        									<p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. </p>
+        									{{!-- <details>
+												<span><summary>{{book_detail_short}}</summary>
+													{{book_detail_remain}}
+												</span>
+											</details> --}}
+											{{!-- <span>{{book_detail_short}}</span>
+											<span>
+												<details>
+													{{book_detail_remain}}
+												</details>
+											</span> --}}
+											
+										{{book_detail_short}}{{book_detail_remain}}
+											
         								</div>
         								<div class="box-tocart d-flex">
         									<span>Qty</span>
@@ -137,7 +155,7 @@
 	                        	<!-- Start Single Tab Content -->
 	                        	<div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
 									<div class="description__attribute">
-										<p>{{{main_detail1}}}</p>
+										<p></p>
 										<ul>
 											<li>• Two-tone gray heather hoodie.</li>
 											<li>• Drawstring-adjustable hood. </li>
@@ -146,11 +164,14 @@
 									</div>
 	                        	</div>
 	                        	<!-- End Single Tab Content -->
+
 	                        	<!-- Start Single Tab Content -->
-	                        	<div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">
+	                        	<div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">	
 									<div class="review__attribute">
 										<h1>Customer Reviews</h1>
-										<h2>Hastech</h2>
+										{{#each reviews}}
+										<div>
+										<h2 style="margin-bottom:10px;">{{userID}}</h2>
 										<div class="review__ratings__type d-flex">
 											<div class="review-ratings">
 												<div class="rating-summary d-flex">
@@ -164,7 +185,7 @@
 			    									</ul>
 												</div>
 
-												<div class="rating-summary d-flex">
+												{{!-- <div class="rating-summary d-flex">
 													<span>Price</span>
 			    									<ul class="rating d-flex">
 														<li><i class="zmdi zmdi-star"></i></li>
@@ -183,15 +204,27 @@
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
 			    									</ul>
-												</div>
+												</div> --}}
 											</div>
+											
+
 											<div class="review-content">
-												<p>Hastech</p>
-												<p>Review by Hastech</p>
-												<p>Posted on 11/6/2018</p>
+												
+												<p>Review by {{{userID}}}</p>
+												<p>{{date}}</p>
 											</div>
 										</div>
+										
+										</div>
+										<p>{{content}}</p>
+										<br>
+										<br>
+										{{/each}}
+
 									</div>
+									
+
+
 									<div class="review-fieldset">
 										<h2>You're reviewing:</h2>
 										<h3>{{book_name_main}}</h3>
@@ -247,6 +280,7 @@
 											</div>
 										</div>
 									</div>
+									
 	                        	</div>
 	                        	<!-- End Single Tab Content -->
 	                        </div>

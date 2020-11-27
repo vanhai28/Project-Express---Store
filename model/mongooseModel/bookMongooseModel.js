@@ -2,7 +2,7 @@ const mongoose = require('mongoose') ;
 
 const bookSchema = new mongoose.Schema({
   id: String,
-  name: String,
+  title: String,
   price:{
     _bsontype: 'Decimal128',
   },
@@ -11,11 +11,9 @@ const bookSchema = new mongoose.Schema({
   },
   category: String,
   detail: String,
-  reviewID: String,
+  images: Array,
+  best_seller: Boolean,
   cover: String,
-  picture1: String,
-  picture2: String,
-  best_seller: Boolean
 });
 const Book = mongoose.model('Book', bookSchema);
 module.exports = Book;
