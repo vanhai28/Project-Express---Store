@@ -12,6 +12,7 @@ exports.addUser = async (newUser) => {
         user_name: newUser.user_name,
         user_email: newUser.user_email,
         password: hash,
+        status: "active",
       });
 
       user

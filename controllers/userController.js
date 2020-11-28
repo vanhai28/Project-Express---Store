@@ -1,7 +1,7 @@
 const userModel = require("../model/userModel");
 
 exports.addUser = async function (req, res) {
-  const { user_name, user_email, password, re_password } = req.body;
+  const { user_name, user_email, password } = req.body;
 
   const newUser = {
     user_name,
