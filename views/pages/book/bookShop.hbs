@@ -194,7 +194,6 @@
                             <li class="page-item"><a class="page-link"
                                     href="/book-shop?page={{prevPage}}">{{prevPage}}</a></li>
 
-                             {{!-- href="?page=<%= previousPage %>"><%= previousPage %></a></li> --}}
                             {{/if}}
 
                             <li class="page-item active">
@@ -206,7 +205,6 @@
                                     href="/book-shop?page={{nextPage}}">{{nextPage}}</a></li>
                             {{/if}}
 
-                            {{!-- <% if(currentPage < lastPage){ %> --}}
                             {{#gt lastPage currentPage }}
                             <li class="page-item">
                                 <a class="page-link" href="/book-shop?page={{nextPage}}" aria-label="Next">

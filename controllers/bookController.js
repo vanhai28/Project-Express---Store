@@ -4,10 +4,6 @@ const Review = require("../model/mongooseModel/reviewMongooseModel");
 const User = require("../model/mongooseModel/userMongooseModel");
 
 const ITEM_PER_PAGE = 12;
-
-// let MAX_NUMBER_PAGE = Book.estimatedDocumentCount();
-// console.log("MAX_NUMBER_PAGE", MAX_NUMBER_PAGE);
-
 // CODE cu
 
 // module.exports.bookShop = function (req, res, next) {
