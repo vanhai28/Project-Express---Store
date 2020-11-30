@@ -108,13 +108,7 @@
             <div class="col-lg-9 col-12 order-1 order-lg-2">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
-                            <div class="shop__list nav justify-content-center" role="tablist">
-                                <a class="nav-item nav-link active" data-toggle="tab" href="#nav-grid" role="tab"><i
-                                        class="fa fa-th"></i></a>
-                                <a class="nav-item nav-link" data-toggle="tab" href="#nav-list" role="tab"><i
-                                        class="fa fa-list"></i></a>
-                            </div>
+                        <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">                           
                             <p>Showing 1–12 of 40 results</p>
                             <div class="orderby__wrapper">
                                 <span>Sort By</span>
@@ -137,8 +131,8 @@
                         {{#each books}}
                         <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                             <div class="product__thumb">
-                                <a class="first__img" href="/book-detail/{{_id}}"><img src={{cover}}
-                                        alt="product image" class="imgBook"></a>
+                                <a class="first__img" href="/book-detail/{{_id}}"><img src={{cover}} alt="product image"
+                                        class="imgBook"></a>
                                 {{!-- <a class="second__img animation1" href="/book-detail/{{_id}}"><img src={{picture2}} alt="product image" class="imgBook"></a> --}}
                                 <div class="hot__box">
                                     <span class="hot-label">BEST SELLER</span>
@@ -180,120 +174,54 @@
 
 
                     </div>
-                    <ul class="wn__pagination">
-                        {{#gt prevPage 0}}
-                        <li>
-                            <a href="/book-shop?page={{prevPage}}">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        {{/gt}}
 
-                        {{#each pagination}}
-                        {{#is number page}}
-                        <li class="active"><a href="/book-shop?page={{number}}">
-                                {{number}}</a>
-                        </li>
-                        {{/is}}
-                        {{#isnt number page}}
-                        <li><a href="/book-shop?page={{number}}"> {{number}}</a></li>
-                        {{/isnt}}
-                        {{/each}}
-                        <!--thay 10 bang so trang toi da -->
-                        {{#gt nextPage 0}}
-                        <li>
-                            <a href="/book-shop?page={{nextPage}}">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                        {{/gt}}
-                    </ul>
+                    <nav aria-label="Page navigation example" style="margin-top: 20px;">
 
-                </div>
+                        <ul class="pagination justify-content-center">
+                            
+                            {{#isnt currentPage 1}}
+                            <li class="page-item">
+                                <a class="page-link" href="/book-shop?page={{prevPage}}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            {{/isnt}}
 
 
 
-                <div class="shop-grid fade tab-pane " id="nav-list" role="tabpanel">
-                    <div class="list__view__wrapper">
-                        <!-- Start Single Product -->
-                        {{#each books}}
+                            {{#if hasPreviousPage}}
+                            <li class="page-item"><a class="page-link"
+                                    href="/book-shop?page={{prevPage}}">{{prevPage}}</a></li>
 
-                        <div class="list__view mt--40">
-                            <div class="thumb">
-                                <a class="first__img" href="/book-detail/{{_id}}"><img src={{picture}}
-                                        alt="product image"></a>
-                                {{!-- <a class="second__img animation1" href="single-product.html"><img
-                                        src="images/product/2.jpg" alt="product images"></a> --}}
-                                        <div class=" hot__box">
-                                    <span class="hot-label">BEST SELLER</span>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <h2><a href="/book-detail/{{_id}}">{{title}}</a></h2>
-                            <ul class="rating d-flex">
-                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                            </ul>
-                            <ul class="prize__box">
-                                <li>{{current_cost}}</li>
-                                <li class="old__prize">{{old_cost}}</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec
-                                est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare
-                                lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus
-                                eu, suscipit id nulla.</p>
-                            <ul class="cart__action d-flex">
-                                <li class="cart"><a href="cart.html">Add to cart</a></li>
-                                <li class="wishlist"><a href="cart.html"></a></li>
-                                <li class="compare"><a href="cart.html"></a></li>
-                            </ul>
+                            {{!-- href="?page=<%= previousPage %>"><%= previousPage %></a></li> --}}
+                            {{/if}}
 
-                        </div>
-                    </div>
-                    {{/each}}
-                </div>
+                            <li class="page-item active">
+                                <a class="page-link" href="javascript:void(0)" tabindex="-1">{{currentPage}}</a>
+                            </li>
 
-                <div class="mt--40">
-                    <ul class="wn__pagination">
-                        {{#gt prevPage 0}}
-                        <li>
-                            <a href="/book-shop?page={{prevPage}}">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        {{/gt}}
+                            {{#if hasNextPage}}
+                            <li class="page-item"><a class="page-link"
+                                    href="/book-shop?page={{nextPage}}">{{nextPage}}</a></li>
+                            {{/if}}
 
-                        {{#each pagination}}
-                        {{#is number page}}
-                        <li class="active"><a href="/book-shop?page={{number}}">
-                                {{number}}</a>
-                        </li>
-                        {{/is}}
-                        {{#isnt number page}}
-                        <li><a href="/book-shop?page={{number}}"> {{number}}</a></li>
-                        {{/isnt}}
-                        {{/each}}
-                        <!--thay 10 bang so trang toi da -->
-                        {{#gt nextPage 0}}
-                        <li>
-                            <a href="/book-shop?page={{nextPage}}">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                        {{/gt}}
-                    </ul>
+                            {{!-- <% if(currentPage < lastPage){ %> --}}
+                            {{#gt lastPage currentPage }}
+                            <li class="page-item">
+                                <a class="page-link" href="/book-shop?page={{nextPage}}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                            {{/gt}}
+
+                        </ul>
+                    </nav>
+                
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <!-- End Shop Page -->
