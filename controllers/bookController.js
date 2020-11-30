@@ -2,6 +2,7 @@ const bookModel = require("../model/bookModel");
 const Book = require("../model/mongooseModel/bookMongooseModel");
 const Review = require("../model/mongooseModel/reviewMongooseModel");
 
+const ITEM_PER_PAGE = 12;
 
 // let MAX_NUMBER_PAGE = Book.estimatedDocumentCount();
 // console.log("MAX_NUMBER_PAGE", MAX_NUMBER_PAGE);
