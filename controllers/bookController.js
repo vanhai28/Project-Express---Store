@@ -54,12 +54,12 @@ module.exports.bookShop = function (req, res, next) {
             res.render("pages/book/bookShop", {
               title: "Book shop",
               books: bookModel.getItemsInPage(page, books),
-              // hasNextPage: ITEM_PER_PAGE * page < totalBook,
-              // hasPreviousPage: page > 1,
-              // nextPage: page + 1,
-              // prevPage: page - 1,
-              // lastPage: Math.ceil(totalBook/ITEM_PER_PAGE),
-              // ITEM_PER_PAGE: ITEM_PER_PAGE,
+              hasNextPage: ITEM_PER_PAGE * page < totalBook,
+              hasPreviousPage: page > 1,
+              nextPage: page + 1,
+              prevPage: page - 1,
+              lastPage: Math.ceil(totalBook/ITEM_PER_PAGE),
+              ITEM_PER_PAGE: ITEM_PER_PAGE,
               currentPage: page
         })
       });
