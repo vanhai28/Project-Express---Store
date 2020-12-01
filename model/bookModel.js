@@ -7,14 +7,6 @@ module.exports.listBook = async () => {
   return listBook;
 };
 
-module.exports.getDisplayedBook = async (page) => {
-  const bookList = await this.listBook();
-  const productPerPage = 12;
-  const startIndex = (page - 1) * productPerPage;
-  const endIndex = page * productPerPage;
-
-  return bookList.slice(startIndex, endIndex);
-};
 
 module.exports.pagination = (page) => {
   let paginationArr = [];

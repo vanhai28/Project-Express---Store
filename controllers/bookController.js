@@ -31,10 +31,7 @@ module.exports.bookShop = function (req, res, next) {
 
 Render = function (book, reviews, res) {
   const book_detail_short = book.detail.slice(0, ShortDetailLength);
-  const book_detail_remain = book.detail.slice(
-    ShortDetailLength,
-    f.detail.length
-  );
+  const book_detail_remain = book.detail.slice(ShortDetailLength,f.detail.length);
   res.render("./pages/book/bookDetail", {
     title: "Detail",
     book_name_main: book.title,
@@ -52,14 +49,15 @@ Render = function (book, reviews, res) {
 exports.bookDetail = async function (req, res, next) {
   const bookId = req.params.id;
 
-  const relatedBooks = await bookModel.getBookByCatory();
-  const upsellProducts = await bookModel.getUpsellProduct();
-
   const ShortDetailLength = 400;
 
   let book = await Book.findOne({ _id: bookId });
 
   var reviews = await Review.find({ bookID: bookId }).lean();
+
+  const genre = book.category;
+  const relatedBooks = await bookModel.getBookByCatory(genre, 6);;
+  const upsellProducts = await bookModel.getBookByCatory(genre, 6);
 
   const book_detail_short = book.detail.slice(0, ShortDetailLength);
   const book_detail_remain = book.detail.slice(
@@ -73,8 +71,8 @@ exports.bookDetail = async function (req, res, next) {
     image_book_main_cover: book.cover,
     book_detail_short: book_detail_short,
     book_detail_remain: book_detail_remain,
-    //relatedBooks: relatedBooks,
-    //upsellProducts: upsellProducts,
+    relatedBooks: relatedBooks,
+    upsellProducts: upsellProducts,
     images: book.images,
     reviews: reviews,
   });
