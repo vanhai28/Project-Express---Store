@@ -3082,7 +3082,9 @@ nav.menu ul li a {
   display: block;
 }
 .product .product__thumb a img {
-  width: 100%;
+  width: 210px;
+  height: 210px;
+  /* width: 100%; */
 }
 .product .product__thumb a.second__img {
   left: 0;
