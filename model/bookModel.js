@@ -1,15 +1,14 @@
 const numPagePerPagination = 4;
 MAX_NUMBER_PAGE = 9; //this is got by API
 const bookMongoose = require("./mongooseModel/bookMongooseModel");
-// const bestSeller = require("./mongooseModel/bestSellerMongoose");
 
 module.exports.listBook = async () => {
   let listBook = await bookMongoose.find({});
   return listBook;
 };
 
-module.exports.getDisplayedBook = (page) => {
-  const bookList = this.listBook();
+module.exports.getDisplayedBook = async (page) => {
+  const bookList = await this.listBook();
   const productPerPage = 12;
   const startIndex = (page - 1) * productPerPage;
   const endIndex = page * productPerPage;
@@ -79,13 +78,13 @@ module.exports.getNewProduct = async () => {
 //   return result.slice(0, 10);
 // };
 
-module.exports.getRelatedBook = () => {
-  let listBook = this.listBook();
+module.exports.getRelatedBook = async () => {
+  let listBook = await this.listBook();
   return listBook.slice(0, 6);
 };
 
-module.exports.getUpsellProduct = () => {
-  let listBook = this.listBook();
+module.exports.getUpsellProduct = async () => {
+  let listBook = await this.listBook();
   return listBook.slice(10, 16);
 };
 

@@ -52,12 +52,12 @@ Render = function (book, reviews, res) {
 exports.bookDetail = async function (req, res, next) {
   const bookId = req.params.id;
 
-  const relatedBooks = bookModel.getRelatedBook(/*type*/);
-  const upsellProducts = bookModel.getUpsellProduct();
+  const relatedBooks = await bookModel.getBookByCatory();
+  const upsellProducts = await bookModel.getUpsellProduct();
 
   const ShortDetailLength = 400;
 
-  const book = await Book.findOne({ _id: bookId });
+  let book = await Book.findOne({ _id: bookId });
 
   var reviews = await Review.find({ bookID: bookId }).lean();
 
@@ -73,8 +73,8 @@ exports.bookDetail = async function (req, res, next) {
     image_book_main_cover: book.cover,
     book_detail_short: book_detail_short,
     book_detail_remain: book_detail_remain,
-    relatedBooks: relatedBooks,
-    upsellProducts: upsellProducts,
+    //relatedBooks: relatedBooks,
+    //upsellProducts: upsellProducts,
     images: book.images,
     reviews: reviews,
   });
