@@ -1,3 +1,7 @@
+const { bookShop } = require("../controllers/bookController");
+const Book = require("../model/mongooseModel/bookMongooseModel");
+
+
 const numPagePerPagination = 4;
 MAX_NUMBER_PAGE = 9; //this is got by API
 
@@ -870,8 +874,14 @@ module.exports.nextPage = (currentMinPage) => {
 };
 
 module.exports.getNewProduct = () => {
-  let listBook = this.listBook();
-  return listBook.slice(0, 7);
+
+  // Book.find({}).limit(7).then(books =>{
+  //   return books = books.map(books => books.toObject());
+  // })
+  Book.find({}).lean().exec(function(error, books) {
+    return books.slice(0,7);
+  })
+ 
 };
 module.exports.getBestSellerBook = () => {
   let listBook = this.listBook();

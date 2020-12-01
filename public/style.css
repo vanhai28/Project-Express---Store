@@ -811,8 +811,8 @@ a {
   background-size: cover;
   background-position: center center;
 }
-.bg-image--2 {
-  background-image: url(images/bg/2.jpg);
+ .bg-image--2 {
+  background-image: url(images/bg/7.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -842,7 +842,7 @@ a {
   background-position: center center;
 }
 .bg-image--7 {
-  background-image: url(images/bg/7.jpg);
+  background-image: url(images/bg/2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -1337,7 +1337,7 @@ Elements Styles
   content: url("images/icons/icon_title3.png");
 }
 .section__title h2 {
-  color: #333;
+  /* color: #fff; */
   display: block;
   font-size: 30px;
   font-weight: 700;
@@ -1346,6 +1346,11 @@ Elements Styles
   position: relative;
   text-transform: uppercase;
 }
+
+.stay h2{
+  color: #fff;
+}
+
 .wn__newsletter__area .section__title > h2 {
   letter-spacing: 2px;
 }
@@ -3897,12 +3902,19 @@ h3.widget-title-modal {
   margin-top: 20px;
 }
 .newsletter__block p {
-  color: #333;
+  color: #fff;
   font-size: 14px;
   line-height: 25px;
   padding: 0 60px 60px;
 }
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color:#fff;
+  opacity: 1; /* Firefox */
+}
+
 .newsletter__block .newsletter__box {
+  color: #fff;
   display: inline-block;
   margin-top: 5px;
   max-width: 470px;
@@ -3915,12 +3927,12 @@ h3.widget-title-modal {
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
   background: transparent none repeat scroll 0 0;
-  border-color: currentcolor currentcolor #aaa;
+  border-color: currentcolor currentcolor #fff;
   border-image: none;
   border-radius: 0;
   border-style: none none solid;
   border-width: 0 0 1px;
-  color: #333;
+  color: #fff;
   display: inline-block;
   font-size: 12px;
   height: 50px;
@@ -3932,7 +3944,7 @@ h3.widget-title-modal {
 .newsletter__block .newsletter__box button {
   background: transparent none repeat scroll 0 0;
   border: medium none;
-  color: #333;
+  color: #fff;
   display: inline-block;
   font-size: 14px;
   font-weight: 700;
