@@ -1,25 +1,33 @@
 const bookModel = require("../model/bookModel");
-const arrModel = require("../model/arrayModel");
-module.exports.index = function (req, res, next) {
-  let aventureBook = bookModel.getBookByCatory("adventure", 12);
-  let biographicBook = bookModel.getBookByCatory("biographicBook", 12);
-  let cookBook = bookModel.getBookByCatory("cookBook", 12);
-  let childrenBook = bookModel.getBookByCatory("childrenBook", 12);
+const arrModel = require("../service/arrayHelper");
+const Book = require("../model/mongooseModel/bookMongooseModel");
 
-  aventureBook = arrModel.modifyArray(aventureBook);
-  biographicBook = arrModel.modifyArray(biographicBook);
-  cookBook = arrModel.modifyArray(cookBook);
+module.exports.index = async function (req, res, next) {
+  let softSkillBook = await bookModel.getBookByCatory("Kỹ năng sống", 12);
+  let childrenBook = await bookModel.getBookByCatory("Sách thiếu nhi", 12);
+  let learnForeignLanguageBook = await bookModel.getBookByCatory(
+    "Học ngoại ngữ",
+    12
+  );
+  let economicBook = await bookModel.getBookByCatory("Kinh tế", 12);
+
+  const bestSellerBook = await Book.find({ best_seller: true })
+    .limit(12)
+    .lean();
+  softSkillBook = arrModel.modifyArray(softSkillBook);
+  learnForeignLanguageBook = arrModel.modifyArray(learnForeignLanguageBook);
+  economicBook = arrModel.modifyArray(economicBook);
   childrenBook = arrModel.modifyArray(childrenBook);
 
+  console.log(softSkillBook);
   res.render("index", {
     title: "Home",
-    newBook: bookModel.getNewProduct(),
-    listBook: bookModel.listBook(),
-    bestSellerBook: bookModel.getBestSellerBook(),
-    biographicBook,
-    aventureBook,
+    isLogin: false,
+    softSkillBook: softSkillBook,
     childrenBook,
-    cookBook,
+    learnForeignLanguageBook,
+    economicBook,
+    bestSellerBook,
   });
 };
 

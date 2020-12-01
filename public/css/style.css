@@ -56,3 +56,18 @@
 .pagination .page-item:hover + .page-item .page-link {
   border-left-color: #3e8af4;
 }
+.container a.see-more-btn {
+  background-color: #e59285;
+  position: absolute;
+  right: 0px;
+  color: #fff;
+  padding: 7px 16px;
+  border-radius: 20px;
+}
+a.see-more-btn:hover {
+  background-color: rgba(229, 146, 133, 0.8);
+}
+
+.product__thumb a.first__img {
+  height: 210px;
+}

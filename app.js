@@ -1,40 +1,46 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const  createError = require("http-errors");
-const  express = require("express");
-const  path = require("path");
-const  cookieParser = require("cookie-parser");
-const  logger = require("morgan");
-const  hbs = require('express-handlebars');
-const hbshelpers = require('handlebars-helpers');
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const hbs = require("express-handlebars");
+const hbshelpers = require("handlebars-helpers");
 const multihelpers = hbshelpers();
 
-const  indexRouter = require("./routes/index");
-const  usersRouter = require("./routes/users");
-const mongoose = require('./config/db')
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+const mongoose = require("./config/db");
 
-const  app = express();
-const bodyParser = require('body-parser')
+const app = express();
+const bodyParser = require("body-parser");
 // const multer = require('multer') // v1.0.5
 // const upload = multer() // for parsing multipart/form-data
 
-app.use(bodyParser.json()) // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // run mongoose
 mongoose.mongoose();
 
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
-app.engine( 'hbs', hbs( {
-  extname: 'hbs',
-  helpers: multihelpers,
-  defaultView: 'default',
-  layoutsDir: __dirname + '/views/layout/',
-  partialsDir: __dirname + '/views/partials/'
-}));
+app.engine(
+  "hbs",
+  hbs({
+    extname: "hbs",
+    helpers: multihelpers,
+    defaultView: "default",
+    layoutsDir: __dirname + "/views/layout/",
+    partialsDir: __dirname + "/views/partials/",
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true,
+    },
+  })
+);
 
 app.use(logger("dev"));
 app.use(express.json());
