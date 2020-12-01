@@ -3097,9 +3097,9 @@ nav.menu ul li a {
   transition-property: all;
   transition-timing-function: linear;
 }
-.product .product__thumb a.second__img img {
+/* .product .product__thumb a.second__img img {
   width: 100%;
-}
+} */
 .product .product__thumb .new__box {
   color: #fff;
   font-size: 10px;
