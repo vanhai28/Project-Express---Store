@@ -836,7 +836,7 @@ a {
   background-position: center center;
 }
 .bg-image--6 {
-  background-image: url(images/bg/6.jpg);
+  background-image: url(images/bg/22.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -2706,6 +2706,7 @@ Header Styles
 
 /* Header Style Four*/
 .header__absolute {
+  background-color: #fff;
   left: 0;
   position: absolute;
   right: 0;
@@ -4423,7 +4424,7 @@ h3.widget-title-modal {
     padding: 0 50px 60px;
   }
   .wn__newsletter__area.bg-image--2 {
-    background: #f6f6f6 none repeat scroll 0 0;
+    /* background: #f6f6f6 none repeat scroll 0 0; */
   }
   .newsletter__block .newsletter__box {
     max-width: 280px;
@@ -7840,7 +7841,7 @@ a.checkout__title {
     padding-right: 15px;
   }
   .wn__newsletter__area.bg-image--2 {
-    background: #f6f6f6;
+    /* background: #f6f6f6; */
   }
 }
 @media only screen and (max-width: 767px) {

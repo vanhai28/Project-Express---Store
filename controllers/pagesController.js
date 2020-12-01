@@ -2,35 +2,56 @@ const bookModel = require("../model/bookModel");
 const arrModel = require("../model/arrayModel");
 const Book = require("../model/mongooseModel/bookMongooseModel");
 
-
-
 module.exports.index = async function (req, res, next) {
-
-  const softSkillBook = await Book.find({category: 'Kỹ năng sống' }).limit(12).lean();
-  const childrenBook = await Book.find({category: 'Sách thiếu nhi' }).limit(12).lean();
-  const learnForeignLanguageBook = await Book.find({category: 'Học ngoại ngữ' }).limit(12).lean();
-  const economicBook = await Book.find({category: 'Kinh tế' }).limit(12).lean();
+  let softSkillBook = await bookModel.getBookByCatory('Kỹ năng sống',12);
+  let childrenBook = await bookModel.getBookByCatory('Sách thiếu nhi',12);
+  let learnForeignLanguageBook = await bookModel.getBookByCatory('Học ngoại ngữ',12);
+  let economicBook = await bookModel.getBookByCatory('Kinh tế',12);
 
   const bestSellerBook = await Book.find({best_seller: true}).limit(12).lean();
+  softSkillBook = arrModel.modifyArray(softSkillBook);
+  learnForeignLanguageBook = arrModel.modifyArray(learnForeignLanguageBook);
+  economicBook = arrModel.modifyArray(economicBook);
+  childrenBook = arrModel.modifyArray(childrenBook);
 
-  const newBook = await Book.find({}).limit(7).lean();
-
-  // aventureBook = arrModel.modifyArray(aventureBook);
-  // // biographicBook = arrModel.modifyArray(biographicBook);
-  // cookBook = arrModel.modifyArray(cookBook);
-  // childrenBook = arrModel.modifyArray(childrenBook);
-
+  console.log(softSkillBook);
   res.render("index", {
     title: "Home",
-    // newBook,
-    listBook: bookModel.listBook(),
     bestSellerBook,
-    softSkillBook,
+    softSkillBook:softSkillBook,
     childrenBook,
     learnForeignLanguageBook,
     economicBook,
   });
 };
+
+// module.exports.index = async function (req, res, next) {
+
+//   const softSkillBook = await Book.find({category: 'Kỹ năng sống' }).limit(12).lean();
+//   const childrenBook = await Book.find({category: 'Sách thiếu nhi' }).limit(12).lean();
+//   const learnForeignLanguageBook = await Book.find({category: 'Học ngoại ngữ' }).limit(12).lean();
+//   const economicBook = await Book.find({category: 'Kinh tế' }).limit(12).lean();
+
+//   const bestSellerBook = await Book.find({best_seller: true}).limit(12).lean();
+
+//   const newBook = await Book.find({}).limit(7).lean();
+
+//   // aventureBook = arrModel.modifyArray(aventureBook);
+//   // // biographicBook = arrModel.modifyArray(biographicBook);
+//   // cookBook = arrModel.modifyArray(cookBook);
+//   // childrenBook = arrModel.modifyArray(childrenBook);
+
+//   res.render("index", {
+//     title: "Home",
+//     // newBook,
+//     listBook: bookModel.listBook(),
+//     bestSellerBook,
+//     softSkillBook,
+//     childrenBook,
+//     learnForeignLanguageBook,
+//     economicBook,
+//   });
+// };
 
 module.exports.login = function (req, res, next) {
   res.render("pages/login", { title: "Login" });
