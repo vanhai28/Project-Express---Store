@@ -2,8 +2,20 @@ const numPagePerPagination = 4;
 MAX_NUMBER_PAGE = 9; //this is got by API
 const bookMongoose = require("./mongooseModel/bookMongooseModel");
 
-module.exports.listBook = async () => {
-  let listBook = await bookMongoose.find({});
+// module.exports.listBook = async () => {
+
+
+//   let listBook = await bookMongoose.find({});
+//   return listBook;
+// };
+
+module.exports.listBook = async (pageNumber, itemPerPage) => {
+  
+  let listBook = await bookMongoose.paginate({},{
+    page: pageNumber,
+    limit: itemPerPage,
+    
+  });
   return listBook;
 };
 

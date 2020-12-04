@@ -1,33 +1,29 @@
 const bookModel = require("../model/bookModel");
+const { paginate } = require("../model/mongooseModel/bookMongooseModel");
 const Book = require("../model/mongooseModel/bookMongooseModel");
 const Review = require("../model/mongooseModel/reviewMongooseModel");
 const User = require("../model/mongooseModel/userMongooseModel");
 
 const ITEM_PER_PAGE = 12;
 
-module.exports.bookShop = function (req, res, next) {
+module.exports.bookShop = async function (req, res, next) {
   const page = +req.query.page || 1;
-  Book.find({})
-    .countDocuments()
-    .then((numBook) => {
-      totalBook = numBook;
-      return Book.find({})
-        .lean()
-        .exec(function (error, books) {
-          res.render("pages/book/bookShop", {
-            title: "Book shop",
-            books: bookModel.getItemsInPage(page, books),
-            hasNextPage: ITEM_PER_PAGE * page < totalBook,
-            hasPreviousPage: page > 1,
-            nextPage: page + 1,
-            prevPage: page - 1,
-            lastPage: Math.ceil(totalBook / ITEM_PER_PAGE),
-            ITEM_PER_PAGE: ITEM_PER_PAGE,
-            currentPage: page,
-          });
-        });
-    });
+  
+  const paginate = await bookModel.listBook(page, ITEM_PER_PAGE);
+  
+  res.render('pages/book/bookShop',{
+    title: "Book Shop",
+    books: paginate.docs, 
+    hasNextPage: paginate.hasNextPage,
+    hasPreviousPage: paginate.hasPrevPage,
+    nextPage: paginate.nextPage,
+    prevPage: paginate.prevPage,
+    lastPage: paginate.totalPages,
+    ITEM_PER_PAGE: ITEM_PER_PAGE,
+    currentPage: paginate.page,
+  });
 };
+
 
 Render = function (book, reviews, res) {
   const book_detail_short = book.detail.slice(0, ShortDetailLength);
