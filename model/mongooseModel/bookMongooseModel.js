@@ -20,5 +20,8 @@ const book = new Schema(
   { collection: "books" }
 );
 
+book.index({title: 'text'});
+
 book.plugin(mongoosePaginate);
 module.exports = mongoose.model("books", book);
+

@@ -5,18 +5,17 @@
 	<![endif]-->
 
 	<!-- Main wrapper -->
-	<div class="wrapper" id="wrapper">
 		
 		<!-- Header -->
 		<!-- //Header -->
 		<!-- Start Search Popup -->
 		<div class="box-search-content search_active block-bg close__top">
-			<form id="search_mini_form" class="minisearch" action="#">
+			<form id="search_mini_form" class="minisearch" action="/book-shop" method="GET">
 				<div class="field__search">
-					<input type="text" placeholder="Search entire store here...">
-					<div class="action">
-						<a href="#"><i class="zmdi zmdi-search"></i></a>
-					</div>
+					<input name="q" type="text" placeholder="Search entire store here...">
+					{{!-- <div class="action">
+						<a href="/book-shop/?q=nhan"><i class="zmdi zmdi-search"></i></a>
+					</div> --}}
 				</div>
 			</form>
 			<div class="close__wrap">
@@ -85,19 +84,8 @@
         									
         								</div>
 										<div class="product__overview">
-        									{{!-- <details>
-												<span><summary>{{book_detail_short}}</summary>
-													{{book_detail_remain}}
-												</span>
-											</details> --}}
-											{{!-- <span>{{book_detail_short}}</span>
-											<span>
-												<details>
-													{{book_detail_remain}}
-												</details>
-											</span> --}}
 											
-										{{book_detail_short}}{{book_detail_remain}}
+										<p style="text-align: justify;">{{book_detail}}</p>
 											
         								</div>
         								<div class="box-tocart d-flex">
@@ -385,68 +373,22 @@
         					<aside class="wedget__categories poroduct--cat">
         						<h3 class="wedget__title">Product Categories</h3>
         						<ul>
-        							<li><a href="#">Biography <span>(3)</span></a></li>
-        							<li><a href="#">Business <span>(4)</span></a></li>
-        							<li><a href="#">Cookbooks <span>(6)</span></a></li>
-        							<li><a href="#">Health & Fitness <span>(7)</span></a></li>
-        							<li><a href="#">History <span>(8)</span></a></li>
-        							<li><a href="#">Mystery <span>(9)</span></a></li>
-        							<li><a href="#">Inspiration <span>(13)</span></a></li>
-        							<li><a href="#">Romance <span>(20)</span></a></li>
-        							<li><a href="#">Fiction/Fantasy <span>(22)</span></a></li>
-        							<li><a href="#">Self-Improvement <span>(13)</span></a></li>
-        							<li><a href="#">Humor Books <span>(17)</span></a></li>
-        							<li><a href="#">Harry Potter <span>(20)</span></a></li>
-        							<li><a href="#">Land of Stories <span>(34)</span></a></li>
-        							<li><a href="#">Kids' Music <span>(60)</span></a></li>
-        							<li><a href="#">Toys & Games <span>(3)</span></a></li>
-        							<li><a href="#">hoodies <span>(3)</span></a></li>
+        							<li><a href="/book-shop?catId={{CATEGORY.KyNangSong}}">Kỹ năng sống <span>(3)</span></a></li>
+									<li><a href="/book-shop?catId={{CATEGORY.HocNgoaiNgu}}">Học ngoại ngữ <span>(4)</span></a></li>
+									<li><a href="/book-shop?catId={{CATEGORY.TreEm}}">Thiếu nhi <span>(6)</span></a></li>
+									<li><a href="/book-shop?catId={{CATEGORY.KinhTe}}">Kinh tế<span>(7)</span></a></li>
+									<li><a href="/book-shop?catId={{CATEGORY.KhoaHoc}}">Khoa học<span>(7)</span></a></li>
         						</ul>
         					</aside>
-        					<aside class="wedget__categories pro--range">
-        						<h3 class="wedget__title">Filter by price</h3>
-        						<div class="content-shopby">
-        						    <div class="price_filter s-filter clear">
-        						        <form action="#" method="GET">
-        						            <div id="slider-range"></div>
-        						            <div class="slider__range--output">
-        						                <div class="price__output--wrap">
-        						                    <div class="price--output">
-        						                        <span>Price :</span><input type="text" id="amount" readonly="">
-        						                    </div>
-        						                    <div class="price--filter">
-        						                        <a href="#">Filter</a>
-        						                    </div>
-        						                </div>
-        						            </div>
-        						        </form>
-        						    </div>
-        						</div>
-        					</aside>
-        					<aside class="wedget__categories poroduct--compare">
-        						<h3 class="wedget__title">Compare</h3>
-        						<ul>
-        							<li><a href="#">x</a><a href="#">Condimentum posuere</a></li>
-        							<li><a href="#">x</a><a href="#">Condimentum posuere</a></li>
-        							<li><a href="#">x</a><a href="#">Dignissim venenatis</a></li>
-        						</ul>
-        					</aside>
+        					
         					<aside class="wedget__categories poroduct--tag">
         						<h3 class="wedget__title">Product Tags</h3>
         						<ul>
-        							<li><a href="#">Biography</a></li>
-        							<li><a href="#">Business</a></li>
-        							<li><a href="#">Cookbooks</a></li>
-        							<li><a href="#">Health & Fitness</a></li>
-        							<li><a href="#">History</a></li>
-        							<li><a href="#">Mystery</a></li>
-        							<li><a href="#">Inspiration</a></li>
-        							<li><a href="#">Religion</a></li>
-        							<li><a href="#">Fiction</a></li>
-        							<li><a href="#">Fantasy</a></li>
-        							<li><a href="#">Music</a></li>
-        							<li><a href="#">Toys</a></li>
-        							<li><a href="#">Hoodies</a></li>
+        							<li><a href="/book-shop?catId={{CATEGORY.KyNangSong}}">Kỹ năng sống <span>(3)</span></a></li>
+									<li><a href="/book-shop?catId={{CATEGORY.HocNgoaiNgu}}">Học ngoại ngữ <span>(4)</span></a></li>
+									<li><a href="/book-shop?catId={{CATEGORY.TreEm}}">Thiếu nhi <span>(6)</span></a></li>
+									<li><a href="/book-shop?catId={{CATEGORY.KinhTe}}">Kinh tế<span>(7)</span></a></li>
+									<li><a href="/book-shop?catId={{CATEGORY.KhoaHoc}}">Khoa học<span>(7)</span></a></li>
         						</ul>
         					</aside>
         					<aside class="wedget__categories sidebar--banner">
@@ -563,5 +505,4 @@
 		</div>
 		<!-- END QUICKVIEW PRODUCT -->
 
-	</div>
 	<!-- //Main wrapper -->

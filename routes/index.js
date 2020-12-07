@@ -27,13 +27,6 @@ router.get("/book-detail/:id", bookController.bookDetail);
 
 router.post("/auth/login", authController.authLoginUser);
 
+
 module.exports = router;
-// router.get('/book-detail/:page', (req, res, next) => {
-//     //console.log(req.params.page);
-//    var array = bookModel.listBook();
 
-//    var f = array.find(x => x.ID_book == req.params.page );
-//    res.render('./book/bookDetail',
-//    { title:"Book shop", book_name: f.book_name, current_cost: f.current_cost});
-
-// });
