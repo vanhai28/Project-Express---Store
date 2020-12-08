@@ -27,20 +27,22 @@ exports.addUser = async function (req, res) {
 
 module.exports.account = async function (req, res, next) {
   const id = req.query.id;
-  const account = await userModel.getAccount(id);
+  try {
+    const account = await userModel.getAccount(id);
+    account.password = "";
 
-  res.render("pages/accountManagement", {
-    title: "Account",
-    isLogin: true,
-    _id: account._id,
-    image: account.image,
-    user_name: account.user_name,
-    user_email: account.user_email,
-  });
+    res.render("pages/accountManagement", {
+      title: "Account",
+      isLogin: true,
+      userAccount: account,
+    });
+  } catch (error) {
+    res.send("error when load page");
+    return;
+  }
 };
 
 module.exports.changeAccount = async (req, res, next) => {
-  // res.send(":");
   const form = new formidable.IncomingForm({ multiples: true });
   form.parse(req, async (err, fields, files) => {
     if (err) {
@@ -56,25 +58,32 @@ module.exports.changeAccount = async (req, res, next) => {
       }
 
       if (url) {
-        newInfor.image = url[0];
+        newInfor.avatar_image = url[0];
       }
-      console.log(url[0]);
+      try {
+        const isSucess = await userModel.modifyAccount(newInfor);
+        let result = "";
+        let userAccount = await userModel.getAccount(newInfor._id);
+        delete userAccount.password;
 
-      const isSucess = await userModel.modifyAccount(newInfor);
-      let result = "";
+        if (isSucess) {
+          result = "Lưu thành công";
+        } else {
+          result = "Có lỗi trong quá trình lưu";
+        }
 
-      if (isSucess) {
-        result = "Lưu thành công";
-      } else {
-        result = "Có lỗi trong quá trình lưu";
+        res.render("pages/accountManagement", {
+          userAccount: userAccount,
+          isLogin: true,
+          result: result,
+        });
+      } catch (error) {
+        res.render("pages/accountManagement", {
+          userAccount: newInfor,
+          isLogin: true,
+          result: "error when get user information",
+        });
       }
-      res.render("pages/accountManagement", {
-        image: newInfor.image,
-        isLogin: true,
-        user_name: fields.user_name,
-        user_email: fields.user_email,
-        result: result,
-      });
     });
   });
 };

@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-// const { delete } = require("../routes");
 
 const userMongooseModel = require("./mongooseModel/userMongooseModel");
 
@@ -14,11 +13,14 @@ exports.addUser = async (newUser) => {
         user_email: newUser.user_email,
         password: hash,
         status: "active",
+        first_name: "",
+        last_name: "",
+        avartar_image: "",
       });
 
       user
         .save()
-        .then((doc) => { })
+        .then((doc) => {})
         .then((err) => {
           console.log(err);
         });
@@ -32,24 +34,23 @@ module.exports.getAccount = async (id) => {
   let account;
 
   try {
-    account = await userMongooseModel.findOne({ _id: id });
+    account = await userMongooseModel.findOne({ _id: id }).lean();
   } catch (error) {
     console.log(err);
     return null;
   }
 
   return account;
-}
+};
 
 module.exports.modifyAccount = async (account) => {
   try {
-    if (!account.image) delete account.image;
-    console.log(account.user_name);
-    await userMongooseModel.findOneAndUpdate({user_name: account.user_name}, account);
+    if (!account.avatar_image) delete account.avatar_image;
 
+    await userMongooseModel.findByIdAndUpdate(account._id, account);
   } catch (error) {
     console.log(error);
     return false;
   }
-  return true
-}
+  return true;
+};
