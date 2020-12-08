@@ -34,6 +34,7 @@ module.exports.bookShop = async function (req, res, next) {
   
   res.render('pages/book/bookShop',{
     title: "Book Shop",
+    isLogin: true,
     books: paginate.docs, 
     hasNextPage: paginate.hasNextPage,
     hasPreviousPage: paginate.hasPrevPage,
@@ -63,6 +64,7 @@ exports.bookDetail = async function (req, res, next) {
 
   res.render("./pages/book/bookDetail", {
     title: "Detail",
+    isLogin: true,
     book_name_main: book.title,
     current_cost_main: book.price,
     image_book_main_cover: book.cover,

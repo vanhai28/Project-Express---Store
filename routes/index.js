@@ -3,6 +3,8 @@ const router = express.Router();
 const controllerDef = require("../controllers/pagesController");
 const bookController = require("../controllers/bookController");
 const authController = require("../controllers/authController");
+const userController = require("../controllers/userController");
+
 
 /* GET home page. */
 router.get("/", controllerDef.index);
@@ -27,6 +29,15 @@ router.get("/book-detail/:id", bookController.bookDetail);
 
 router.post("/auth/login", authController.authLoginUser);
 
+router.get("/user/account", userController.account);
+
+router.post("/user/account", userController.changeAccount);
+
+
+module.exports = router;
+// router.get('/book-detail/:page', (req, res, next) => {
+//     //console.log(req.params.page);
+//    var array = bookModel.listBook();
 
 module.exports = router;
 

@@ -1,5 +1,6 @@
 const bookModel = require("../model/bookModel");
 const arrModel = require("../service/arrayHelper");
+
 const Book = require("../model/mongooseModel/bookMongooseModel");
 
 module.exports.index = async function (req, res, next) {
@@ -22,7 +23,7 @@ module.exports.index = async function (req, res, next) {
   console.log(softSkillBook);
   res.render("index", {
     title: "Home",
-    isLogin: false,
+    isLogin: true,
     softSkillBook: softSkillBook,
     childrenBook,
     learnForeignLanguageBook,
