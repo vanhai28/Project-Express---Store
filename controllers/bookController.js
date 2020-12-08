@@ -3,7 +3,7 @@ const { paginate } = require("../model/mongooseModel/bookMongooseModel");
 const Book = require("../model/mongooseModel/bookMongooseModel");
 const Review = require("../model/mongooseModel/reviewMongooseModel");
 const User = require("../model/mongooseModel/userMongooseModel");
-
+const Category = require("../model/mongooseModel/categoryMongooseModel");
 const ITEM_PER_PAGE = 12;
 
 const CATEGORY ={};
@@ -31,7 +31,8 @@ module.exports.bookShop = async function (req, res, next) {
 
   const paginate = await bookModel.listBook(filter, page, ITEM_PER_PAGE);
   
-  
+  const category = await Category.find({}).lean();
+
   res.render('pages/book/bookShop',{
     title: "Book Shop",
     isLogin: true,
@@ -45,7 +46,7 @@ module.exports.bookShop = async function (req, res, next) {
     currentPage: paginate.page,
     q: q,
     catId: catId,
-    CATEGORY: CATEGORY,
+    CATEGORY: category,
   });
 };
 
@@ -62,6 +63,8 @@ exports.bookDetail = async function (req, res, next) {
   const relatedBooks = await bookModel.getBookByCatory(genre, 6);;
   const upsellProducts = await bookModel.getBookByCatory(genre, 6);
 
+  const category = await Category.find({}).lean();
+
   res.render("./pages/book/bookDetail", {
     title: "Detail",
     isLogin: true,
@@ -73,7 +76,7 @@ exports.bookDetail = async function (req, res, next) {
     upsellProducts: upsellProducts,
     images: book.images,
     reviews: reviews,
-    CATEGORY: CATEGORY,
+    CATEGORY: category,
   });
 };
 

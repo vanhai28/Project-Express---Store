@@ -51,14 +51,6 @@
         						<div class="col-lg-6 col-12">
         							<div class="wn__fotorama__wrapper">
 	        							<div class="fotorama wn__fotorama__action" data-nav="thumbs">
-		        							  {{!-- <a href=""><img src="{{image_book_main_cover}}" alt="" class="imgBook"></a>
-		        							  <a href=""><img src="{{image_book_main_1}}" alt=""></a>
-		        							  <a href=""><img src="{{image_book_main_2}}" alt=""></a> --}}
-		        							  {{!-- <a href=""><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href=""><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href=""><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href=""><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href=""><img src="{{image_book_main}}" alt=""></a> --}}
 											  {{#each images}}
 											  <a href=""><img src="{{this}}" alt=""></a>
 											  {{/each}}
@@ -373,22 +365,18 @@
         					<aside class="wedget__categories poroduct--cat">
         						<h3 class="wedget__title">Product Categories</h3>
         						<ul>
-        							<li><a href="/book-shop?catId={{CATEGORY.KyNangSong}}">Kỹ năng sống <span>(3)</span></a></li>
-									<li><a href="/book-shop?catId={{CATEGORY.HocNgoaiNgu}}">Học ngoại ngữ <span>(4)</span></a></li>
-									<li><a href="/book-shop?catId={{CATEGORY.TreEm}}">Thiếu nhi <span>(6)</span></a></li>
-									<li><a href="/book-shop?catId={{CATEGORY.KinhTe}}">Kinh tế<span>(7)</span></a></li>
-									<li><a href="/book-shop?catId={{CATEGORY.KhoaHoc}}">Khoa học<span>(7)</span></a></li>
+        							{{#each CATEGORY}}
+									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
+									{{/each}}
         						</ul>
         					</aside>
         					
         					<aside class="wedget__categories poroduct--tag">
         						<h3 class="wedget__title">Product Tags</h3>
         						<ul>
-        							<li><a href="/book-shop?catId={{CATEGORY.KyNangSong}}">Kỹ năng sống <span>(3)</span></a></li>
-									<li><a href="/book-shop?catId={{CATEGORY.HocNgoaiNgu}}">Học ngoại ngữ <span>(4)</span></a></li>
-									<li><a href="/book-shop?catId={{CATEGORY.TreEm}}">Thiếu nhi <span>(6)</span></a></li>
-									<li><a href="/book-shop?catId={{CATEGORY.KinhTe}}">Kinh tế<span>(7)</span></a></li>
-									<li><a href="/book-shop?catId={{CATEGORY.KhoaHoc}}">Khoa học<span>(7)</span></a></li>
+        							{{#each CATEGORY}}
+									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
+									{{/each}}
         						</ul>
         					</aside>
         					<aside class="wedget__categories sidebar--banner">
