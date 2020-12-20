@@ -9,9 +9,11 @@ const hbs = require("express-handlebars");
 const hbshelpers = require("handlebars-helpers");
 const multihelpers = hbshelpers();
 
+const passport = require('./passport');
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const mongoose = require("./config/db");
+const session = require("express-session");
 
 const app = express();
 const bodyParser = require("body-parser");
@@ -48,6 +50,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+//Passport middlewares
+app.use(session({ secret: process.env.SESSION_SECRET}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+//Pass req.user to res.local
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+})
+
+//Routes
 app.use("/", indexRouter);
 app.use("/user", usersRouter);
 

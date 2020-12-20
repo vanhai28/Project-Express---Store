@@ -1,4 +1,4 @@
-const bookModel = require("../model/bookModel");
+const bookService = require("../model/bookService");
 const { paginate } = require("../model/mongooseModel/bookMongooseModel");
 const Book = require("../model/mongooseModel/bookMongooseModel");
 const Review = require("../model/mongooseModel/reviewMongooseModel");
@@ -29,13 +29,13 @@ module.exports.bookShop = async function (req, res, next) {
     filter.idCategory = catId;
   }
 
-  const paginate = await bookModel.listBook(filter, page, ITEM_PER_PAGE);
+  const paginate = await bookService.listBook(filter, page, ITEM_PER_PAGE);
   
   const category = await Category.find({}).lean();
 
   res.render('pages/book/bookShop',{
     title: "Book Shop",
-    isLogin: true,
+    isLogin: false,
     books: paginate.docs, 
     hasNextPage: paginate.hasNextPage,
     hasPreviousPage: paginate.hasPrevPage,
@@ -60,14 +60,14 @@ exports.bookDetail = async function (req, res, next) {
   const reviews = await Review.find({ bookID: bookId }).lean();
 
   const genre = book.category;
-  const relatedBooks = await bookModel.getBookByCatory(genre, 6);;
-  const upsellProducts = await bookModel.getBookByCatory(genre, 6);
+  const relatedBooks = await bookService.getBookByCatory(genre, 6);;
+  const upsellProducts = await bookService.getBookByCatory(genre, 6);
 
   const category = await Category.find({}).lean();
 
   res.render("./pages/book/bookDetail", {
     title: "Detail",
-    isLogin: true,
+    isLogin: false,
     book_name_main: book.title,
     current_cost_main: book.price,
     image_book_main_cover: book.cover,

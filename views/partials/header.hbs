@@ -40,7 +40,7 @@
                         <div class="block-minicart minicart__active">
                             <div class="minicart-content-wrapper">
                                 <div class="micart__close">
-                                    <span>close</span>
+                                    <span>Đóng</span>
                                 </div>
                                 <div class="items-total d-flex justify-content-between">
                                     <span>3 items</span>
@@ -105,14 +105,14 @@
                                     </div>
                                 </div>
                                 <div class="mini_action cart">
-                                    <a class="cart__btn" href="/cart">View and edit cart</a>
+                                    <a class="cart__btn" href="/cart">Xem và sửa giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
                         <!-- End Shopping Cart -->
                     </li>
                     <li >
-                        {{#if isLogin}}
+                        {{#if user}}
                             <a class="setting__active" href="my-account.html">
                                 <i class="fas fa-user"></i>
                             </a>
@@ -120,16 +120,16 @@
                                 <div class="content-inner">
                                     <div class="switcher-currency">
                                         <strong class="label switcher-label">
-                                            <span>My Account</span>
+                                            <span>Tài khoản của tôi</span>
                                         </strong>
                                         <div class="switcher-options">
                                             <div class="switcher-currency-trigger">
                                                 <div class="setting__menu">
                                                     <span><a href="#"></a></span>
-                                                    <span><a href="/user/account?id=5fcd7e4d6cdaa1190c95bf36">My Account</a></span>
+                                                    <span><a href="/user/account">Tài khoản của tôi</a></span>
                                                     {{!-- <span><a href="#">My Wishlist</a></span> --}}
-                                                    <span><a href="/uer/cart">My Cart</a></span>
-                                                    <span><a href="/user/log-out">Log out</a></span>
+                                                    <span><a href="/user/cart">Giỏ hàng</a></span>
+                                                    <span><a href="/user/logout">Đăng xuất</a></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,7 +137,7 @@
                                 </div>
                             </div>
                         {{else}}
-                            <a href="/login">
+                            <a href="/user/login">
                                 <i class="fas fa-sign-in-alt"></i>
                             </a>
                         {{/if}}
@@ -151,22 +151,22 @@
             <div class="col-lg-12 d-none">
                 <nav class="mobilemenu__nav">
                     <ul class="meninmenu">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">Trang chủ</a></li>
                         <li><a href="#">Pages</a>
                             <ul>
-                                <li><a href="/about-us">About Page</a></li>
+                                <li><a href="/about-us">Giới thiệu</a></li>
                                 {{!-- <li><a href="my-account.html">My Account</a></li> --}}
-                                <li><a href="/cart">Cart Page</a></li>
+                                <li><a href="/cart">Xem và sửa giỏ hàng</a></li>
                                 <li><a href="/checkout">Checkout Page</a></li>
                                 {{!-- <li><a href="wishlist.html">Wishlist Page</a></li> --}}
                          
-                                <li><a href="/faq">Faq Page</a></li>
+                                <li><a href="/faq">Hỏi đáp</a></li>
                                 {{!-- <li><a href="team.html">Team Page</a></li> --}}
                             </ul>
                         </li>
-                        <li><a href="book-shop">Book</a>   
+                        <li><a href="book-shop">Sách</a>   
                         </li>
-                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/contact">Liên hệ</a></li>
                     </ul>
                 </nav>
             </div>

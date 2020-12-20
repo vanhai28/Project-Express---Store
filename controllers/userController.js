@@ -1,7 +1,7 @@
 const formidable = require("formidable");
 const upload = require("../service/uploadFile");
+const userService = require("../model/userService");
 
-const userModel = require("../model/userModel");
 
 exports.addUser = async function (req, res) {
   const { user_name, user_email, password } = req.body;
@@ -13,8 +13,8 @@ exports.addUser = async function (req, res) {
   };
 
   try {
-    await userModel.addUser(newUser).then(() => {
-      res.redirect("/login");
+    await userService.addUser(newUser).then(() => {
+      res.redirect("/user/login");
     });
   } catch (err) {
     res.render("pages/register", {
@@ -25,15 +25,25 @@ exports.addUser = async function (req, res) {
   }
 };
 
+module.exports.login = function (req, res, next) {
+  res.render("pages/login", { title: "Login" });
+};
+
+module.exports.register = function (req, res, next) {
+  res.render("pages/register", { title: "Register" });
+};
+
 module.exports.account = async function (req, res, next) {
   const id = req.query.id;
+  const user = req.user;
   try {
-    const account = await userModel.getAccount(id);
+    // const account = await userService.getAccount(id);
+    const account = await userService.getAccount(user._id);
     account.password = "";
 
     res.render("pages/accountManagement", {
       title: "Account",
-      isLogin: true,
+      isLogin: false,
       userAccount: account,
     });
   } catch (error) {
@@ -51,7 +61,7 @@ module.exports.changeAccount = async (req, res, next) => {
     }
     let newInfor = fields;
 
-    await upload.uploadFile(Array(files.avatar), async (err, url) => {
+    await upload.uploadFile(Array(files.avatar_image), async (err, url) => {
       if (err) {
         res.send("error happen when upload avatar image" + err);
         return;
@@ -61,9 +71,9 @@ module.exports.changeAccount = async (req, res, next) => {
         newInfor.avatar_image = url[0];
       }
       try {
-        const isSucess = await userModel.modifyAccount(newInfor);
+        const isSucess = await userService.modifyAccount(newInfor);
         let result = "";
-        let userAccount = await userModel.getAccount(newInfor._id);
+        let userAccount = await userService.getAccount(newInfor._id);
         delete userAccount.password;
 
         if (isSucess) {
@@ -74,16 +84,15 @@ module.exports.changeAccount = async (req, res, next) => {
 
         res.render("pages/accountManagement", {
           userAccount: userAccount,
-          isLogin: true,
           result: result,
         });
       } catch (error) {
         res.render("pages/accountManagement", {
           userAccount: newInfor,
-          isLogin: true,
           result: "error when get user information",
         });
       }
     });
   });
 };
+

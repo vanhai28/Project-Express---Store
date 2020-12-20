@@ -1,16 +1,16 @@
-const bookModel = require("../model/bookModel");
+const bookService = require("../model/bookService");
 const arrModel = require("../service/arrayHelper");
 
 const Book = require("../model/mongooseModel/bookMongooseModel");
 
 module.exports.index = async function (req, res, next) {
-  let softSkillBook = await bookModel.getBookByCatory("Kỹ năng sống", 12);
-  let childrenBook = await bookModel.getBookByCatory("Sách thiếu nhi", 12);
-  let learnForeignLanguageBook = await bookModel.getBookByCatory(
+  let softSkillBook = await bookService.getBookByCatory("Kỹ năng sống", 12);
+  let childrenBook = await bookService.getBookByCatory("Sách thiếu nhi", 12);
+  let learnForeignLanguageBook = await bookService.getBookByCatory(
     "Học ngoại ngữ",
     12
   );
-  let economicBook = await bookModel.getBookByCatory("Kinh tế", 12);
+  let economicBook = await bookService.getBookByCatory("Kinh tế", 12);
 
   const bestSellerBook = await Book.find({ best_seller: true })
     .limit(12)
@@ -23,21 +23,13 @@ module.exports.index = async function (req, res, next) {
   console.log(softSkillBook);
   res.render("index", {
     title: "Home",
-    isLogin: true,
+    isLogin: false,
     softSkillBook: softSkillBook,
     childrenBook,
     learnForeignLanguageBook,
     economicBook,
     bestSellerBook,
   });
-};
-
-module.exports.login = function (req, res, next) {
-  res.render("pages/login", { title: "Login" });
-};
-
-module.exports.register = function (req, res, next) {
-  res.render("pages/register", { title: "Register" });
 };
 
 module.exports.aboutUs = (req, res, next) => {

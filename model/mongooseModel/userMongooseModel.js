@@ -10,8 +10,7 @@ const userSchema = new Schema(
     phone_number: String,
     password: String,
     status: String,
-    image: String,
-    avarta_image: String,
+    avatar_image: String,
   },
   { collection: "users" }
 );

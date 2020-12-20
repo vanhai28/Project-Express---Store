@@ -9,12 +9,12 @@
                     {{err}} 
                     </div>
                   {{/if}}
-                    <form action="/auth/login" method="POST"> 
+                    <form action="/user/login" method="POST"> 
                         <div class="account__form">
                               <h3 class="account__title text-center">Login</h3>
                             <div class="input__box">
-                                <label>Username or email address <span>*</span></label>
-                                <input type="text" required name="emailOrUserName">
+                                <label>Username<span>*</span></label>
+                                <input type="text" required name="username">
                             </div>
                             <div class="input__box">
                                 <label>Password<span>*</span></label>
@@ -29,7 +29,7 @@
                             </div>
                                 <a class="forget_pass .d-print-inline" href="#">Lost your password?</a>
                                 <span class="text-right">Or new account 
-                                    <a class="btn btn-primary" href="/register">Register</a>
+                                    <a class="btn btn-primary" href="/user/register">Register</a>
                                 </span>      
                         </div>
                     </form>
