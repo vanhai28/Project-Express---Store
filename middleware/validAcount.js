@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const userMongooseModel = require("../model/mongooseModel/userMongooseModel");
 
 exports.validAccount = async (req, res, next) => {
@@ -34,3 +35,36 @@ exports.validAccount = async (req, res, next) => {
 
   next();
 };
+
+exports.checkPassword = async (req, res, next) => {
+  const { cur_password, new_password, re_password } = req.body;
+
+  let checkPassword = await bcrypt.compare(cur_password, req.user.password);
+  let checkNewPassword = await bcrypt.compare(new_password, req.user.password);
+  if (!checkPassword) {
+    res.render('pages/passwordChange', {
+      title: 'Change Password',
+      result: 'Mật khẩu hiện tại không chính xác',
+    });
+    return;
+  }
+
+  if (checkNewPassword) {
+    res.render('pages/passwordChange', {
+      title: 'Change Password',
+      result: 'Mật khẩu mới trùng với mật khẩu hiện tại',
+    });
+    return;
+  }
+
+  if (new_password !== re_password) {
+    res.render("pages/passwordChange", {
+      title: "Change Password",
+      result: "Mật khẩu mới không trùng khớp",
+    });
+    return;
+  }
+
+
+  next();
+}

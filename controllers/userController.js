@@ -1,6 +1,7 @@
 const formidable = require("formidable");
 const upload = require("../service/uploadFile");
 const userService = require("../model/userService");
+const { model } = require("../model/mongooseModel/userMongooseModel");
 
 
 exports.addUser = async function (req, res) {
@@ -95,4 +96,31 @@ module.exports.changeAccount = async (req, res, next) => {
     });
   });
 };
+
+module.exports.password = (req, res) =>{
+  res.render("pages/passwordChange", { title: "Change Password" });
+}
+
+module.exports.changePassword = (req, res)=>{
+  const new_password = req.body.new_password;
+  const id = req.user._id;
+  try{
+    userService.changePassword(id, new_password);
+    res.render('pages/passwordChange',{
+      title: 'Change Password',
+      result: 'Thay đổi mật khẩu thành công'
+    })
+    }catch(err){
+      res.render("pages/passwordChange", {
+        title: 'Change Password',
+        result: 'Thay đổi mật khẩu không thành công'
+      });
+      return;
+    }
+}
+
+module.exports.logout = (req, res) =>{
+  req.logout();
+  res.redirect(req.headers.referer);
+}
 

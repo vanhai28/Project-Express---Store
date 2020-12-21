@@ -3,7 +3,6 @@ const router = express.Router();
 const controllerDef = require("../controllers/pagesController");
 const bookController = require("../controllers/bookController");
 const authController = require("../controllers/authController");
-const auth = require('../middleware/authenticate');
 
 /* GET home page. */
 router.get("/", controllerDef.index);
@@ -16,7 +15,7 @@ router.get("/checkout", controllerDef.checkout);
 
 router.get("/contact", controllerDef.contact);
 
-router.get("/faq", auth, controllerDef.faq);
+router.get("/faq", controllerDef.faq);
 
 router.get("/book-shop", bookController.bookShop);
 

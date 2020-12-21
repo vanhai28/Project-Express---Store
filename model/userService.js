@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const passport = require("passport");
 const { use } = require("passport");
 
 const userMongooseModel = require("./mongooseModel/userMongooseModel");
@@ -67,14 +68,22 @@ module.exports.modifyAccount = async (account) => {
  */
 module.exports.checkCredential = async(user_name, password)=>{
   const user = await userMongooseModel.findOne({user_name: user_name});
-  if(!use)
+  if(!user)
     return false;
   
   let checkPassword = await bcrypt.compare(password, user.password);
   if (checkPassword){
     return user;
-    return false;
   }
+  return false;
+}
 
+module.exports.changePassword = async(id, password)=>{
+  const saltRounds = 10;
+  await bcrypt.genSalt(saltRounds, (err, salt)=>{
+    bcrypt.hash(password, salt, async (err, hash)=>{
+      await userMongooseModel.updateOne({_id: id}, {password: hash});
+    })
+  })
 }
 
