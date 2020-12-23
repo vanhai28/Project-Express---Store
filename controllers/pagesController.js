@@ -4,13 +4,13 @@ const arrModel = require("../service/arrayHelper");
 const Book = require("../model/mongooseModel/bookMongooseModel");
 
 module.exports.index = async function (req, res, next) {
-  let softSkillBook = await bookService.getBookByCatory("Kỹ năng sống", 12);
-  let childrenBook = await bookService.getBookByCatory("Sách thiếu nhi", 12);
-  let learnForeignLanguageBook = await bookService.getBookByCatory(
+  let softSkillBook = await bookService.getBookByCategory("Kỹ năng sống", 12);
+  let childrenBook = await bookService.getBookByCategory("Sách thiếu nhi", 12);
+  let learnForeignLanguageBook = await bookService.getBookByCategory(
     "Học ngoại ngữ",
     12
   );
-  let economicBook = await bookService.getBookByCatory("Kinh tế", 12);
+  let economicBook = await bookService.getBookByCategory("Kinh tế", 12);
 
   const bestSellerBook = await Book.find({ best_seller: true })
     .limit(12)

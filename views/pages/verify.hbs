@@ -1,0 +1,62 @@
+<!-- Start Search Popup -->
+<div class="box-search-content search_active block-bg close__top">
+    <form id="search_mini_form" class="minisearch" action="#">
+        <div class="field__search">
+            <input type="text" placeholder="Search entire store here...">
+            <div class="action">
+                <a href="#"><i class="zmdi zmdi-search"></i></a>
+            </div>
+        </div>
+    </form>
+    <div class="close__wrap">
+        <span>close</span>
+    </div>
+</div>
+<!-- End Search Popup -->
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area bg-image--6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="bradcaump-title">XÁC THỰC EMAIL</h2>
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="/">Trang chủ</a>
+                        <span class="brd-separetor">/</span>
+                        <span class="breadcrumb_item active">Xác thực Email</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<div id="tt-pageContent">
+    <div class="container-indent mt-5">
+        <div class="container container-fluid-custom-mobile-padding">
+            <div class="tt-shopping-layout d-flex justify-content-center">
+                <div class="tt-wrapper col-lg-6 col-12 text-align-center">
+                    {{#if message}}
+                        <div class="alert alert-primary " role="alert">
+                            {{message}}
+                        </div>
+                    {{/if}}
+                    <div class="account__form ">
+                        <form method="POST" action="/user/verify">
+                            <div class="input__box">
+                                <label for="verifyToken">Mã xác thực<span>*</span></label>
+                                <input id = "verifyToken" type="text" minlength="7" required name="verifyToken">
+                            </div>
+                            
+                            <div class="row tt-offset-21 my-3 d-flex justify-content-center">
+                                <div class="col-auto text-align-center">
+                                    <button type="submit" class="btn btn-primary">Xác nhận</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

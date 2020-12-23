@@ -36,7 +36,7 @@
         <div class="container container-fluid-custom-mobile-padding">
             {{!-- <h1 class="tt-title-subpages noborder mt-5">TÀI KHOẢN</h1> --}}
             <div class="tt-shopping-layout">
-                <div class="tt-wrapper">
+                <div class="tt-wrapper mt-5">
                     {{!-- <h6 class="tt-title">Chỉnh sửa thông tin</h6> --}}
                     {{#if result}}
                     <div class="alert alert-primary " id="addSucess" role="alert">{{result}}</div>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="shopEmail" class="control-label">Địa chỉ email </label>
-                                <input type="text" class="form-control" id="shopEmail" name="user_email"
+                                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="shopEmail" name="user_email"
                                     value="{{userAccount.user_email}}" />
                             </div>
                   

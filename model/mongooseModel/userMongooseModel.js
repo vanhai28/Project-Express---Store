@@ -11,6 +11,8 @@ const userSchema = new Schema(
     password: String,
     status: String,
     avatar_image: String,
+    isVerify: Boolean,
+    verify_token: String,
   },
   { collection: "users" }
 );

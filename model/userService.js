@@ -1,9 +1,7 @@
 const bcrypt = require("bcrypt");
-const passport = require("passport");
-const { use } = require("passport");
-
+const randomstring = require("randomstring");
 const userMongooseModel = require("./mongooseModel/userMongooseModel");
-
+const mailer = require('../misc/mailer');
 exports.addUser = async (newUser) => {
   //---------- Add user into database ---------
   const saltRounds = 10;
@@ -17,6 +15,9 @@ exports.addUser = async (newUser) => {
         status: "active",
         first_name: "",
         last_name: "",
+        isVerify: false,
+        verify_token: "",
+        phone_number: "",
         avatar_image: defaultAvt,
       });
 
@@ -34,14 +35,12 @@ exports.addUser = async (newUser) => {
 
 module.exports.getAccount = async (id) => {
   let account;
-
   try {
     account = await userMongooseModel.findOne({ _id: id }).lean();
   } catch (error) {
     console.log(err);
     return null;
   }
-
   return account;
 };
 
@@ -85,5 +84,32 @@ module.exports.changePassword = async(id, password)=>{
       await userMongooseModel.updateOne({_id: id}, {password: hash});
     })
   })
+}
+
+module.exports.checkVerifyToken = (verifyToken)=>{
+  return userMongooseModel.findOne({'verify_token': verifyToken});
+}
+
+module.exports.verify =async (id)=>{
+  await userMongooseModel.updateOne({_id: id},{isVerify: true});
+}
+
+module.exports.sendVerifyEmail = async (user) =>{
+  const verifyToken =  randomstring.generate(7);
+  const userEmail = user.user_email;
+  await userMongooseModel.updateOne({_id: user._id},{verify_token: verifyToken});
+  const html =`Chào bạn,
+  <br/>
+  Cảm ơn bạn đã đăng ký tài khoản tại Bookstore. Đây là email được gửi để xác thực tài khoản của bạn.
+  <br/>
+  Mã xác thực: <b>${verifyToken}</b>
+  <br/>
+  Vui lòng nhập mã trên tại trang xác thực.
+  <br/><br/>
+  Xin chân thành cảm ơn,
+  <br/>
+  Bookstore
+  `;
+  await mailer.sendEmail('admin@bookstore.com', userEmail, 'Xác thực Email', html);
 }
 

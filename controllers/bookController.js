@@ -1,17 +1,14 @@
 const bookService = require("../model/bookService");
-const { paginate } = require("../model/mongooseModel/bookMongooseModel");
 const Book = require("../model/mongooseModel/bookMongooseModel");
-const Review = require("../model/mongooseModel/reviewMongooseModel");
-const User = require("../model/mongooseModel/userMongooseModel");
-const Category = require("../model/mongooseModel/categoryMongooseModel");
 const ITEM_PER_PAGE = 12;
 
-const CATEGORY ={};
-CATEGORY.KyNangSong = "5fc50d6be77a5f7fc39b83f0";
-CATEGORY.HocNgoaiNgu ="5fc50da4e77a5f7fc39b83f1";
-CATEGORY.TreEm ="5fc50dcae77a5f7fc39b83f2";
-CATEGORY.KinhTe ="5fc602e08afb5827a4dabfc3";
-CATEGORY.KhoaHoc ="5fc5eadcc2391d0017da2ea3";
+// const CATEGORY ={};
+// CATEGORY.KyNangSong = "5fc50d6be77a5f7fc39b83f0";
+// CATEGORY.HocNgoaiNgu ="5fc50da4e77a5f7fc39b83f1";
+// CATEGORY.TreEm ="5fc50dcae77a5f7fc39b83f2";
+// CATEGORY.KinhTe ="5fc602e08afb5827a4dabfc3";
+// CATEGORY.KhoaHoc ="5fc5eadcc2391d0017da2ea3";
+
 module.exports.bookShop = async function (req, res, next) {
   const page = +req.query.page || 1;
   const catId = req.query.catId;
@@ -30,8 +27,7 @@ module.exports.bookShop = async function (req, res, next) {
   }
 
   const paginate = await bookService.listBook(filter, page, ITEM_PER_PAGE);
-  
-  const category = await Category.find({}).lean();
+  const category = await bookService.getCategory();
 
   res.render('pages/book/bookShop',{
     title: "Book Shop",
@@ -55,19 +51,16 @@ module.exports.bookShop = async function (req, res, next) {
 exports.bookDetail = async function (req, res, next) {
   const bookId = req.params.id;
 
-  const book = await Book.findOne({ _id: bookId });
-
-  const reviews = await Review.find({ bookID: bookId }).lean();
+  const book = await bookService.getBookById(bookId);
+  const reviews = await bookService.getReviewOfBook(bookId);
 
   const genre = book.category;
-  const relatedBooks = await bookService.getBookByCatory(genre, 6);;
-  const upsellProducts = await bookService.getBookByCatory(genre, 6);
-
-  const category = await Category.find({}).lean();
+  const relatedBooks = await bookService.getBookByCategory(genre, 6);;
+  const upsellProducts = await bookService.getBookByCategory(genre, 6);
+  const category = await bookService.getCategory();
 
   res.render("./pages/book/bookDetail", {
     title: "Detail",
-    isLogin: false,
     book_name_main: book.title,
     current_cost_main: book.price,
     image_book_main_cover: book.cover,

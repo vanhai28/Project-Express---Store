@@ -11,22 +11,26 @@ const auth = require('../middleware/authenticate');
 //   res.send("respond with a resource");
 // });
 
-router.get("/register", userController.register);
+router.get("/register", userController.getRegister);
 
-router.post("/register", validAcc.validAccount, userController.addUser);
+router.post("/register", validAcc.validAccount, userController.postRegister);
 
-router.get("/login", userController.login);
+router.get("/login", userController.getLogin);
 
-router.post('/login', authController.authLoginUser);
+router.post('/login', authController.postLogin, auth.isVerify);
 
-router.get("/account", userController.account);
+router.get("/account", userController.getAccount);
 
-router.post("/account", userController.changeAccount);
+router.post("/account", userController.postAccount);
 
-router.get("/password", auth, userController.password);
+router.get("/password", auth.isLogin, userController.getPassword);
 
-router.post('/password', validAcc.checkPassword, userController.changePassword);
+router.post('/password', validAcc.checkPassword, userController.postPassword);
 
-router.get('/logout', userController.logout);
+router.get("/verify", userController.getVerify);
+
+router.post("/verify", userController.postVerify);
+
+router.get('/logout', userController.getLogout);
 
 module.exports = router;

@@ -7,9 +7,11 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const hbs = require("express-handlebars");
 const hbshelpers = require("handlebars-helpers");
+const flash = require('connect-flash');
+
 const multihelpers = hbshelpers();
 
-const passport = require('./passport');
+const passport = require('./config/passport');
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const mongoose = require("./config/db");
@@ -22,7 +24,6 @@ const bodyParser = require("body-parser");
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
 // run mongoose
 mongoose.mongoose();
 
@@ -55,6 +56,7 @@ app.use(session({ secret: process.env.SESSION_SECRET}));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(flash());
 
 //Pass req.user to res.local
 app.use(function (req, res, next) {
