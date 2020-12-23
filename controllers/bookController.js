@@ -61,6 +61,7 @@ exports.bookDetail = async function (req, res, next) {
 
   res.render("./pages/book/bookDetail", {
     title: "Detail",
+    bookID: book._id,
     book_name_main: book.title,
     current_cost_main: book.price,
     image_book_main_cover: book.cover,

@@ -242,18 +242,22 @@
 												</div> --}}
 											</div>
 										</div>
-										<div class="review_form_field">
 
+										<form method="POST" action="/reviews">
+										<div class="review_form_field">
+											
 											{{#if user}}
 
 											<div class="input__box">
 												<span>Bạn đang đánh giá với tên là <b>{{user.user_name}}</b></span>
 											</div>
+											<input type="hidden" name="user_name" value="{{user.user_name}}">
 											
 											{{else}}
+
 											<div class="input__box">
 												<span>Nickname</span>
-												<input id="nickname_field" type="text" name="nickname">
+												<input id="nickname_field" type="text" name="user_name">
 											</div>
 
 											{{/if}}
@@ -263,12 +267,16 @@
 											</div> --}}
 											<div class="input__box">
 												<span>Nhận xét</span>
-												<textarea name="review"></textarea>
+												<textarea name="message"></textarea>
+												<input name="bookID" type="hidden" value="{{bookID}}">
 											</div>
+
 											<div class="review-form-actions">
-												<button>Gửi đánh giá</button>
+												<button type ="submit">Gửi đánh giá</button>
 											</div>
+											
 										</div>
+										</form>
 									</div>
 									
 	                        	</div>
