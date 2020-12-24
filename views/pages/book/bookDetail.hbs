@@ -128,8 +128,8 @@
         				</div>
         				<div class="product__info__detailed">
 							<div class="pro_details_nav nav justify-content-start" role="tablist">
-	                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Details</a>
-	                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Reviews</a>
+	                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Chi tiết</a>
+	                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Đánh giá</a>
 	                        </div>
 	                        <div class="tab__container">
 	                        	<!-- Start Single Tab Content -->
@@ -148,14 +148,14 @@
 	                        	<!-- Start Single Tab Content -->
 	                        	<div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">	
 									<div class="review__attribute">
-										<h1>Customer Reviews</h1>
+										<h1>Khách hàng đánh giá</h1>
 										{{#each reviews}}
 										<div>
 										<h2 style="margin-bottom:10px;">{{user_name}}</h2>
 										<div class="review__ratings__type d-flex">
 											<div class="review-ratings">
 												<div class="rating-summary d-flex">
-													<span>Quality</span>
+													<span>Chất lượng</span>
 			    									<ul class="rating d-flex">
 														<li><i class="zmdi zmdi-star"></i></li>
 														<li><i class="zmdi zmdi-star"></i></li>
@@ -190,7 +190,7 @@
 
 											<div class="review-content">
 												
-												<p>Review by {{{user_name}}}</p>
+												<p>Đánh giá bởi {{{user_name}}}</p>
 												<p>{{this.date}}</p>
 											</div>
 										</div>
@@ -206,12 +206,12 @@
 
 
 									<div class="review-fieldset">
-										<h2>You're reviewing:</h2>
+										<h2>Bạn đang đánh giá cho:</h2>
 										<h3>{{book_name_main}}</h3>
 										<div class="review-field-ratings">
 											<div class="product-review-table">
 												<div class="review-field-rating d-flex">
-													<span>Quality</span>
+													<span>Chất lượng</span>
 													<ul class="rating d-flex">
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
@@ -242,23 +242,41 @@
 												</div> --}}
 											</div>
 										</div>
+
+										<form method="POST" action="/reviews">
 										<div class="review_form_field">
+											
+											{{#if user}}
+
+											<div class="input__box">
+												<span>Bạn đang đánh giá với tên là <b>{{user.user_name}}</b></span>
+											</div>
+											<input type="hidden" name="user_name" value="{{user.user_name}}">
+											
+											{{else}}
+
 											<div class="input__box">
 												<span>Nickname</span>
-												<input id="nickname_field" type="text" name="nickname">
+												<input id="nickname_field" type="text" name="user_name">
 											</div>
+
+											{{/if}}
 											{{!-- <div class="input__box">
 												<span>Summary</span>
 												<input id="summery_field" type="text" name="summery">
 											</div> --}}
 											<div class="input__box">
-												<span>Review</span>
-												<textarea name="review"></textarea>
+												<span>Nhận xét</span>
+												<textarea name="message"></textarea>
+												<input name="bookID" type="hidden" value="{{bookID}}">
 											</div>
+
 											<div class="review-form-actions">
-												<button>Submit Review</button>
+												<button type ="submit">Gửi đánh giá</button>
 											</div>
+											
 										</div>
+										</form>
 									</div>
 									
 	                        	</div>
@@ -267,7 +285,7 @@
         				</div>
 						<div class="wn__related__product pt--80 pb--50">
 							<div class="section__title text-center">
-								<h2 class="title__be--2">Related Products</h2>
+								<h2 class="title__be--2">Sách có liên quan</h2>
 							</div>
 							<div class="row mt--60">
 								<div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
@@ -314,7 +332,7 @@
 						</div>
 						<div class="wn__related__product">
 							<div class="section__title text-center">
-								<h2 class="title__be--2">upsell products</h2>
+								<h2 class="title__be--2">Sách bán chạy</h2>
 							</div>
 							<div class="row mt--60">
 								<div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
@@ -363,7 +381,7 @@
         			<div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
         				<div class="shop__sidebar">
         					<aside class="wedget__categories poroduct--cat">
-        						<h3 class="wedget__title">Product Categories</h3>
+        						<h3 class="wedget__title">Các thể loại sách</h3>
         						<ul>
         							{{#each CATEGORY}}
 									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
@@ -372,11 +390,39 @@
         					</aside>
         					
         					<aside class="wedget__categories poroduct--tag">
-        						<h3 class="wedget__title">Product Tags</h3>
+        						<h3 class="wedget__title">Các từ khóa</h3>
         						<ul>
         							{{#each CATEGORY}}
 									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
 									{{/each}}
+        						</ul>
+        					</aside>
+							<aside class="wedget__categories pro--range">
+        						<h3 class="wedget__title">Lọc theo giá</h3>
+        						<div class="content-shopby">
+        						    <div class="price_filter s-filter clear">
+        						        <form action="#" method="GET">
+        						            <div id="slider-range"></div>
+        						            <div class="slider__range--output">
+        						                <div class="price__output--wrap">
+        						                    <div class="price--output">
+        						                        <span>Giá :</span><input type="text" id="amount" readonly="">
+        						                    </div>
+        						                    <div class="price--filter">
+        						                        <a href="#">Lọc</a>
+        						                    </div>
+        						                </div>
+        						            </div>
+        						        </form>
+        						    </div>
+        						</div>
+        					</aside>
+        					<aside class="wedget__categories poroduct--compare">
+        						<h3 class="wedget__title">Compare</h3>
+        						<ul>
+        							<li><a href="#">x</a><a href="#">Condimentum posuere</a></li>
+        							<li><a href="#">x</a><a href="#">Condimentum posuere</a></li>
+        							<li><a href="#">x</a><a href="#">Dignissim venenatis</a></li>
         						</ul>
         					</aside>
         					<aside class="wedget__categories sidebar--banner">
