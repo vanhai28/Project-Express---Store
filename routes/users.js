@@ -31,6 +31,10 @@ router.get("/verify", userController.getVerify);
 
 router.post("/verify", userController.postVerify);
 
+router.get("/forget-password", userController.getForgetPassword);
+
+router.post("/forget-password",userController.postForgetPassword);
+
 router.get('/logout', userController.getLogout);
 
 module.exports = router;

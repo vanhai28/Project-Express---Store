@@ -120,12 +120,12 @@ module.exports.getVerify = (req, res) =>{
   res.render('pages/verify', {title: 'Verify'});
 }
 
-module.exports.postVerify = (req, res) => {
+module.exports.postVerify = async (req, res) => {
   const {verifyToken} = req.body;
   const user = req.user;
-  const isValid = userService.checkVerifyToken(verifyToken);
+  const isValid = await userService.checkVerifyToken(verifyToken);
   if(!isValid){
-    res.render('pages/verify',{
+    return res.render('pages/verify',{
       title: 'Verify',
       message: 'Mã xác thực không hợp lệ'
     });
@@ -142,6 +142,26 @@ module.exports.postVerify = (req, res) => {
 module.exports.getLogout = (req, res) =>{
   req.logout();
   res.redirect(req.headers.referer);
+}
+
+module.exports.getForgetPassword = (req, res) =>{
+  res.render("pages/forgetPassword", { title: "Forget Password" });
+}
+
+module.exports.postForgetPassword = async (req,res) =>{
+  const email = req.body.email.trim();
+  const username =  req.body.username.trim();
+  const isValid = await userService.checkUsernameAndEmail(username,email);
+  if(isValid){
+    userService.sendForgetPasswordEmail(email);
+    res.redirect('/user/login');
+  }
+  else{
+    res.render('pages/forgetPassword',{
+      title: 'Forget Password',
+      message: 'Email hoặc Username không chính xác. Vui lòng nhập lại.'
+    });
+  }
 }
 
 

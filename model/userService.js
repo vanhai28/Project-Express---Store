@@ -86,12 +86,12 @@ module.exports.changePassword = async(id, password)=>{
   })
 }
 
-module.exports.checkVerifyToken = (verifyToken)=>{
-  return userMongooseModel.findOne({'verify_token': verifyToken});
+module.exports.checkVerifyToken = async (verifyToken)=>{
+  return await userMongooseModel.findOne({verify_token: verifyToken});
 }
 
 module.exports.verify =async (id)=>{
-  await userMongooseModel.updateOne({_id: id},{isVerify: true});
+  await userMongooseModel.updateOne({_id: id},{isVerify: true, verify_token:""});
 }
 
 module.exports.sendVerifyEmail = async (user) =>{
@@ -112,4 +112,35 @@ module.exports.sendVerifyEmail = async (user) =>{
   `;
   await mailer.sendEmail('admin@bookstore.com', userEmail, 'Xác thực Email', html);
 }
+
+module.exports.sendForgetPasswordEmail = async (email) =>{
+  const newPassword =  randomstring.generate(10);
+  const userEmail = email;
+
+  const saltRounds = 10;
+  await bcrypt.genSalt(saltRounds, (err, salt)=>{
+    bcrypt.hash(newPassword, salt, async (err, hash)=>{
+      await userMongooseModel.updateOne({user_email: email},{password: hash});
+    })
+  })
+
+  const html =`Chào bạn,
+  <br/>
+  Mật khẩu tài khoản của bạn đã được reset.
+  <br/>
+  Mật khẩu mới: <b>${newPassword}</b>
+  <br/>
+  Vui lòng mật khẩu mới để tiếp tục sử dụng dịch vụ của chúng tôi.
+  <br/><br/>
+  Xin chân thành cảm ơn,
+  <br/>
+  Bookstore
+  `;
+  await mailer.sendEmail('admin@bookstore.com', userEmail, 'Reset Mật khẩu', html);
+}
+
+module.exports.checkUsernameAndEmail = (username, email)=>{
+    return userMongooseModel.findOne({user_name: username, user_email: email});
+}
+
 
