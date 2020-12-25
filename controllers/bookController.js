@@ -2,13 +2,6 @@ const bookService = require("../model/bookService");
 const Book = require("../model/mongooseModel/bookMongooseModel");
 const ITEM_PER_PAGE = 12;
 
-// const CATEGORY ={};
-// CATEGORY.KyNangSong = "5fc50d6be77a5f7fc39b83f0";
-// CATEGORY.HocNgoaiNgu ="5fc50da4e77a5f7fc39b83f1";
-// CATEGORY.TreEm ="5fc50dcae77a5f7fc39b83f2";
-// CATEGORY.KinhTe ="5fc602e08afb5827a4dabfc3";
-// CATEGORY.KhoaHoc ="5fc5eadcc2391d0017da2ea3";
-
 module.exports.bookShop = async function (req, res, next) {
   const page = +req.query.page || 1;
   const catId = req.query.catId;

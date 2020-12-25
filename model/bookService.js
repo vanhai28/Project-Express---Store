@@ -1,8 +1,6 @@
 const bookMongoose = require("./mongooseModel/bookMongooseModel");
 const categoryMongoose = require("../model/mongooseModel/categoryMongooseModel");
 const reviewMongoose = require("../model/mongooseModel/reviewMongooseModel");
-const categoryMongooseModel = require("../model/mongooseModel/categoryMongooseModel");
-
 const numPagePerPagination = 4;
 MAX_NUMBER_PAGE = 9; 
 

@@ -1,4 +1,7 @@
+const randomstring = require("randomstring");
 const bookService = require("../model/bookService");
+const memberService = require("../model/memberService");
+const faqService = require("../model/faqService");
 const arrModel = require("../service/arrayHelper");
 
 const Book = require("../model/mongooseModel/bookMongooseModel");
@@ -32,8 +35,12 @@ module.exports.index = async function (req, res, next) {
   });
 };
 
-module.exports.aboutUs = (req, res, next) => {
-  res.render("pages/aboutUs", { title: "About Us" });
+module.exports.aboutUs = async (req, res, next) => {
+  const member = await memberService.getMember();
+  res.render("pages/aboutUs", {
+    title: "About Us",
+    member,
+  });
 };
 module.exports.cart = (req, res, next) => {
   res.render("pages/cart", { title: "Cart" });
@@ -44,6 +51,10 @@ module.exports.checkout = (req, res, next) => {
 module.exports.contact = (req, res, next) => {
   res.render("pages/contact", { title: "contact" });
 };
-module.exports.faq = (req, res, next) => {
-  res.render("pages/faq", { title: "Frequently Asked Questions" });
+module.exports.faq = async (req, res, next) => {
+  const faq = await faqService.getFAQ();
+  res.render("pages/faq", {
+    title: "Frequently Asked Questions",
+    faq,
+  });
 };
