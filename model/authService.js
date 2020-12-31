@@ -3,7 +3,7 @@ const userMongooseModel = require("./mongooseModel/userMongooseModel");
 
 exports.authLoginAcc = async (emailOrUserName, pass) => {
   let err = "";
-  //----------------- tim trong database ---------------
+  //----------------- find in database ---------------
 
   let isHasUsername = await userMongooseModel.findOne({
     user_name: emailOrUserName,
@@ -13,16 +13,16 @@ exports.authLoginAcc = async (emailOrUserName, pass) => {
   });
 
   let user = isHasUsername || isHasEmail;
-  console.log("user : ----- " + user);
+
   if (user) {
-    console.log(user.password);
     let checkPassword = await bcrypt.compare(pass, user.password);
-    console.log("checl : ", checkPassword);
-    if (checkPassword) {
-      return null;
+
+    if (!checkPassword) {
+      err = "Username and password is not match";
+    } else if (user.status == "blocked") {
+      err = "your account is blocked!!";
     }
   }
-  err = "Username and password is not match";
 
   return err;
 };

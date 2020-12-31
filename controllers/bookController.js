@@ -1,34 +1,73 @@
-const bookModel = require("../model/bookModel");
+const bookService = require("../model/bookService");
+const Book = require("../model/mongooseModel/bookMongooseModel");
+const ITEM_PER_PAGE = 12;
 
-module.exports.bookShop = function (req, res, next) {
-  const page = parseInt(req.query.page) || 1;
-  const pagination = bookModel.pagination(page);
-  const prevPage = bookModel.prevPage(pagination[0].number);
-  const nextPage = bookModel.nextPage(pagination[0].number);
+module.exports.bookShop = async function (req, res, next) {
+  const page = +req.query.page || 1;
+  const catId = req.query.catId;
+  const q = req.query.q;
 
-  res.render("pages/book/bookShop", {
-    title: "Book shop",
-    books: bookModel.getDisplayedBook(page),
-    pagination: pagination,
-    prevPage: prevPage,
-    nextPage: nextPage,
-    page: page,
+  let filter;
+  if(q){
+    filter = {$text: {$search: q}};
+  }
+  else{
+    filter ={};
+  }
+
+  if(catId){
+    filter.idCategory = catId;
+  }
+
+  const paginate = await bookService.listBook(filter, page, ITEM_PER_PAGE);
+  const category = await bookService.getCategory();
+
+  res.render('pages/book/bookShop',{
+    title: "Book Shop",
+    isLogin: false,
+    books: paginate.docs, 
+    hasNextPage: paginate.hasNextPage,
+    hasPreviousPage: paginate.hasPrevPage,
+    nextPage: paginate.nextPage,
+    prevPage: paginate.prevPage,
+    lastPage: paginate.totalPages,
+    ITEM_PER_PAGE: ITEM_PER_PAGE,
+    currentPage: paginate.page,
+    q: q,
+    catId: catId,
+    CATEGORY: category,
   });
 };
 
-module.exports.bookDetail = function(req, res, next){
-   const array = bookModel.listBook();
-
-   const f = array.find(x => x.ID_book == req.params.id );
-   res.render('./pages/book/bookDetail', 
-   { title:"Detail", 
-    book_name_main: f.book_name, 
-    current_cost_main: f.current_cost, 
-    image_book_main: f.image_book,
-    relatedBooks: bookModel.getRelatedBook(/*type*/),
-    upsellProducts: bookModel.getUpsellProduct(),
-    image_book_newProduct: array[20].image_book,
-   });
-  }
 
 
+exports.bookDetail = async function (req, res, next) {
+  const bookId = req.params.id;
+
+  const book = await bookService.getBookById(bookId);
+  const reviews = await bookService.getReviewOfBook(bookId);
+
+  const genre = book.category;
+  const relatedBooks = await bookService.getBookByCategory(genre, 6);;
+  const upsellProducts = await bookService.getBookByCategory(genre, 6);
+  const category = await bookService.getCategory();
+
+  res.render("./pages/book/bookDetail", {
+    title: "Detail",
+    bookID: book._id,
+    book_name_main: book.title,
+    current_cost_main: book.price,
+    image_book_main_cover: book.cover,
+    book_detail: book.detail,
+    relatedBooks: relatedBooks,
+    upsellProducts: upsellProducts,
+    images: book.images,
+    reviews: reviews,
+    CATEGORY: category,
+  });
+};
+
+exports.bookSearch = async (res, req, next) =>{
+  const f = await Book.find({$text: {$search: "d"}});
+  console.log('f', f);
+}

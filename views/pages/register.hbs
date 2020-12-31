@@ -3,33 +3,33 @@
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-6 col-12 text-align-center">
-                   <div class="my__account__wrapper"> 
+                   <div class="my__account__wrapper mt-5"> 
                     {{#if err}}
                         <div class="alert alert-danger" role="alert">
                             {{err}} 
                         </div>
                     {{/if}}
-                    <form action="/users/register" method="POST">
+                    <form action="/user/register" method="POST">
                         <div class="account__form">
-                              <h3 class="account__title text-center">Register</h3>
+                              <h3 class="account__title text-center">ĐĂNG KÝ</h3>
                             <div class="input__box">
-                                <label>User name <span>*</span></label>
+                                <label>Username <span>*</span></label>
                                 <input type="text" required name="user_name">
                             </div>
                             <div class="input__box">
-                                <label>Email address <span>*</span></label>
-                                <input type="email" required name="user_email">
+                                <label>Địa chỉ Email <span>*</span></label>
+                                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required name="user_email">
                             </div>
                             <div class="input__box">
-                                <label>Password<span>*</span></label>
+                                <label>Mật khẩu<span>*</span></label>
                                 <input type="password" minlength="8" required name="password">
                             </div>
                             <div class="input__box">
-                                <label>Re-Enter Password<span>*</span></label>
+                                <label>Xác nhận mật khẩu<span>*</span></label>
                                 <input type="password" minlength="8" required name="re_password">
                             </div>
                             <div class="form__btn">
-                                <button>Register</button>
+                                <button>Đăng ký</button>
                             </div>
                         </div>
                     </form>

@@ -5,18 +5,17 @@
 	<![endif]-->
 
 	<!-- Main wrapper -->
-	<div class="wrapper" id="wrapper">
 		
 		<!-- Header -->
 		<!-- //Header -->
 		<!-- Start Search Popup -->
 		<div class="box-search-content search_active block-bg close__top">
-			<form id="search_mini_form" class="minisearch" action="#">
+			<form id="search_mini_form" class="minisearch" action="/book-shop" method="GET">
 				<div class="field__search">
-					<input type="text" placeholder="Search entire store here...">
-					<div class="action">
-						<a href="#"><i class="zmdi zmdi-search"></i></a>
-					</div>
+					<input name="q" type="text" placeholder="Search entire store here...">
+					{{!-- <div class="action">
+						<a href="/book-shop/?q=nhan"><i class="zmdi zmdi-search"></i></a>
+					</div> --}}
 				</div>
 			</form>
 			<div class="close__wrap">
@@ -32,7 +31,7 @@
                         <div class="bradcaump__inner text-center">
                         	<h2 class="bradcaump-title">Shop Single</h2>
                             <nav class="bradcaump-content">
-                              <a class="breadcrumb_item" href="index.html">Home</a>
+                              <a class="breadcrumb_item" href="/">Home</a>
                               <span class="brd-separetor">/</span>
                               <span class="breadcrumb_item active">Shop Single</span>
                             </nav>
@@ -52,14 +51,9 @@
         						<div class="col-lg-6 col-12">
         							<div class="wn__fotorama__wrapper">
 	        							<div class="fotorama wn__fotorama__action" data-nav="thumbs">
-		        							  <a href="/1.jpg"><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href="/2.jpg"><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href="/3.jpg"><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href="/4.jpg"><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href="/5.jpg"><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href="/6.jpg"><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href="/7.jpg"><img src="{{image_book_main}}" alt=""></a>
-		        							  <a href="/8.jpg"><img src="{{image_book_main}}" alt=""></a>
+											  {{#each images}}
+											  <a href=""><img src="{{this}}" alt=""></a>
+											  {{/each}}
 	        							</div>
         							</div>
         						</div>
@@ -75,12 +69,16 @@
     											<li class="off"><i class="zmdi zmdi-star-outline"></i></li>
         									</ul>
         								</div>
-        								<div class="price-box">
-        									<span>{{current_cost_main}}</span>
+        								<div>
+											<ul class="prize d-flex">
+												<li>{{current_cost_main}}</li>
+											</ul>
+        									
         								</div>
 										<div class="product__overview">
-        									<p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.</p>
-        									<p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. </p>
+											
+										<p style="text-align: justify;">{{book_detail}}</p>
+											
         								</div>
         								<div class="box-tocart d-flex">
         									<span>Qty</span>
@@ -130,14 +128,14 @@
         				</div>
         				<div class="product__info__detailed">
 							<div class="pro_details_nav nav justify-content-start" role="tablist">
-	                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Details</a>
-	                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Reviews</a>
+	                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Chi tiết</a>
+	                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Đánh giá</a>
 	                        </div>
 	                        <div class="tab__container">
 	                        	<!-- Start Single Tab Content -->
 	                        	<div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
 									<div class="description__attribute">
-										<p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.</p>
+										<p></p>
 										<ul>
 											<li>• Two-tone gray heather hoodie.</li>
 											<li>• Drawstring-adjustable hood. </li>
@@ -146,15 +144,18 @@
 									</div>
 	                        	</div>
 	                        	<!-- End Single Tab Content -->
+
 	                        	<!-- Start Single Tab Content -->
-	                        	<div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">
+	                        	<div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">	
 									<div class="review__attribute">
-										<h1>Customer Reviews</h1>
-										<h2>Hastech</h2>
+										<h1>Khách hàng đánh giá</h1>
+										{{#each reviews}}
+										<div>
+										<h2 style="margin-bottom:10px;">{{user_name}}</h2>
 										<div class="review__ratings__type d-flex">
 											<div class="review-ratings">
 												<div class="rating-summary d-flex">
-													<span>Quality</span>
+													<span>Chất lượng</span>
 			    									<ul class="rating d-flex">
 														<li><i class="zmdi zmdi-star"></i></li>
 														<li><i class="zmdi zmdi-star"></i></li>
@@ -164,7 +165,7 @@
 			    									</ul>
 												</div>
 
-												<div class="rating-summary d-flex">
+												{{!-- <div class="rating-summary d-flex">
 													<span>Price</span>
 			    									<ul class="rating d-flex">
 														<li><i class="zmdi zmdi-star"></i></li>
@@ -183,22 +184,34 @@
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
 			    									</ul>
-												</div>
+												</div> --}}
 											</div>
+											
+
 											<div class="review-content">
-												<p>Hastech</p>
-												<p>Review by Hastech</p>
-												<p>Posted on 11/6/2018</p>
+												
+												<p>Đánh giá bởi {{{user_name}}}</p>
+												<p>{{this.date}}</p>
 											</div>
 										</div>
+										
+										</div>
+										<p>{{content}}</p>
+										<br>
+										<br>
+										{{/each}}
+
 									</div>
+									
+
+
 									<div class="review-fieldset">
-										<h2>You're reviewing:</h2>
+										<h2>Bạn đang đánh giá cho:</h2>
 										<h3>{{book_name_main}}</h3>
 										<div class="review-field-ratings">
 											<div class="product-review-table">
 												<div class="review-field-rating d-flex">
-													<span>Quality</span>
+													<span>Chất lượng</span>
 													<ul class="rating d-flex">
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
@@ -207,7 +220,7 @@
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
 			    									</ul>
 												</div>
-												<div class="review-field-rating d-flex">
+												{{!-- <div class="review-field-rating d-flex">
 													<span>Price</span>
 													<ul class="rating d-flex">
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
@@ -226,34 +239,53 @@
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
 			    									</ul>
-												</div>
+												</div> --}}
 											</div>
 										</div>
+
+										<form method="POST" action="/reviews">
 										<div class="review_form_field">
+											
+											{{#if user}}
+
+											<div class="input__box">
+												<span>Bạn đang đánh giá với tên là <b>{{user.user_name}}</b></span>
+											</div>
+											<input type="hidden" name="user_name" value="{{user.user_name}}">
+											
+											{{else}}
+
 											<div class="input__box">
 												<span>Nickname</span>
-												<input id="nickname_field" type="text" name="nickname">
+												<input id="nickname_field" type="text" name="user_name">
 											</div>
-											<div class="input__box">
+
+											{{/if}}
+											{{!-- <div class="input__box">
 												<span>Summary</span>
 												<input id="summery_field" type="text" name="summery">
-											</div>
+											</div> --}}
 											<div class="input__box">
-												<span>Review</span>
-												<textarea name="review"></textarea>
+												<span>Nhận xét</span>
+												<textarea name="message"></textarea>
+												<input name="bookID" type="hidden" value="{{bookID}}">
 											</div>
+
 											<div class="review-form-actions">
-												<button>Submit Review</button>
+												<button type ="submit">Gửi đánh giá</button>
 											</div>
+											
 										</div>
+										</form>
 									</div>
+									
 	                        	</div>
 	                        	<!-- End Single Tab Content -->
 	                        </div>
         				</div>
 						<div class="wn__related__product pt--80 pb--50">
 							<div class="section__title text-center">
-								<h2 class="title__be--2">Related Products</h2>
+								<h2 class="title__be--2">Sách có liên quan</h2>
 							</div>
 							<div class="row mt--60">
 								<div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
@@ -261,17 +293,16 @@
 									{{#each relatedBooks}}
 									<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product__thumb">
-											<a class="first__img" href="/book-detail/{{ID_book}}"><img src={{image_book}} alt="product image"></a>
-											<a class="second__img animation1" href="/book-detail/{{ID_book}}"><img src="/images/books/2.jpg" alt="product image"></a>
+											<a class="first__img" href="/book-detail/{{_id}}"><img src={{cover}} alt="product image"></a>
 											<div class="hot__box">
-												<span class="hot-label">BEST SALLER</span>
+												<span class="hot-label">BEST SELLER</span>
 											</div>
 										</div>
 										<div class="product__content content--center">
-											<h4><a href="/book-detail/{{ID_book}}">{{book_name}}</a></h4>
+											<h4><a href="/book-detail/{{_id}}">{{title}}</a></h4>
 											<ul class="prize d-flex">
-												<li>{{current_cost}}</li>
-												<li class="old_prize">{{old_cost}}</li>
+												<li>{{price}}</li>
+												<li class="old_prize">{{old_price}}</li>
 											</ul>
 											<div class="action">
 												<div class="actions_inner">
@@ -301,7 +332,7 @@
 						</div>
 						<div class="wn__related__product">
 							<div class="section__title text-center">
-								<h2 class="title__be--2">upsell products</h2>
+								<h2 class="title__be--2">Sách bán chạy</h2>
 							</div>
 							<div class="row mt--60">
 								<div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
@@ -309,17 +340,16 @@
 									{{#each upsellProducts}}
 									<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product__thumb">
-											<a class="first__img" href="/book-detail/{{ID_book}}"><img src={{image_book}} alt="product image"></a>
-											<a class="second__img animation1" href="/book-detail/{{ID_book}}"><img src="/images/books/2.jpg" alt="product image"></a>
+											<a class="first__img" href="/book-detail/{{_id}}"><img src={{cover}} alt="title"></a>
 											<div class="hot__box">
 												<span class="hot-label">HOT</span>
 											</div>
 										</div>
 										<div class="product__content content--center">
-											<h4><a href="/book-detail/{{ID_book}}">{{book_name}}</a></h4>
+											<h4><a href="/book-detail/{{_id}}">{{title}}</a></h4>
 											<ul class="prize d-flex">
-												<li>{{old_cost}}</li>
-												<li class="old_prize">{{current_cost}}</li>
+												<li>{{old_price}}</li>
+												<li class="old_prize">{{price}}</li>
 											</ul>
 											<div class="action">
 												<div class="actions_inner">
@@ -351,28 +381,24 @@
         			<div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
         				<div class="shop__sidebar">
         					<aside class="wedget__categories poroduct--cat">
-        						<h3 class="wedget__title">Product Categories</h3>
+        						<h3 class="wedget__title">Các thể loại sách</h3>
         						<ul>
-        							<li><a href="#">Biography <span>(3)</span></a></li>
-        							<li><a href="#">Business <span>(4)</span></a></li>
-        							<li><a href="#">Cookbooks <span>(6)</span></a></li>
-        							<li><a href="#">Health & Fitness <span>(7)</span></a></li>
-        							<li><a href="#">History <span>(8)</span></a></li>
-        							<li><a href="#">Mystery <span>(9)</span></a></li>
-        							<li><a href="#">Inspiration <span>(13)</span></a></li>
-        							<li><a href="#">Romance <span>(20)</span></a></li>
-        							<li><a href="#">Fiction/Fantasy <span>(22)</span></a></li>
-        							<li><a href="#">Self-Improvement <span>(13)</span></a></li>
-        							<li><a href="#">Humor Books <span>(17)</span></a></li>
-        							<li><a href="#">Harry Potter <span>(20)</span></a></li>
-        							<li><a href="#">Land of Stories <span>(34)</span></a></li>
-        							<li><a href="#">Kids' Music <span>(60)</span></a></li>
-        							<li><a href="#">Toys & Games <span>(3)</span></a></li>
-        							<li><a href="#">hoodies <span>(3)</span></a></li>
+        							{{#each CATEGORY}}
+									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
+									{{/each}}
         						</ul>
         					</aside>
-        					<aside class="wedget__categories pro--range">
-        						<h3 class="wedget__title">Filter by price</h3>
+        					
+        					<aside class="wedget__categories poroduct--tag">
+        						<h3 class="wedget__title">Các từ khóa</h3>
+        						<ul>
+        							{{#each CATEGORY}}
+									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
+									{{/each}}
+        						</ul>
+        					</aside>
+							<aside class="wedget__categories pro--range">
+        						<h3 class="wedget__title">Lọc theo giá</h3>
         						<div class="content-shopby">
         						    <div class="price_filter s-filter clear">
         						        <form action="#" method="GET">
@@ -380,10 +406,10 @@
         						            <div class="slider__range--output">
         						                <div class="price__output--wrap">
         						                    <div class="price--output">
-        						                        <span>Price :</span><input type="text" id="amount" readonly="">
+        						                        <span>Giá :</span><input type="text" id="amount" readonly="">
         						                    </div>
         						                    <div class="price--filter">
-        						                        <a href="#">Filter</a>
+        						                        <a href="#">Lọc</a>
         						                    </div>
         						                </div>
         						            </div>
@@ -399,26 +425,8 @@
         							<li><a href="#">x</a><a href="#">Dignissim venenatis</a></li>
         						</ul>
         					</aside>
-        					<aside class="wedget__categories poroduct--tag">
-        						<h3 class="wedget__title">Product Tags</h3>
-        						<ul>
-        							<li><a href="#">Biography</a></li>
-        							<li><a href="#">Business</a></li>
-        							<li><a href="#">Cookbooks</a></li>
-        							<li><a href="#">Health & Fitness</a></li>
-        							<li><a href="#">History</a></li>
-        							<li><a href="#">Mystery</a></li>
-        							<li><a href="#">Inspiration</a></li>
-        							<li><a href="#">Religion</a></li>
-        							<li><a href="#">Fiction</a></li>
-        							<li><a href="#">Fantasy</a></li>
-        							<li><a href="#">Music</a></li>
-        							<li><a href="#">Toys</a></li>
-        							<li><a href="#">Hoodies</a></li>
-        						</ul>
-        					</aside>
         					<aside class="wedget__categories sidebar--banner">
-								<img src={{image_book_newProduct}} alt="banner images">
+								<img src="" alt="banner images">
 								<div class="text">
 									<h2>new products</h2>
 									<h6>save up to <br> <strong>40%</strong>off</h6>
@@ -461,7 +469,7 @@
 		                        <!-- Start product images -->
 		                        <div class="product-images">
 		                            <div class="main-image images">
-		                                <img alt="big images" src="/images/product/big-img/1.jpg">
+		                                <img alt="big images" src="">
 		                            </div>
 		                        </div>
 		                        <!-- end product images -->
@@ -531,5 +539,4 @@
 		</div>
 		<!-- END QUICKVIEW PRODUCT -->
 
-	</div>
 	<!-- //Main wrapper -->

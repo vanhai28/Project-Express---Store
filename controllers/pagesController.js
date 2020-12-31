@@ -1,38 +1,46 @@
-const bookModel = require("../model/bookModel");
-const arrModel = require("../model/arrayModel");
-module.exports.index = function (req, res, next) {
-  let aventureBook = bookModel.getBookByCatory("adventure", 12);
-  let biographicBook = bookModel.getBookByCatory("biographicBook", 12);
-  let cookBook = bookModel.getBookByCatory("cookBook", 12);
-  let childrenBook = bookModel.getBookByCatory("childrenBook", 12);
+const randomstring = require("randomstring");
+const bookService = require("../model/bookService");
+const memberService = require("../model/memberService");
+const faqService = require("../model/faqService");
+const arrModel = require("../service/arrayHelper");
 
-  aventureBook = arrModel.modifyArray(aventureBook);
-  biographicBook = arrModel.modifyArray(biographicBook);
-  cookBook = arrModel.modifyArray(cookBook);
+const Book = require("../model/mongooseModel/bookMongooseModel");
+
+module.exports.index = async function (req, res, next) {
+  let softSkillBook = await bookService.getBookByCategory("Kỹ năng sống", 12);
+  let childrenBook = await bookService.getBookByCategory("Sách thiếu nhi", 12);
+  let learnForeignLanguageBook = await bookService.getBookByCategory(
+    "Học ngoại ngữ",
+    12
+  );
+  let economicBook = await bookService.getBookByCategory("Kinh tế", 12);
+
+  const bestSellerBook = await Book.find({ best_seller: true })
+    .limit(12)
+    .lean();
+  softSkillBook = arrModel.modifyArray(softSkillBook);
+  learnForeignLanguageBook = arrModel.modifyArray(learnForeignLanguageBook);
+  economicBook = arrModel.modifyArray(economicBook);
   childrenBook = arrModel.modifyArray(childrenBook);
 
+  console.log(softSkillBook);
   res.render("index", {
     title: "Home",
-    newBook: bookModel.getNewProduct(),
-    listBook: bookModel.listBook(),
-    bestSellerBook: bookModel.getBestSellerBook(),
-    biographicBook,
-    aventureBook,
+    isLogin: false,
+    softSkillBook: softSkillBook,
     childrenBook,
-    cookBook,
+    learnForeignLanguageBook,
+    economicBook,
+    bestSellerBook,
   });
 };
 
-module.exports.login = function (req, res, next) {
-  res.render("pages/login", { title: "Login" });
-};
-
-module.exports.register = function (req, res, next) {
-  res.render("pages/register", { title: "Register" });
-};
-
-module.exports.aboutUs = (req, res, next) => {
-  res.render("pages/aboutUs", { title: "About Us" });
+module.exports.aboutUs = async (req, res, next) => {
+  const member = await memberService.getMember();
+  res.render("pages/aboutUs", {
+    title: "About Us",
+    member,
+  });
 };
 module.exports.cart = (req, res, next) => {
   res.render("pages/cart", { title: "Cart" });
@@ -43,6 +51,10 @@ module.exports.checkout = (req, res, next) => {
 module.exports.contact = (req, res, next) => {
   res.render("pages/contact", { title: "contact" });
 };
-module.exports.faq = (req, res, next) => {
-  res.render("pages/faq", { title: "Frequently Asked Questions" });
+module.exports.faq = async (req, res, next) => {
+  const faq = await faqService.getFAQ();
+  res.render("pages/faq", {
+    title: "Frequently Asked Questions",
+    faq,
+  });
 };

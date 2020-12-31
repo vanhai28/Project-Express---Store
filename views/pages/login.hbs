@@ -3,34 +3,40 @@
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-6 col-12 text-center">
-                <div class="my__account__wrapper">
-                {{#if err}}
-                    <div class="alert alert-danger" role="alert">
-                    {{err}} 
-                    </div>
-                  {{/if}}
-                    <form action="/auth/login" method="POST"> 
+                <div class="my__account__wrapper mt-5">
+                    {{#if message}}
+                        <div class="alert alert-danger" role="alert">
+                            {{message}}
+                        </div>
+                    {{/if}}
+                    <form action="/user/login" method="POST">
                         <div class="account__form">
-                              <h3 class="account__title text-center">Login</h3>
+                            <h3 class="account__title text-center">ĐĂNG NHẬP</h3>
                             <div class="input__box">
-                                <label>Username or email address <span>*</span></label>
-                                <input type="text" required name="emailOrUserName">
+                                <label>Username<span>*</span></label>
+                                <input type="text" required name="username">
                             </div>
                             <div class="input__box">
-                                <label>Password<span>*</span></label>
+                                <label>Mật khẩu<span>*</span></label>
                                 <input type="password" required name="password">
                             </div>
                             <div class="form__btn">
-                                <button>Login</button>
+                                <button>Đăng nhập</button>
                                 <label class="label-for-checkbox">
-                                    <input id="rememberme" class="input-checkbox" name="rememberme" value="forever" type="checkbox">
-                                    <span>Remember me</span>   
-                                </label>  
+                                    <input id="rememberme" class="input-checkbox" name="rememberme" value="forever"
+                                        type="checkbox">
+                                    <span>Nhớ mật khẩu</span>
+                                </label>
                             </div>
-                                <a class="forget_pass .d-print-inline" href="#">Lost your password?</a>
-                                <span class="text-right">Or new account 
-                                    <a class="btn btn-primary" href="/register">Register</a>
-                                </span>      
+                            <div class="text-center">
+                                <a class="forget_pass .d-print-inline" href="/user/forget-password">Quên mật khẩu?</a>
+
+                            </div>
+                            <div class="text-center ">
+                                <h7>Bạn mới biết đến Bookstore?
+                                    <a class="btn btn-primary" href="/user/register">Đăng ký</a>
+                                </h7>
+                            </div>
                         </div>
                     </form>
                 </div>

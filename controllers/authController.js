@@ -1,14 +1,25 @@
-const authModel = require("../model/authModel");
+const passport = require('.././config/passport');
 
-exports.authLoginUser = async (req, res, next) => {
-  const emailOrUserName = req.body.emailOrUserName;
+module.exports.postLogin = (req, res, next) => {
+  passport.authenticate('local', (err, user, infor)=>{
+    if(err){
+      return next(err);
+    }
 
-  const pass = req.body.password;
-  const err = await authModel.authLoginAcc(emailOrUserName, pass);
+    if(!user){
+      return res.render('pages/login',{
+        title: 'Login',
+        message: 'Username hoặc mật khẩu không chính xác'
+      })
+    }
 
-  if (err) {
-    res.render("pages/login", { title: "Login", err: err });
-  } else {
-    res.redirect("/");
-  }
-};
+    req.logIn(user, (err)=>{
+      if (err){
+        return next(err);
+      }
+      next();
+    });
+  })(req, res, next);
+}
+
+
