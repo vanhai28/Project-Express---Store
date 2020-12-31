@@ -94,75 +94,77 @@ module.exports.postAccount = async (req, res, next) => {
   });
 };
 
-module.exports.getPassword = (req, res) =>{
+module.exports.getPassword = (req, res) => {
   res.render("pages/passwordChange", { title: "Change Password" });
-}
+};
 
-module.exports.postPassword = (req, res)=>{
+module.exports.postPassword = (req, res) => {
   const new_password = req.body.new_password;
   const id = req.user._id;
-  try{
+  try {
     userService.changePassword(id, new_password);
-    res.render('pages/passwordChange',{
-      title: 'Change Password',
-      result: 'Thay đổi mật khẩu thành công'
-    })
-    }catch(err){
-      res.render("pages/passwordChange",{
-        title: 'Change Password',
-        result: 'Thay đổi mật khẩu không thành công'
-      });
-    }
-}
+    res.render("pages/passwordChange", {
+      title: "Change Password",
+      result: "Thay đổi mật khẩu thành công",
+    });
+  } catch (err) {
+    res.render("pages/passwordChange", {
+      title: "Change Password",
+      result: "Thay đổi mật khẩu không thành công",
+    });
+  }
+};
 
-module.exports.getVerify = (req, res) =>{
+module.exports.getVerify = (req, res) => {
   userService.sendVerifyEmail(req.user);
-  res.render('pages/verify', {title: 'Verify'});
-}
+  res.render("pages/verify", { title: "Verify" });
+};
 
 module.exports.postVerify = async (req, res) => {
-  const {verifyToken} = req.body;
+  const { verifyToken } = req.body;
   const user = req.user;
   const isValid = await userService.checkVerifyToken(verifyToken);
-  if(!isValid){
-    return res.render('pages/verify',{
-      title: 'Verify',
-      message: 'Mã xác thực không hợp lệ'
+  if (!isValid) {
+    return res.render("pages/verify", {
+      title: "Verify",
+      message: "Mã xác thực không hợp lệ",
     });
   }
 
-  try{
+  try {
     userService.verify(user._id);
-  }catch(err){
+  } catch (err) {
     console.log(err);
   }
-  res.redirect('/');  
-}
+  res.redirect("/");
+};
 
-module.exports.getLogout = (req, res) =>{
-  req.logout();
-  res.redirect(req.headers.referer);
-}
+module.exports.getLogout = async (req, res) => {
+  try {
+    await userService.saveLastestTimeAccess(req.user._id);
 
-module.exports.getForgetPassword = (req, res) =>{
-  res.render("pages/forgetPassword", { title: "Forget Password" });
-}
-
-module.exports.postForgetPassword = async (req,res) =>{
-  const email = req.body.email.trim();
-  const username =  req.body.username.trim();
-  const isValid = await userService.checkUsernameAndEmail(username,email);
-  if(isValid){
-    userService.sendForgetPasswordEmail(email);
-    res.redirect('/user/login');
+    req.logout();
+    res.redirect(req.headers.referer);
+  } catch (error) {
+    res.redirect("/");
   }
-  else{
-    res.render('pages/forgetPassword',{
-      title: 'Forget Password',
-      message: 'Email hoặc Username không chính xác. Vui lòng nhập lại.'
+};
+
+module.exports.getForgetPassword = (req, res) => {
+  res.render("pages/forgetPassword", { title: "Forget Password" });
+};
+
+module.exports.postForgetPassword = async (req, res) => {
+  const email = req.body.email.trim();
+  const username = req.body.username.trim();
+  const isValid = await userService.checkUsernameAndEmail(username, email);
+  if (isValid) {
+    userService.sendForgetPasswordEmail(email);
+    res.redirect("/user/login");
+  } else {
+    res.render("pages/forgetPassword", {
+      title: "Forget Password",
+      message: "Email hoặc Username không chính xác. Vui lòng nhập lại.",
     });
   }
-}
-
-
-
+};
