@@ -2,7 +2,7 @@ const bookService = require("../model/bookService");
 const Book = require("../model/mongooseModel/bookMongooseModel");
 const ITEM_PER_PAGE = 12;
 
-module.exports.bookShop = async function (req, res, next) {
+exports.bookShop = async function (req, res, next) {
   const page = +req.query.page || 1;
   const catId = req.query.catId;
   const q = req.query.q;
@@ -22,9 +22,8 @@ module.exports.bookShop = async function (req, res, next) {
   const paginate = await bookService.listBook(filter, page, ITEM_PER_PAGE);
   const category = await bookService.getCategory();
 
-  res.render('pages/book/bookShop',{
+  res.render('./pages/book/bookShop',{
     title: "Book Shop",
-    isLogin: false,
     books: paginate.docs, 
     hasNextPage: paginate.hasNextPage,
     hasPreviousPage: paginate.hasPrevPage,
