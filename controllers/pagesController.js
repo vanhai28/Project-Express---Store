@@ -42,9 +42,9 @@ module.exports.aboutUs = async (req, res, next) => {
     member,
   });
 };
-module.exports.cart = (req, res, next) => {
-  res.render("pages/cart", { title: "Cart" });
-};
+// module.exports.cart = (req, res, next) => {
+//   res.render("pages/cart", { title: "Cart" });
+// };
 module.exports.checkout = (req, res, next) => {
   res.render("pages/checkout", { title: "checkout" });
 };

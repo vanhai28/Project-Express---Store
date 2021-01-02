@@ -52,11 +52,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 //Passport middlewares
-app.use(session({ secret: process.env.SESSION_SECRET}));
+app.use(session({ secret: process.env.SESSION_SECRET,
+cookie: {httpOnly: true, maxAge: 30 * 24 * 60 *60 * 1000},
+resave: false,
+saveUninitialized: false}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(flash());
+
+// Cart with session
+let Cart = require('./controllers/cartController');
+
+app.use((req,res,next) =>{
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  req.session.cart = cart;
+  res.locals.totalQuantity = cart.totalQuantity;
+  res.locals.cart = cart;
+  next();
+})
 
 //Pass req.user to res.local
 app.use(function (req, res, next) {
@@ -68,6 +83,10 @@ app.use(function (req, res, next) {
 app.use("/", indexRouter);
 app.use("/user", usersRouter);
 app.use("/reviews", require('./routes/reviewRouter'));
+app.use("/cart", require('./routes/cartRouter'));
+
+
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

@@ -8,7 +8,7 @@ router.get("/", controllerDef.index);
 
 router.get("/about-us", controllerDef.aboutUs);
 
-router.get("/cart", controllerDef.cart);
+// router.get("/cart", controllerDef.cart);
 
 router.get("/checkout", controllerDef.checkout);
 

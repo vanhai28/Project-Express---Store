@@ -84,7 +84,7 @@
         									<span>Qty</span>
         									<input id="qty" class="input-text qty" name="qty" min="1" value="1" title="Qty" type="number">
         									<div class="addtocart__actions">
-        										<button class="tocart" type="submit" title="Add to Cart">Add to Cart</button>
+        										<button class="tocart add-to-cart" title="Add to Cart" data-id="{{bookID}}">Add to Cart</button>
         									</div>
 											<div class="product-addto-links clearfix">
 												<a class="wishlist" href="#"></a>
@@ -185,20 +185,20 @@
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
 			    									</ul>
 												</div> --}}
+												{{!-- <p>{{content}}</p>
+										<br>
+										<br> --}}
 											</div>
 											
-
 											<div class="review-content">
 												
-												<p>Đánh giá bởi {{{user_name}}}</p>
+												{{!-- <p>Đánh giá bởi {{{user_name}}}</p> --}}
 												<p>{{this.date}}</p>
 											</div>
 										</div>
-										
+												<p>{{content}}</p>
+										<br>
 										</div>
-										<p>{{content}}</p>
-										<br>
-										<br>
 										{{/each}}
 
 									</div>
@@ -307,8 +307,8 @@
 											<div class="action">
 												<div class="actions_inner">
 													<ul class="add_to_links">
-														<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-														<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+														<li><a class="cart add-to-cart" data-id ="{{_id}}"><i class="bi bi-shopping-cart-full"></i></a></li>
+														{{!-- <li><a class="wishlist" href="/wishlist"><i class="bi bi-shopping-cart-full"></i></a></li> --}}
 														<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
 														<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
 													</ul>
@@ -354,8 +354,8 @@
 											<div class="action">
 												<div class="actions_inner">
 													<ul class="add_to_links">
-														<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-														<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+														<li><a class="cart add-to-cart" data-id ="{{_id}}"><i class="bi bi-shopping-cart-full"></i></a></li>
+														{{!-- <li><a class="wishlist" href="/wishlist"><i class="bi bi-shopping-cart-full"></i></a></li> --}}
 														<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
 														<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
 													</ul>
@@ -527,7 +527,7 @@
 		                                </div>
 		                            </div>
 		                            <div class="addtocart-btn">
-		                                <a href="#">Add to cart</a>
+		                                <a class="add-to-cart" data-id ="{{bookID}}">Add to cart</a>
 		                            </div>
 		                        </div><!-- .product-info -->
 		                    </div><!-- .modal-product -->
@@ -540,3 +540,4 @@
 		<!-- END QUICKVIEW PRODUCT -->
 
 	<!-- //Main wrapper -->
+<script src="/js/cart.js"></script>

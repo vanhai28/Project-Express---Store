@@ -8,8 +8,14 @@ exports.addReview = async(req, res) => {
         content: req.body.message,
     }
 
-    console.log(review);
-    await reviewModel.addReview(review);
+    if(review.user_name =="" || review.content ==""){
+        res.redirect('book-detail/'+ req.body.bookID);
+    }
+
+    else{
+        await reviewModel.addReview(review);
     
-    res.redirect('book-detail/'+ req.body.bookID);
+        res.redirect('book-detail/'+ req.body.bookID);
+    }
+    
 }
