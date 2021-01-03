@@ -51,7 +51,7 @@ function updateCartItem(id, quantity){
             $('#cart-total-quantity').html(result.totalQuantity + ' món');
             $('#cart-total-price').html(result.totalPrice);
             $('#total-price').html(result.totalPrice + ' VNĐ');
-            $(`#price${id}`).html(result.item.price);
+            $(`#price${id}`).html(result.item.price.toFixed(3));
         }
     })
 }

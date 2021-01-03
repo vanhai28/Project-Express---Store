@@ -30,9 +30,9 @@ module.exports = function Cart(oldCart) {
             this.items[id] = { item: item, quantity: 0, price: 0 };
             storedItem = this.items[id];
         }
-        storedItem.item.price = parseFloat(storedItem.item.price);
+        storedItem.item.price = parseFloat(storedItem.item.price).toFixed(3);
         storedItem.quantity += parseInt(quantity);
-        storedItem.price = parseFloat(storedItem.item.price * storedItem.quantity);
+        storedItem.price = parseFloat(storedItem.item.price * storedItem.quantity).toFixed(3);
         this.totalQuantity = this.getTotalQuantity();
         this.totalPrice = this.getTotalPrice();
         return this.getCartItem(id);
@@ -67,8 +67,8 @@ module.exports = function Cart(oldCart) {
     this.generateArray = () => {
         var arr = [];
         for (var id in this.items) {
-            this.items[id].item.price = parseFloat(this.items[id].item.price).toFixed(2);
-            this.items[id].price = parseFloat(this.items[id].price).toFixed(2);
+            this.items[id].item.price = parseFloat(this.items[id].item.price).toFixed(3);
+            this.items[id].price = parseFloat(this.items[id].price).toFixed(3);
             arr.push(this.items[id]);
         }
         return arr;
