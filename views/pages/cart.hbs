@@ -1,4 +1,6 @@
 
+<link rel="stylesheet" href="/css/style.css">
+
 	<!-- Main wrapper -->
 	<div class="wrapper" id="wrapper">
 		
@@ -56,13 +58,19 @@
                                     </thead>
                                     <tbody>
                                         {{#each items}}
-                                        <tr>
+                                        <tr id="item{{item._id}}">
                                             <td class="product-thumbnail"><a href="#"><img src="{{item.cover}}" alt="product img"></a></td>
                                             <td class="product-name"><a href="#">{{item.title}}</a></td>
                                             <td class="product-price"><span class="amount">{{item.price}}</span></td>
-                                            <td class="product-quantity"><input type="number" value="{{quantity}}"></td>
-                                            <td class="product-subtotal">{{price}}</td>
-                                            <td class="product-remove"><a href="#">X</a></td>
+                                            {{!-- <td class="product-quantity"><input id="sst{{item._id}}" type="number" value="{{quantity}}" ></td> --}}
+                                            <td class="product-quantity">
+                                                <input type="button" value="-" class="decreaseVal" onclick="decreaseValue('{{item._id}}')">
+                                                <input type="number" id="sst{{item._id}}" min="1" max="22" value="{{quantity}}" class="val" disabled>
+                                                <input type="button" value="+" class="increaseVal" onclick="encreaseValue('{{item._id}}')">
+                                            </td>
+                                            
+                                            <td class="product-subtotal" id="price{{item._id}}">{{price}}</td>
+                                            <td class="product-remove"><a onclick="if(confirm('Bạn có muốn xóa')) removeCartItem('{{item._id}}')">X</a></td>
                                         </tr>
                                         {{/each}}
                                         {{!-- <tr>
@@ -110,7 +118,7 @@
                             </div> --}}
                             <div class="cart__total__amount">
                                 <span>Tổng tiền phải trả</span>
-                                <span>{{totalPrice}} VNĐ</span>
+                                <span id="total-price">{{totalPrice}} VNĐ</span>
                             </div>
                         </div>
                     </div>
@@ -177,3 +185,28 @@
 
 	</div>
 	<!-- //Main wrapper -->
+    <script>
+        function encreaseValue(id) {
+            let rs = document.getElementById(`sst${id}`);
+            rs.value = parseInt(rs.value) + 1;
+            updateCart(id,rs.value); 
+        }
+
+        function decreaseValue(id) {
+            let rs = document.getElementById(`sst${id}`);
+            if(rs.value <=1){
+                if(confirm("Bạn có muốn xóa khỏi giỏ hàng?")){
+                    removeCartItem(id);
+                }
+                else{
+                    return;
+                }
+            }
+            else{
+                rs.value = parseInt(rs.value) -1;
+                updateCart(id,rs.value); 
+            }
+        }
+    </script>
+{{!-- <script src="/js/cart.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}

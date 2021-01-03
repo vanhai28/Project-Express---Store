@@ -28,4 +28,20 @@ router.post("/", async (req, res, next) => {
         return;
     }
 })
+
+router.put('/', (req, res)=>{
+    let productId = req.body.id;
+    let quantity = parseInt(req.body.quantity);
+    let cartItem = req.session.cart.update(productId, quantity);
+    res.json(cartItem);
+});
+
+router.delete('/', (req, res)=>{
+    let productId = req.body.id;
+    let cartItem = req.session.cart.remove(productId);
+    res.json({
+        totalQuantity: req.session.cart.totalQuantity,
+        totalPrice: req.session.cart.totalPrice
+    })
+})
 module.exports = router;
