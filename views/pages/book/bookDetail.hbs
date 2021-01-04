@@ -29,11 +29,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="bradcaump__inner text-center">
-                        	<h2 class="bradcaump-title">Chi tiết sản phẩm</h2>
+                        	<h2 class="bradcaump-title">CHI TIẾT</h2>
                             <nav class="bradcaump-content">
                               <a class="breadcrumb_item" href="/">Trang chủ</a>
                               <span class="brd-separetor">/</span>
-                              <span class="breadcrumb_item active">Chi tiết sản phẩm</span>
+                              <span class="breadcrumb_item active">Chi tiết</span>
                             </nav>
                         </div>
                     </div>
@@ -86,18 +86,18 @@
         									<div class="addtocart__actions">
         										<button class="tocart" title="Thêm vào giỏ hàng" onclick="addItemToCart('{{bookID}}')">Thêm vào giỏ</button>
         									</div>
-											<div class="product-addto-links clearfix">
+											{{!-- <div class="product-addto-links clearfix">
 												<a class="wishlist" href="#"></a>
 												<a class="compare" href="#"></a>
-											</div>
+											</div> --}}
         								</div>
-										<div class="product_meta">
+										{{!-- <div class="product_meta">
 											<span class="posted_in">Categories: 
 												<a href="#">Adventure</a>, 
 												<a href="#">Kids' Music</a>
 											</span>
-										</div>
-										<div class="product-share">
+										</div> --}}
+										{{!-- <div class="product-share">
 											<ul>
 												<li class="categories-title">Share :</li>
 												<li>
@@ -121,19 +121,20 @@
 													</a>
 												</li>
 											</ul>
-										</div>
+										</div> --}}
         							</div>
         						</div>
         					</div>
         				</div>
         				<div class="product__info__detailed">
 							<div class="pro_details_nav nav justify-content-start" role="tablist">
-	                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Chi tiết</a>
-	                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Đánh giá</a>
+	                            {{!-- <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Chi tiết</a> --}}
+	                            {{!-- <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Đánh giá</a> --}}
+	                            <a class="nav-item nav-link " data-toggle="tab" href="#nav-review" role="tab">Đánh giá</a>
 	                        </div>
 	                        <div class="tab__container">
 	                        	<!-- Start Single Tab Content -->
-	                        	<div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
+	                        	{{!-- <div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
 									<div class="description__attribute">
 										<p></p>
 										<ul>
@@ -142,11 +143,11 @@
 											<li>• Machine wash/dry.</li>
 										</ul>
 									</div>
-	                        	</div>
+	                        	</div> --}}
 	                        	<!-- End Single Tab Content -->
 
 	                        	<!-- Start Single Tab Content -->
-	                        	<div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">	
+	                        	<div class="pro__tab_label tab-pane fade show active" id="nav-review" role="tabpanel">	
 									<div class="review__attribute">
 										<h1>Khách hàng đánh giá</h1>
 										{{#each reviews}}

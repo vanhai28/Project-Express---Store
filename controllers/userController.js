@@ -41,7 +41,6 @@ module.exports.getAccount = async function (req, res) {
 
     res.render("pages/accountManagement", {
       title: "Account",
-      isLogin: false,
       userAccount: account,
     });
   } catch (error) {
