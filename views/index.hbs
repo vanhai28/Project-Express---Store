@@ -95,9 +95,11 @@
 										<div class="product__thumb">
 											<a class="first__img" href="/book-detail/{{_id}}"><img src="{{cover}}" alt="{{title}}"></a>
 											<a class="second__img animation1" href="/book-detail/{{_id}}"><img src="{{cover}}" alt="{{title}}"></a>
+											{{#if best_seller}}
 											<div class="hot__box">
 												<span class="hot-label">Bán chạy</span>
 											</div>
+											{{/if}}
 										</div>
 										<div class="product__content content--center">
 											<h4><a href="/book-detail/{{_id}}">{{title}}</a></h4>
@@ -146,9 +148,11 @@
 										<div class="product__thumb">
 											<a class="first__img" href="/book-detail/{{_id}}"><img src={{cover}} alt={{title}}></a>
 											<a class="second__img animation1" href="/book-detail/{{_id}}"><img src={{cover}} alt={{title}}></a>
+											{{#if best_seller}}
 											<div class="hot__box">
 												<span class="hot-label">Bán chạy</span>
 											</div>
+											{{/if}}
 										</div>
 										<div class="product__content content--center">
 											<h4><a href="/book-detail/{{_id}}">{{title}}</a></h4>
@@ -197,9 +201,11 @@
 										<div class="product__thumb">
 											<a class="first__img" href="/book-detail/{{_id}}"><img src={{cover}} alt={{title}}></a>
 											<a class="second__img animation1" href="/book-detail/{{_id}}"><img src={{cover}} alt={{title}}></a>
+											{{#if best_seller}}
 											<div class="hot__box">
 												<span class="hot-label">Bán chạy</span>
 											</div>
+											{{/if}}
 										</div>
 										<div class="product__content content--center">
 											<h4><a href="/book-detail/{{_id}}">{{title}}</a></h4>
@@ -248,9 +254,11 @@
 										<div class="product__thumb">
 											<a class="first__img" href="/book-detail/{{_id}}"><img src="{{cover}}" alt="{{title}}"></a>
 											<a class="second__img animation1" href="/book-detail/{{_id}}"><img src="{{cover}}" alt="{{title}}"></a>
+											{{#if best_seller}}
 											<div class="hot__box">
 												<span class="hot-label">Bán chạy</span>
 											</div>
+											{{/if}}
 										</div>
 										<div class="product__content content--center">
 											<h4><a href="/book-detail/{{_id}}">{{title}}</a></h4>
@@ -304,8 +312,8 @@
 							<p>Đăng kí theo dõi để nhận được những thông tin cập nhất mới nhất về sản phẩm mà bạn quan tâm</p>
 							<form action="#">
 								<div class="newsletter__box">
-									<input type="email" placeholder="Enter your e-mail">
-									<button>Subscribe</button>
+									<input type="email" placeholder="Địa chỉ E-mail">
+									<button>Đăng ký</button>
 								</div>
 							</form>
 						</div>
