@@ -6,6 +6,9 @@ module.exports = function Cart(oldCart) {
     this.totalPrice = oldCart.totalPrice || 0;
     this.address = oldCart.address || {};
     this.paymentMethod = oldCart.paymentMethod || "COD";
+    this.totalCost = oldCart.totalCost || 0;
+    this.shipTK = oldCart.shipTK || false;
+    this.shipCost = oldCart.shipCost || parseFloat(80).toFixed(3);;
 
     this.getTotalQuantity = () => {
         var quantity = 0;
@@ -24,6 +27,18 @@ module.exports = function Cart(oldCart) {
         return price;
     };
 
+    this.getTotalCost = () => {
+        let cost = parseFloat(this.shipCost) + parseFloat(this.totalPrice);
+        return parseFloat(cost).toFixed(3);
+    }
+
+    this.setShip = (value) =>{
+        this.shipTK = !(this.shipTK);
+        let shipCost = parseFloat(value).toFixed(3);
+        this.shipCost = shipCost;
+        this.totalCost = this.getTotalCost();
+    }
+
     this.add = (item, id, quantity) => {
         var storedItem = this.items[id];
         if (!storedItem) {
@@ -35,15 +50,17 @@ module.exports = function Cart(oldCart) {
         storedItem.price = parseFloat(storedItem.item.price * storedItem.quantity).toFixed(3);
         this.totalQuantity = this.getTotalQuantity();
         this.totalPrice = this.getTotalPrice();
+        this.totalCost = this.getTotalCost();
         return this.getCartItem(id);
     };
 
     this.remove = (id) => {
-        var storedItem = this.items[id];
+        var storedItem = this.items[id]; 
         if (storedItem) {
             delete this.items[id];
             this.totalQuantity = this.getTotalQuantity();
             this.totalPrice = this.getTotalPrice();
+            this.totalCost = this.getTotalCost();
         }
     };
 
@@ -54,6 +71,7 @@ module.exports = function Cart(oldCart) {
             storedItem.price = parseFloat(storedItem.item.price * storedItem.quantity);
             this.totalQuantity = this.getTotalQuantity();
             this.totalPrice = this.getTotalPrice();
+            this.totalCost = this.getTotalCost();
         }
         return this.getCartItem(id);
     };
@@ -62,6 +80,7 @@ module.exports = function Cart(oldCart) {
         this.items = {};
         this.totalQuantity = 0;
         this.totalPrice = 0;
+        this.totalCost =0;
     };
 
     this.generateArray = () => {

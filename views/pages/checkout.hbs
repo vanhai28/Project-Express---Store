@@ -250,19 +250,30 @@
         						<li>Tổng tiền <span>{{totalPrice}} VNĐ</span></li>
         						<li>Phí ship
         							<ul>
+										{{#if shipTK}}
         								<li>
-        									<input name="shipping_method[0]" data-index="0" value="legacy_flat_rate" checked="checked" type="radio">
+        									<input name="shipping_method[0]" data-index="0" value="30" checked="checked" type="radio" onclick="setShipTK()">
         									<label>GH TK: 30.000 VNĐ</label>
         								</li>
         								<li>
-        									<input name="shipping_method[0]" data-index="0" value="legacy_flat_rate" checked="checked" type="radio">
+        									<input name="shipping_method[0]" data-index="0" value="80" type="radio" onclick="setShipN()">
         									<label>GH nhanh: 80.000 VNĐ</label>
         								</li>
+										{{else}}
+										<li>
+        									<input name="shipping_method[0]" data-index="0" value="30"  type="radio" onclick="setShipTK()">
+        									<label>GH TK: 30.000 VNĐ</label>
+        								</li>
+        								<li>
+        									<input name="shipping_method[0]" data-index="0" value="80" type="radio" onclick="setShipN()" checked="checked">
+        									<label>GH nhanh: 80.000 VNĐ</label>
+        								</li>
+										{{/if}}
         							</ul>
         						</li>
         					</ul>
         					<ul class="total__amount">
-        						<li>Số tiền phải trả <span>{{totalPrice}} VNĐ</span></li>
+        						<li>Số tiền phải trả <span id="total-cost">{{totalCost}} VNĐ</span></li>
         					</ul>
         				</div>
 					    <div id="accordion" class="checkout_accordion mt--30" role="tablist">
@@ -318,3 +329,12 @@
 	</div>
 	<!-- //Main wrapper -->
 
+<script>
+	function setShipTK(){
+		updateShip(30);
+	}
+
+	function setShipN(){
+		updateShip(80);
+	}
+</script>

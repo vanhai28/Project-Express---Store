@@ -38,10 +38,24 @@ router.put('/', (req, res)=>{
 
 router.delete('/', (req, res)=>{
     let productId = req.body.id;
-    let cartItem = req.session.cart.remove(productId);
+    req.session.cart.remove(productId);
     res.json({
         totalQuantity: req.session.cart.totalQuantity,
         totalPrice: req.session.cart.totalPrice
+    })
+})
+
+router.delete('/all', (req, res)=>{
+    req.session.cart.empty();
+    res.sendStatus(204);
+    res.end();
+})
+
+router.put('/ship', (req, res) =>{
+    let value = req.body.value;
+    req.session.cart.setShip(value);
+    res.json({
+        totalCost: req.session.cart.totalCost,
     })
 })
 module.exports = router;

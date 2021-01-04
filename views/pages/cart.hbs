@@ -52,11 +52,11 @@
                                             <th class="product-name">Sách</th>
                                             <th class="product-price">Giá</th>
                                             <th class="product-quantity">Số lượng</th>
-                                            <th class="product-subtotal">Tổng tiền</th>
+                                            <th class="product-subtotal">Thành tiền</th>
                                             <th class="product-remove">Xóa</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="cart-body">
                                         {{#each items}}
                                         <tr id="item{{item._id}}">
                                             <td class="product-thumbnail"><a href="book-detail/{{item._id}}"><img src="{{item.cover}}" alt="product img"></a></td>
@@ -73,22 +73,6 @@
                                             <td class="product-remove"><a onclick="if(confirm('Bạn có muốn xóa')) removeCartItem('{{item._id}}')">X</a></td>
                                         </tr>
                                         {{/each}}
-                                        {{!-- <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="images/product/sm-3/2.jpg" alt="product img"></a></td>
-                                            <td class="product-name"><a href="#">Quisque fringilla</a></td>
-                                            <td class="product-price"><span class="amount">$50.00</span></td>
-                                            <td class="product-quantity"><input type="number" value="1"></td>
-                                            <td class="product-subtotal">$50.00</td>
-                                            <td class="product-remove"><a href="#">X</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="images/product/sm-3/3.jpg" alt="product img"></a></td>
-                                            <td class="product-name"><a href="#">Vestibulum suscipit</a></td>
-                                            <td class="product-price"><span class="amount">$50.00</span></td>
-                                            <td class="product-quantity"><input type="number" value="1"></td>
-                                            <td class="product-subtotal">$50.00</td>
-                                            <td class="product-remove"><a href="#">X</a></td>
-                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -96,9 +80,9 @@
                         <div class="cartbox__btn">
                             <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
                                 <li><a href="#">Nhận mã giảm giá</a></li>
-                                <li><a href="#">Nhập mã giảm giá</a></li>
-                                <li><a href="#">Cập nhật giỏ hàng</a></li>
-                                <li><a href="/checkout">Thanh toán</a></li>
+                                <li><a href="/book-shop">Tiếp tục mua sắm</a></li>
+                                <li><a onclick="clearCart()">Xóa toàn bộ</a></li>
+                                <li><a onclick="checkQuantity('{{totalQuantity}}')">Thanh toán</a></li>
                             </ul>
                         </div>
                     </div>
@@ -117,7 +101,7 @@
                                 </ul>
                             </div> --}}
                             <div class="cart__total__amount">
-                                <span>Tổng tiền phải trả</span>
+                                <span>Tổng số tiền: </span>
                                 <span id="total-price">{{totalPrice}} VNĐ</span>
                             </div>
                         </div>
@@ -152,6 +136,15 @@
             else{
                 rs.value = parseInt(rs.value) -1;
                 updateCart(id,rs.value); 
+            }
+        }
+
+        function checkQuantity(value){
+            if(parseInt(value)==0){
+                confirm("Hãy thêm sản phẩm vào giỏ hàng trước khi thanh toán !");
+            }
+            else{
+                window.location.href = "/checkout";
             }
         }
     </script>

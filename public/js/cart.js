@@ -17,6 +17,19 @@ function addToCart(){
     })
 }
 
+function addItemsToCart(id,quantity){
+    $.ajax({
+        url: '/cart',
+        type: 'POST',
+        data: {id, quantity},
+        success: function(result){
+            $('#cart-badge').html(result.totalQuantity);
+            $('#cart-total-quantity').html(result.totalQuantity + ' món');
+            $('#cart-total-price').html(result.totalPrice);
+        }
+    })
+}
+
 function updateCart(id, quantity){
     if(quantity<=0){
         removeCartItem(id);
@@ -52,6 +65,32 @@ function updateCartItem(id, quantity){
             $('#cart-total-price').html(result.totalPrice);
             $('#total-price').html(result.totalPrice + ' VNĐ');
             $(`#price${id}`).html(result.item.price.toFixed(3));
+        }
+    })
+}
+
+function clearCart(){
+    if(confirm('Bạn có muốn xóa toàn bộ giỏ hàng ?')){
+        $.ajax({
+            url: '/cart/all',
+            type: 'DELETE',
+            success: function(result){
+                $('#cart-badge').html(0);
+                $('#cart-body').html('');
+                $('#total-price').html(result.totalPrice + ' VNĐ');
+            }
+        })
+    }
+}
+
+function updateShip(value){
+    let ship = parseFloat(value);
+    $.ajax({
+        url: '/cart/ship',
+        type: 'PUT',
+        data: {value},
+        success: function(result){
+            $('#total-cost').html(result.totalCost + ' VNĐ');
         }
     })
 }
