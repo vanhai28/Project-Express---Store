@@ -95,8 +95,18 @@
 						</h3>
 						<div class="card">
 							<div class="card-body">
-								<div class="product__overview">											
-									<p style="text-align: justify;">{{book.detail}}</p>	
+								<div class="product__overview">		
+									<ul>
+										<li><b>• Thể loại:</b> {{book.category}}</li>
+										<li><b>• Tác giả: </b>
+											{{#each book.author}}
+												{{this}}
+											{{/each}}
+										</li>
+									</ul>									
+									<p style="text-align: justify;">
+										{{book.detail}}
+									</p>	
 								</div>
 							</div>
 						</div>

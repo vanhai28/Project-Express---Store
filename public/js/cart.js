@@ -74,6 +74,8 @@ function clearCart(){
         url: '/cart/all',
         type: 'DELETE',
         success: function(result){
+            $('#cart-total-quantity').html(0 + ' món');
+            $('#cart-total-price').html(0);
             $('#cart-badge').html(0);
             $('#cart-body').html('');
             $('#total-price').html(0 + ' VNĐ');
