@@ -22,6 +22,6 @@ book detail
 }
 
 .heading_detail {
-  text-transform: capitalize;
+  text-transform: uppercase;
   margin: 10px auto;
 }

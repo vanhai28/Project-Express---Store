@@ -198,12 +198,41 @@
 	                        	<!-- End Single Tab Content -->
 	                        </div>
         				</div>
-						<div class="wn__related__product pt--80 pb--50">
+						
+        			</div>
+        			<div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+        				<div class="shop__sidebar">
+        					<aside class="wedget__categories poroduct--cat">
+        						<h3 class="wedget__title">Các thể loại sách</h3>
+        						<ul>
+        							{{#each CATEGORY}}
+									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
+									{{/each}}
+        						</ul>
+        					</aside>
+        					
+        					<aside class="wedget__categories poroduct--tag">
+        						<h3 class="wedget__title">Các từ khóa</h3>
+        						<ul>
+        							{{#each CATEGORY}}
+									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
+									{{/each}}
+        						</ul>
+        					</aside>
+
+        					<aside class="wedget__categories sidebar--banner">
+								<img img src="/images/others/banner_left.jpg" alt="banner images">
+
+        					</aside>
+        				</div>
+        			</div>
+        		</div>
+				<div class="wn__related__product pt--80 pb--50">
 							<div class="section__title text-center">
-								<h2 class="title__be--2">Sách có liên quan</h2>
+								<h2 class="title__be--2">Sản phẩm tương tự</h2>
 							</div>
 							<div class="row mt--60">
-								<div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
+								<div class="furniture--4 arrows_style owl-carousel owl-theme">
 									<!-- Start Single Product -->
 									{{#each relatedBooks}}
 									<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
@@ -250,10 +279,10 @@
 								<h2 class="title__be--2">Sách bán chạy</h2>
 							</div>
 							<div class="row mt--60">
-								<div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
+								<div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
 									<!-- Start Single Product -->
 									{{#each upsellProducts}}
-									<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+									<div class="product product__style--4 col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product__thumb">
 											<a class="first__img" href="/book-detail/{{_id}}"><img src={{cover}} alt="title"></a>
 											<div class="hot__box">
@@ -292,61 +321,7 @@
 								</div>
 							</div>
 						</div>
-        			</div>
-        			<div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
-        				<div class="shop__sidebar">
-        					<aside class="wedget__categories poroduct--cat">
-        						<h3 class="wedget__title">Các thể loại sách</h3>
-        						<ul>
-        							{{#each CATEGORY}}
-									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
-									{{/each}}
-        						</ul>
-        					</aside>
-        					
-        					<aside class="wedget__categories poroduct--tag">
-        						<h3 class="wedget__title">Các từ khóa</h3>
-        						<ul>
-        							{{#each CATEGORY}}
-									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
-									{{/each}}
-        						</ul>
-        					</aside>
-							<aside class="wedget__categories pro--range">
-        						<h3 class="wedget__title">Lọc theo giá</h3>
-        						<div class="content-shopby">
-        						    <div class="price_filter s-filter clear">
-        						        <form action="#" method="GET">
-        						            <div id="slider-range"></div>
-        						            <div class="slider__range--output">
-        						                <div class="price__output--wrap">
-        						                    <div class="price--output">
-        						                        <span>Giá :</span><input type="text" id="amount" readonly="">
-        						                    </div>
-        						                    <div class="price--filter">
-        						                        <a href="#">Lọc</a>
-        						                    </div>
-        						                </div>
-        						            </div>
-        						        </form>
-        						    </div>
-        						</div>
-        					</aside>
-        					<aside class="wedget__categories poroduct--compare">
-        						<h3 class="wedget__title">Compare</h3>
-        						<ul>
-        							<li><a href="#">x</a><a href="#">Condimentum posuere</a></li>
-        							<li><a href="#">x</a><a href="#">Condimentum posuere</a></li>
-        							<li><a href="#">x</a><a href="#">Dignissim venenatis</a></li>
-        						</ul>
-        					</aside>
-        					<aside class="wedget__categories sidebar--banner">
-								<img img src="/images/others/banner_left.jpg" alt="banner images">
 
-        					</aside>
-        				</div>
-        			</div>
-        		</div>
         	</div>
         </div>
         <!-- End main Content -->
