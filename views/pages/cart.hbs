@@ -70,7 +70,7 @@
                                             </td>
                                             
                                             <td class="product-subtotal" id="price{{item._id}}">{{price}}</td>
-                                            <td class="product-remove"><a onclick="if(confirm('Bạn có muốn xóa')) removeCartItem('{{item._id}}')">X</a></td>
+                                            <td class="product-remove"><a onclick="removeCartItem('{{item._id}}')">X</a></td>
                                         </tr>
                                         {{/each}}
                                     </tbody>
@@ -126,12 +126,7 @@
         function decreaseValue(id) {
             let rs = document.getElementById(`sst${id}`);
             if(rs.value <=1){
-                if(confirm("Bạn có muốn xóa khỏi giỏ hàng?")){
-                    removeCartItem(id);
-                }
-                else{
-                    return;
-                }
+                removeCartItem(id);
             }
             else{
                 rs.value = parseInt(rs.value) -1;

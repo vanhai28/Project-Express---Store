@@ -8,7 +8,7 @@ module.exports = function Cart(oldCart) {
     this.paymentMethod = oldCart.paymentMethod || "COD";
     this.totalCost = oldCart.totalCost || 0;
     this.shipTK = oldCart.shipTK || false;
-    this.shipCost = oldCart.shipCost || parseFloat(80).toFixed(3);;
+    this.shipCost = oldCart.shipCost || parseFloat(80000);
 
     this.getTotalQuantity = () => {
         var quantity = 0;
@@ -23,18 +23,18 @@ module.exports = function Cart(oldCart) {
         for (var id in this.items) {
             price += parseFloat(this.items[id].price);
         }
-        price = parseFloat(price).toFixed(3);
+        price = parseFloat(price);
         return price;
     };
 
     this.getTotalCost = () => {
         let cost = parseFloat(this.shipCost) + parseFloat(this.totalPrice);
-        return parseFloat(cost).toFixed(3);
+        return parseFloat(cost);
     }
 
     this.setShip = (value) =>{
         this.shipTK = !(this.shipTK);
-        let shipCost = parseFloat(value).toFixed(3);
+        let shipCost = parseFloat(value);
         this.shipCost = shipCost;
         this.totalCost = this.getTotalCost();
     }
@@ -45,9 +45,9 @@ module.exports = function Cart(oldCart) {
             this.items[id] = { item: item, quantity: 0, price: 0 };
             storedItem = this.items[id];
         }
-        storedItem.item.price = parseFloat(storedItem.item.price).toFixed(3);
+        storedItem.item.price = parseFloat(storedItem.item.price);
         storedItem.quantity += parseInt(quantity);
-        storedItem.price = parseFloat(storedItem.item.price * storedItem.quantity).toFixed(3);
+        storedItem.price = parseFloat(storedItem.item.price * storedItem.quantity);
         this.totalQuantity = this.getTotalQuantity();
         this.totalPrice = this.getTotalPrice();
         this.totalCost = this.getTotalCost();
@@ -86,8 +86,8 @@ module.exports = function Cart(oldCart) {
     this.generateArray = () => {
         var arr = [];
         for (var id in this.items) {
-            this.items[id].item.price = parseFloat(this.items[id].item.price).toFixed(3);
-            this.items[id].price = parseFloat(this.items[id].price).toFixed(3);
+            this.items[id].item.price = parseFloat(this.items[id].item.price);
+            this.items[id].price = parseFloat(this.items[id].price);
             arr.push(this.items[id]);
         }
         return arr;

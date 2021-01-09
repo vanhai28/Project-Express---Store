@@ -64,23 +64,21 @@ function updateCartItem(id, quantity){
             $('#cart-total-quantity').html(result.totalQuantity + ' món');
             $('#cart-total-price').html(result.totalPrice);
             $('#total-price').html(result.totalPrice + ' VNĐ');
-            $(`#price${id}`).html(result.item.price.toFixed(3));
+            $(`#price${id}`).html(result.item.price);
         }
     })
 }
 
 function clearCart(){
-    if(confirm('Bạn có muốn xóa toàn bộ giỏ hàng ?')){
-        $.ajax({
-            url: '/cart/all',
-            type: 'DELETE',
-            success: function(result){
-                $('#cart-badge').html(0);
-                $('#cart-body').html('');
-                $('#total-price').html(result.totalPrice + ' VNĐ');
-            }
-        })
-    }
+    $.ajax({
+        url: '/cart/all',
+        type: 'DELETE',
+        success: function(result){
+            $('#cart-badge').html(0);
+            $('#cart-body').html('');
+            $('#total-price').html(0 + ' VNĐ');
+        }
+    })
 }
 
 function updateShip(value){
