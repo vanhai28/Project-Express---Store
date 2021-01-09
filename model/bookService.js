@@ -14,6 +14,15 @@ module.exports.listBook = async (filter, pageNumber, itemPerPage) => {
   return listBook;
 };
 
+module.exports.listSortedBook = async (sortType, pageNumber, itemPerPage) => {  
+  let listBook = await bookMongoose.paginate({},{
+    sort: {price: sortType},
+    page: pageNumber,
+    limit: itemPerPage,
+  });
+  return listBook;
+};
+
 
 module.exports.pagination = (page) => {
   let paginationArr = [];

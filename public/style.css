@@ -3220,15 +3220,15 @@ nav.menu ul li a {
   visibility: hidden;
   opacity: 0;
 }
-.product:hover .product__content .action {
+/* .product:hover .product__content .action {
   opacity: 1;
   visibility: visible;
-}
-.product:hover .product__hover--content {
+} */
+/* .product:hover .product__hover--content {
   opacity: 1;
   visibility: visible;
   display: block;
-}
+} */
 .product .product__content .action .actions_inner .add_to_links li {
   margin-bottom: 4px;
   display: inline-block;
@@ -3254,12 +3254,12 @@ nav.menu ul li a {
   color: #fff;
   background-color: #ce7852;
 }
-.product:hover .product__content h4,
+/* .product:hover .product__content h4,
 .product:hover .product__content ul.prize {
   opacity: 0;
   visibility: hidden;
   transition: all 0.2s ease 0s;
-}
+} */
 
 .product
   .product__content
@@ -3319,7 +3319,7 @@ nav.menu ul li a {
   text-transform: capitalize;
   white-space: nowrap;
 }
-.product:hover
+/* .product:hover
   .product__content
   .action
   .actions_inner
@@ -3329,8 +3329,8 @@ nav.menu ul li a {
   animation: 300ms ease-in-out 0s normal none 1 running fadeInUp;
   opacity: 1;
   transition: opacity 300ms linear 0s;
-}
-.product:hover
+} */
+/* .product:hover
   .product__content
   .action
   .actions_inner
@@ -3340,8 +3340,8 @@ nav.menu ul li a {
   animation: 500ms ease-in-out 0s normal none 1 running fadeInUp;
   opacity: 1;
   transition: opacity 500ms linear 0s;
-}
-.product:hover
+} */
+/* .product:hover
   .product__content
   .action
   .actions_inner
@@ -3351,8 +3351,8 @@ nav.menu ul li a {
   animation: 700ms ease-in-out 0s normal none 1 running fadeInUp;
   opacity: 1;
   transition: opacity 700ms linear 0s;
-}
-.product:hover
+} */
+/* .product:hover
   .product__content
   .action
   .actions_inner
@@ -3362,12 +3362,12 @@ nav.menu ul li a {
   animation: 900ms ease-in-out 0s normal none 1 running fadeInUp;
   opacity: 1;
   transition: opacity 900ms linear 0s;
-}
-.product:hover .product__thumb a.second__img {
+} */
+/* .product:hover .product__thumb a.second__img {
   opacity: 1;
   visibility: visible;
   width: 100%;
-}
+} */
 .rating.rating--yellow li.on i {
   color: #ffa800;
 }
@@ -8019,4 +8019,26 @@ a.checkout__title {
   section.wn_contact_area {
     padding-bottom: 60px;
   }
+}
+/* 
+.meninmenu li a{
+  text-decoration: none;
+}
+
+.dropdown-menu .dropdown-item a{
+  text-decoration: none;
+}
+
+.dropdown .btn a{
+  text-decoration: none;
+}
+
+.social__net li a{
+  text-decoration: none;
+
+} */
+
+a{
+  text-decoration: none !important;
+
 }

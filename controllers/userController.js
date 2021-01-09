@@ -1,5 +1,5 @@
 const formidable = require("formidable");
-const upload = require("../service/uploadFile");
+const upload = require("../service/uploadFileService");
 const userService = require("../model/userService");
 const { model } = require("../model/mongooseModel/userMongooseModel");
 
