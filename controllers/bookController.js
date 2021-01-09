@@ -10,14 +10,13 @@ exports.bookShop = async function (req, res, next) {
   const q = req.query.q;
 
   let filter;
-  if(q){
-    filter = {$text: {$search: q}};
-  }
-  else{
-    filter ={};
+  if (q) {
+    filter = { $text: { $search: q } };
+  } else {
+    filter = {};
   }
 
-  if(catId){
+  if (catId) {
     filter.idCategory = catId;
   }
 
@@ -43,7 +42,6 @@ exports.bookShop = async function (req, res, next) {
 
   res.render('./pages/book/bookShop',{
     title: "Book Shop",
-    // books: paginate.docs, 
     books,
     hasNextPage: paginate.hasNextPage,
     hasPreviousPage: paginate.hasPrevPage,
@@ -60,8 +58,6 @@ exports.bookShop = async function (req, res, next) {
   });
 };
 
-
-
 exports.bookDetail = async function (req, res, next) {
   const bookId = req.params.id;
 
@@ -69,26 +65,21 @@ exports.bookDetail = async function (req, res, next) {
   const reviews = await bookService.getReviewOfBook(bookId);
 
   const genre = book.category;
-  const relatedBooks = await bookService.getBookByCategory(genre, 6);;
+  const relatedBooks = await bookService.getBookByCategory(genre, 6);
   const upsellProducts = await bookService.getBookByCategory(genre, 6);
   const category = await bookService.getCategory();
 
   res.render("./pages/book/bookDetail", {
     title: "Detail",
-    bookID: book._id,
-    book_name_main: book.title,
-    current_cost_main: book.price,
-    image_book_main_cover: book.cover,
-    book_detail: book.detail,
+    book: book,
     relatedBooks: relatedBooks,
     upsellProducts: upsellProducts,
-    images: book.images,
     reviews: reviews,
     CATEGORY: category,
   });
 };
 
-exports.bookSearch = async (res, req, next) =>{
-  const f = await Book.find({$text: {$search: "d"}});
-  console.log('f', f);
-}
+exports.bookSearch = async (res, req, next) => {
+  const f = await Book.find({ $text: { $search: "d" } });
+  console.log("f", f);
+};

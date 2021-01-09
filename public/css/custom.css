@@ -6,11 +6,22 @@
 	Note: This is custom css. All custom styles (user styles) declare here.
 
 **********************************************************************************/
-.forget_pass  {
-	display: inline;
+.forget_pass {
+  display: inline;
 }
 
-.mt-10{
-	margin-top: 7rem !important;
+.mt-10 {
+  margin-top: 7rem !important;
 }
 
+/*
+book detail
+*/
+.old_price__small {
+  font-size: 0.8rem;
+}
+
+.heading_detail {
+  text-transform: capitalize;
+  margin: 10px auto;
+}
