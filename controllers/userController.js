@@ -1,7 +1,7 @@
 const formidable = require("formidable");
-const upload = require("../service/uploadFile");
-const userService = require("../model/userService");
-const { model } = require("../model/mongooseModel/userMongooseModel");
+const upload = require("../service/uploadFileService");
+const userService = require("../service/userService");
+const followerService = require("../service/followerServices");
 
 module.exports.getRegister = function (req, res) {
   res.render("pages/register", { title: "Register" });
@@ -41,7 +41,6 @@ module.exports.getAccount = async function (req, res) {
 
     res.render("pages/accountManagement", {
       title: "Account",
-      isLogin: false,
       userAccount: account,
     });
   } catch (error) {
@@ -134,11 +133,16 @@ module.exports.postVerify = async (req, res) => {
   try {
     userService.verify(user._id);
   } catch (err) {
+<<<<<<< HEAD
     console.log(err);
+=======
+    console.error(err);
+>>>>>>> a47e59ba8016c2e77af4868a4e7d63d21c632450
   }
   res.redirect("/");
 };
 
+<<<<<<< HEAD
 module.exports.getLogout = async (req, res) => {
   try {
     await userService.saveLastestTimeAccess(req.user._id);
@@ -148,6 +152,11 @@ module.exports.getLogout = async (req, res) => {
   } catch (error) {
     res.redirect("/");
   }
+=======
+module.exports.getLogout = (req, res) => {
+  req.logout();
+  res.redirect(req.headers.referer);
+>>>>>>> a47e59ba8016c2e77af4868a4e7d63d21c632450
 };
 
 module.exports.getForgetPassword = (req, res) => {
@@ -168,3 +177,27 @@ module.exports.postForgetPassword = async (req, res) => {
     });
   }
 };
+<<<<<<< HEAD
+=======
+
+module.exports.APIaddFollower = async (req, res, next) => {
+  if (!req.query || !req.query.email_follower) {
+    res.statusCode = 400;
+    res.send();
+  }
+  let email = req.query.email_follower;
+  let isSuccess = await followerService.addFollower(email);
+
+  if (isSuccess == 1) {
+    res.statusCode = 200;
+    res.send("Successfull !!");
+    await followerService.sendEmailIntroToFollower(email);
+  } else if (isSuccess == 0) {
+    res.statusCode = 200;
+    res.send("Email is already exist ");
+  } else {
+    res.statusCode = 400;
+    res.send("Fail!!");
+  }
+};
+>>>>>>> a47e59ba8016c2e77af4868a4e7d63d21c632450

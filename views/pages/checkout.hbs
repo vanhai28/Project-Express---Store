@@ -13,7 +13,7 @@
 				</div>
 			</form>
 			<div class="close__wrap">
-				<span>close</span>
+				<span>Đóng</span>
 			</div>
 		</div>
 		<!-- End Search Popup -->
@@ -23,11 +23,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="bradcaump__inner text-center">
-                        	<h2 class="bradcaump-title">Checkout</h2>
+                        	<h2 class="bradcaump-title">Thanh toán</h2>
                             <nav class="bradcaump-content">
-                              <a class="breadcrumb_item" href="index.html">Home</a>
+                              <a class="breadcrumb_item" href="/">Trang chủ</a>
                               <span class="brd-separetor">/</span>
-                              <span class="breadcrumb_item active">Checkout</span>
+                              <span class="breadcrumb_item active">Thanh toán</span>
                             </nav>
                         </div>
                     </div>
@@ -41,115 +41,116 @@
         		<div class="row">
         			<div class="col-lg-12">
         				<div class="wn_checkout_wrap">
+							{{#unless user}}
         					<div class="checkout_info">
-        						<span>Returning customer ?</span>
-        						<a class="showlogin" href="#">Click here to login</a>
+        						<span>Bạn cần đăng nhập để mua hàng !</span>
+        						<a style="color: red; font-size:small" href="/user/login">Bấm vào đây để đăng nhập</a>
         					</div>
-        					<div class="checkout_login">
+        					{{!-- <div class="checkout_login">
         						<form class="wn__checkout__form" action="#">
-        							<p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing & Shipping section.</p>
 
         							<div class="input__box">
-        								<label>Username or email <span>*</span></label>
+        								<label>Tên đăng nhập hoặc email <span>*</span></label>
         								<input type="text">
         							</div>
 
         							<div class="input__box">
-        								<label>password <span>*</span></label>
+        								<label>Mật khẩu <span>*</span></label>
         								<input type="password">
         							</div>
         							<div class="form__btn">
-        								<button>Login</button>
+        								<button>Đăng nhập</button>
         								<label class="label-for-checkbox">
         									<input id="rememberme" name="rememberme" value="forever" type="checkbox">
-        									<span>Remember me</span>
+        									<span>Ghi nhớ đăng nhập</span>
         								</label>
-        								<a href="#">Lost your password?</a>
+        								<a href="#">Quên mật khẩu?</a>
         							</div>
         						</form>
-        					</div>
+        					</div> --}}
+							{{else}}
         					<div class="checkout_info">
-        						<span>Have a coupon? </span>
-        						<a class="showcoupon" href="#">Click here to enter your code</a>
+        						<span>Bạn có mã giảm giá? </span>
+        						<a class="showcoupon" href="#">Nhập mã giảm giá của bạn ở đây</a>
         					</div>
         					<div class="checkout_coupon">
         						<form action="#">
         							<div class="form__coupon">
         								<input type="text" placeholder="Coupon code">
-        								<button>Apply coupon</button>
+        								<button>Xác nhận</button>
         							</div>
         						</form>
         					</div>
+							{{/unless}}
         				</div>
         			</div>
         		</div>
         		<div class="row">
         			<div class="col-lg-6 col-12">
         				<div class="customer_details">
-        					<h3>Billing details</h3>
+        					<h3>Chi tiết đơn hàng</h3>
         					<div class="customar__field">
         						<div class="margin_between">
 	        						<div class="input_box space_between">
-	        							<label>First name <span>*</span></label>
+	        							<label>Họ <span>*</span></label>
 	        							<input type="text">
 	        						</div>
 	        						<div class="input_box space_between">
-	        							<label>last name <span>*</span></label>
+	        							<label>Tên <span>*</span></label>
 	        							<input type="text">
 	        						</div>
         						</div>
         						<div class="input_box">
-        							<label>Company name <span>*</span></label>
+        							<label>Tên công ty <span>*</span></label>
         							<input type="text">
         						</div>
         						<div class="input_box">
-        							<label>Country<span>*</span></label>
+        							<label>Quốc gia<span>*</span></label>
         							<select class="select__option">
-										<option>Select a country…</option>
-										<option>Afghanistan</option>
-										<option>American Samoa</option>
-										<option>Anguilla</option>
-										<option>American Samoa</option>
-										<option>Antarctica</option>
-										<option>Antigua and Barbuda</option>
+										<option>Chọn quốc gia</option>
+										<option>Việt Nam</option>
+										<option>Trung Quốc</option>
+										<option>Singapore</option>
+										<option>Mỹ</option>
+										<option>Campuchia</option>
+										<option>Thái Lan</option>
         							</select>
         						</div>
+
         						<div class="input_box">
-        							<label>Address <span>*</span></label>
+        							<label>Tỉnh/ Thành phố<span>*</span></label>
+        							<select class="select__option">
+										<option>Chọn tỉnh của bạn</option>
+										<option>TP Hồ Chí Minh</option>
+										<option>Hà Nội</option>
+										<option>Cần Thơ</option>
+										<option>Hải Phòng</option>
+										<option>Huế</option>
+										<option>Đà Nẵng</option>
+        							</select>
+        						</div>
+
+								<div class="input_box">
+        							<label>Địa chỉ <span>*</span></label>
         							<input type="text" placeholder="Street address">
         						</div>
-        						<div class="input_box">
-        							<input type="text" placeholder="Apartment, suite, unit etc. (optional)">
-        						</div>
-        						<div class="input_box">
-        							<label>District<span>*</span></label>
-        							<select class="select__option">
-										<option>Select a country…</option>
-										<option>Afghanistan</option>
-										<option>American Samoa</option>
-										<option>Anguilla</option>
-										<option>American Samoa</option>
-										<option>Antarctica</option>
-										<option>Antigua and Barbuda</option>
-        							</select>
-        						</div>
-								<div class="input_box">
+								{{!-- <div class="input_box">
 									<label>Postcode / ZIP <span>*</span></label>
 									<input type="text">
-								</div>
+								</div> --}}
 								<div class="margin_between">
 									<div class="input_box space_between">
-										<label>Phone <span>*</span></label>
+										<label>Số điện thoại <span>*</span></label>
 										<input type="text">
 									</div>
 
 									<div class="input_box space_between">
-										<label>Email address <span>*</span></label>
+										<label>Địa chỉ Email <span>*</span></label>
 										<input type="email">
 									</div>
 								</div>
         					</div>
-        					<div class="create__account">
+        					{{!-- <div class="create__account">
         						<div class="wn__accountbox">
 	        						<input class="input-checkbox" name="createaccount" value="1" type="checkbox">
 	        						<span>Create an account ?</span>
@@ -160,106 +161,119 @@
         								<input type="text" placeholder="password">
         							</form>
         						</div>
-        					</div>
+        					</div> --}}
         				</div>
         				<div class="customer_details mt--20">
         					<div class="differt__address">
 	        					<input name="ship_to_different_address" value="1" type="checkbox">
-	        					<span>Ship to a different address ?</span>
+	        					<span>Giao hàng đến địa chỉ khác ?</span>
         					</div>
         					<div class="customar__field differt__form mt--40">
         						<div class="margin_between">
 	        						<div class="input_box space_between">
-	        							<label>First name <span>*</span></label>
+	        							<label>Họ người nhận <span>*</span></label>
 	        							<input type="text">
 	        						</div>
 	        						<div class="input_box space_between">
-	        							<label>last name <span>*</span></label>
+	        							<label>Tên người nhận <span>*</span></label>
 	        							<input type="text">
 	        						</div>
         						</div>
         						<div class="input_box">
-        							<label>Company name <span>*</span></label>
+        							<label>Tên công ty <span>*</span></label>
         							<input type="text">
         						</div>
         						<div class="input_box">
-        							<label>Country<span>*</span></label>
+        							<label>Quốc gia<span>*</span></label>
+										<select class="select__option">
+											<option>Chọn quốc gia</option>
+											<option>Việt Nam</option>
+											<option>Trung Quốc</option>
+											<option>Singapore</option>
+											<option>Mỹ</option>
+											<option>Campuchia</option>
+											<option>Thái Lan</option>
+										</select>
+        						</div>
+
+        						<div class="input_box">
+        							<label>Tỉnh/ Thành phố<span>*</span></label>
         							<select class="select__option">
-										<option>Select a country…</option>
-										<option>Afghanistan</option>
-										<option>American Samoa</option>
-										<option>Anguilla</option>
-										<option>American Samoa</option>
-										<option>Antarctica</option>
-										<option>Antigua and Barbuda</option>
+										<option>Chọn tỉnh của bạn</option>
+										<option>TP Hồ Chí Minh</option>
+										<option>Hà Nội</option>
+										<option>Cần Thơ</option>
+										<option>Hải Phòng</option>
+										<option>Huế</option>
+										<option>Đà Nẵng</option>
         							</select>
         						</div>
-        						<div class="input_box">
-        							<label>Address <span>*</span></label>
+
+								<div class="input_box">
+        							<label>Địa chỉ <span>*</span></label>
         							<input type="text" placeholder="Street address">
         						</div>
-        						<div class="input_box">
-        							<input type="text" placeholder="Apartment, suite, unit etc. (optional)">
-        						</div>
-        						<div class="input_box">
-        							<label>District<span>*</span></label>
-        							<select class="select__option"> 
-										<option>Select a country…</option>
-										<option>Afghanistan</option>
-										<option>American Samoa</option>
-										<option>Anguilla</option>
-										<option>American Samoa</option>
-										<option>Antarctica</option>
-										<option>Antigua and Barbuda</option>
-        							</select>
-        						</div>
-								<div class="input_box">
+								{{!-- <div class="input_box">
 									<label>Postcode / ZIP <span>*</span></label>
 									<input type="text">
-								</div>
+								</div> --}}
 								<div class="margin_between">
 									<div class="input_box space_between">
-										<label>Phone <span>*</span></label>
-										<input type="text">
+										<label>Số điện thoại <span>*</span></label>
+										<input type="tel">
 									</div>
 									<div class="input_box space_between">
-										<label>Email address <span>*</span></label>
+										<label>Địa chỉ Email <span>*</span></label>
 										<input type="email">
 									</div>
 								</div>
         					</div>
         				</div>
         			</div>
+					{{#with cart}}
         			<div class="col-lg-6 col-12 md-mt-40 sm-mt-40">
         				<div class="wn__order__box">
-        					<h3 class="onder__title">Your order</h3>
+        					<h3 class="onder__title">Hóa đơn của bạn</h3>
         					<ul class="order__total">
-        						<li>Product</li>
-        						<li>Total</li>
+        						<li>Sản phẩm</li>
+        						<li>Tổng tiền</li>
         					</ul>
         					<ul class="order_product">
+								{{#each items}}
+        						<li>{{item.title}} × {{quantity}}<span>{{price}} VNĐ</span></li>
+        						{{!-- <li>Buscipit at magna × 1<span>$48.00</span></li>
         						<li>Buscipit at magna × 1<span>$48.00</span></li>
-        						<li>Buscipit at magna × 1<span>$48.00</span></li>
-        						<li>Buscipit at magna × 1<span>$48.00</span></li>
-        						<li>Buscipit at magna × 1<span>$48.00</span></li>
+        						<li>Buscipit at magna × 1<span>$48.00</span></li> --}}
+								{{/each}}
         					</ul>
         					<ul class="shipping__method">
-        						<li>Cart Subtotal <span>$48.00</span></li>
-        						<li>Shipping 
+        						<li>Tổng tiền <span>{{totalPrice}} VNĐ</span></li>
+        						<li>Phí ship
         							<ul>
+										{{#if shipTK}}
         								<li>
-        									<input name="shipping_method[0]" data-index="0" value="legacy_flat_rate" checked="checked" type="radio">
-        									<label>Flat Rate: $48.00</label>
+        									<input name="shipping_method[0]" data-index="0" value="30" checked="checked" type="radio" onclick="setShipTK()">
+        									<label>GH TK: 30.000 VNĐ</label>
         								</li>
         								<li>
-        									<input name="shipping_method[0]" data-index="0" value="legacy_flat_rate" checked="checked" type="radio">
-        									<label>Flat Rate: $48.00</label>
+        									<input name="shipping_method[0]" data-index="0" value="80" type="radio" onclick="setShipN()">
+        									<label>GH nhanh: 80.000 VNĐ</label>
         								</li>
+										{{else}}
+										<li>
+        									<input name="shipping_method[0]" data-index="0" value="30"  type="radio" onclick="setShipTK()">
+        									<label>GH TK: 30.000 VNĐ</label>
+        								</li>
+        								<li>
+        									<input name="shipping_method[0]" data-index="0" value="80" type="radio" onclick="setShipN()" checked="checked">
+        									<label>GH nhanh: 80.000 VNĐ</label>
+        								</li>
+										{{/if}}
         							</ul>
         						</li>
         					</ul>
         					<ul class="total__amount">
-        						<li>Order Total <span>$223.00</span></li>
+        						<li>Số tiền phải trả <span id="total-cost">{{totalCost}} VNĐ</span></li>
         					</ul>
         				</div>
 					    <div id="accordion" class="checkout_accordion mt--30" role="tablist">
@@ -306,66 +320,21 @@
 					    </div>
 
         			</div>
+					{{/with}}
         		</div>
         	</div>
         </section>
         <!-- End Checkout Area -->
-		<!-- Footer Area -->
-		<footer id="wn__footer" class="footer__area bg__cat--8 brown--color">
-			<div class="footer-static-top">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="footer__widget footer__menu">
-								<div class="ft__logo">
-									<a href="index.html">
-										<img src="images/logo/3.png" alt="logo">
-									</a>
-									<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered duskam alteration variations of passages</p>
-								</div>
-								<div class="footer__content">
-									<ul class="social__net social__net--2 d-flex justify-content-center">
-										<li><a href="#"><i class="bi bi-facebook"></i></a></li>
-										<li><a href="#"><i class="bi bi-google"></i></a></li>
-										<li><a href="#"><i class="bi bi-twitter"></i></a></li>
-										<li><a href="#"><i class="bi bi-linkedin"></i></a></li>
-										<li><a href="#"><i class="bi bi-youtube"></i></a></li>
-									</ul>
-									<ul class="mainmenu d-flex justify-content-center">
-										<li><a href="index.html">Trending</a></li>
-										<li><a href="index.html">Best Seller</a></li>
-										<li><a href="index.html">All Product</a></li>
-										<li><a href="index.html">Wishlist</a></li>
-										<li><a href="index.html">Blog</a></li>
-										<li><a href="index.html">Contact</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="copyright__wrapper">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-6 col-md-6 col-sm-12">
-							<div class="copyright">
-								<div class="copy__right__inner text-left">
-									<p>Copyright <i class="fa fa-copyright"></i> <a href="https://freethemescloud.com/">Free themes Cloud.</a> All Rights Reserved</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-12">
-							<div class="payment text-right">
-								<img src="images/icons/payment.png" alt="" />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
-		<!-- //Footer Area -->
 
 	</div>
 	<!-- //Main wrapper -->
 
+<script>
+	function setShipTK(){
+		updateShip(30000);
+	}
+
+	function setShipN(){
+		updateShip(80000);
+	}
+</script>

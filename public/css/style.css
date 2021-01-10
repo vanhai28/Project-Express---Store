@@ -71,3 +71,8 @@ a.see-more-btn:hover {
 .product__thumb a.first__img {
   height: 210px;
 }
+
+.increaseVal{
+  height: 30px;
+  width: 30px;
+}

@@ -1,5 +1,3 @@
-
-
 	<!--[if lte IE 9]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 	<![endif]-->
@@ -13,9 +11,6 @@
 			<form id="search_mini_form" class="minisearch" action="/book-shop" method="GET">
 				<div class="field__search">
 					<input name="q" type="text" placeholder="Search entire store here...">
-					{{!-- <div class="action">
-						<a href="/book-shop/?q=nhan"><i class="zmdi zmdi-search"></i></a>
-					</div> --}}
 				</div>
 			</form>
 			<div class="close__wrap">
@@ -29,11 +24,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="bradcaump__inner text-center">
-                        	<h2 class="bradcaump-title">Shop Single</h2>
+                        	<h2 class="bradcaump-title">CHI TIẾT</h2>
                             <nav class="bradcaump-content">
-                              <a class="breadcrumb_item" href="/">Home</a>
+                              <a class="breadcrumb_item" href="/">Trang chủ</a>
                               <span class="brd-separetor">/</span>
-                              <span class="breadcrumb_item active">Shop Single</span>
+                              <span class="breadcrumb_item active">Chi tiết</span>
                             </nav>
                         </div>
                     </div>
@@ -51,7 +46,7 @@
         						<div class="col-lg-6 col-12">
         							<div class="wn__fotorama__wrapper">
 	        							<div class="fotorama wn__fotorama__action" data-nav="thumbs">
-											  {{#each images}}
+											  {{#each book.images}}
 											  <a href=""><img src="{{this}}" alt=""></a>
 											  {{/each}}
 	        							</div>
@@ -59,7 +54,7 @@
         						</div>
         						<div class="col-lg-6 col-12">
         							<div class="product__info__main">
-        								<h1>{{book_name_main}}</h1>
+        								<h1>{{book.title}}</h1>
         								<div class="product-reviews-summary d-flex">
         									<ul class="rating-summary d-flex">
     											<li><i class="zmdi zmdi-star-outline"></i></li>
@@ -70,83 +65,60 @@
         									</ul>
         								</div>
         								<div>
-											<ul class="prize d-flex">
-												<li>{{current_cost_main}}</li>
-											</ul>
-        									
+											<ul class="prize d-flex breadcrumb" style="font-size: 1.8rem;">
+												<li>{{book.price}} đ <strike class="old_price__small">{{book.old_price}} đ</strike></li>
+											</ul>       									
         								</div>
-										<div class="product__overview">
-											
-										<p style="text-align: justify;">{{book_detail}}</p>
-											
-        								</div>
+
         								<div class="box-tocart d-flex">
-        									<span>Qty</span>
-        									<input id="qty" class="input-text qty" name="qty" min="1" value="1" title="Qty" type="number">
-        									<div class="addtocart__actions">
-        										<button class="tocart" type="submit" title="Add to Cart">Add to Cart</button>
-        									</div>
-											<div class="product-addto-links clearfix">
-												<a class="wishlist" href="#"></a>
-												<a class="compare" href="#"></a>
-											</div>
+											<span>Số lượng</span>
+											<input id="qty" class="input-text qty" name="qty" min="1" value="1" title="Qty" type="number">
         								</div>
-										<div class="product_meta">
-											<span class="posted_in">Categories: 
-												<a href="#">Adventure</a>, 
-												<a href="#">Kids' Music</a>
-											</span>
+										<div class="card mb-2">
+											<div class="card-body">
+												<p class="badge badge-success">Phí vận chuyển</p>
+												<p>TP Hồ Chí Minh : 14.000 đ</p>
+												<p>Khu vực khác: 38.000 đ - 50.000 đ</p>
+											</div>
 										</div>
-										<div class="product-share">
-											<ul>
-												<li class="categories-title">Share :</li>
-												<li>
-													<a href="#">
-														<i class="icon-social-twitter icons"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="icon-social-tumblr icons"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="icon-social-facebook icons"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="icon-social-linkedin icons"></i>
-													</a>
-												</li>
-											</ul>
+										<div class="box-tocart">
+											<div class="addtocart__actions">
+        										<button class="tocart" title="Thêm vào giỏ hàng" onclick="addItemToCart('{{book._id}}')">Thêm vào giỏ</button>
+        									</div>
 										</div>
         							</div>
         						</div>
         					</div>
         				</div>
+						<h3 class="heading_detail">
+							Mô tả sản phẩm
+						</h3>
+						<div class="card">
+							<div class="card-body">
+								<div class="product__overview">		
+									<ul>
+										<li><b>• Thể loại:</b> {{book.category}}</li>
+										<li><b>• Tác giả: </b>
+											{{#each book.author}}
+												{{this}}
+											{{/each}}
+										</li>
+									</ul>									
+									<p style="text-align: justify;">
+										{{book.detail}}
+									</p>	
+								</div>
+							</div>
+						</div>
+							
         				<div class="product__info__detailed">
 							<div class="pro_details_nav nav justify-content-start" role="tablist">
-	                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Chi tiết</a>
-	                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Đánh giá</a>
+	                            <a class="nav-item nav-link " data-toggle="tab" href="#nav-review" role="tab">Đánh giá</a>
 	                        </div>
 	                        <div class="tab__container">
-	                        	<!-- Start Single Tab Content -->
-	                        	<div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
-									<div class="description__attribute">
-										<p></p>
-										<ul>
-											<li>• Two-tone gray heather hoodie.</li>
-											<li>• Drawstring-adjustable hood. </li>
-											<li>• Machine wash/dry.</li>
-										</ul>
-									</div>
-	                        	</div>
-	                        	<!-- End Single Tab Content -->
 
 	                        	<!-- Start Single Tab Content -->
-	                        	<div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">	
+	                        	<div class="pro__tab_label tab-pane fade show active" id="nav-review" role="tabpanel">	
 									<div class="review__attribute">
 										<h1>Khách hàng đánh giá</h1>
 										{{#each reviews}}
@@ -165,49 +137,25 @@
 			    									</ul>
 												</div>
 
-												{{!-- <div class="rating-summary d-flex">
-													<span>Price</span>
-			    									<ul class="rating d-flex">
-														<li><i class="zmdi zmdi-star"></i></li>
-														<li><i class="zmdi zmdi-star"></i></li>
-														<li><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-			    									</ul>
-												</div>
-												<div class="rating-summary d-flex">
-													<span>value</span>
-			    									<ul class="rating d-flex">
-														<li><i class="zmdi zmdi-star"></i></li>
-														<li><i class="zmdi zmdi-star"></i></li>
-														<li><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-			    									</ul>
-												</div> --}}
+
 											</div>
 											
-
 											<div class="review-content">
 												
-												<p>Đánh giá bởi {{{user_name}}}</p>
+												{{!-- <p>Đánh giá bởi {{{user_name}}}</p> --}}
 												<p>{{this.date}}</p>
 											</div>
 										</div>
-										
+												<p>{{content}}</p>
+										<br>
 										</div>
-										<p>{{content}}</p>
-										<br>
-										<br>
 										{{/each}}
 
 									</div>
 									
-
-
 									<div class="review-fieldset">
 										<h2>Bạn đang đánh giá cho:</h2>
-										<h3>{{book_name_main}}</h3>
+										<h3>{{book.title}}</h3>
 										<div class="review-field-ratings">
 											<div class="product-review-table">
 												<div class="review-field-rating d-flex">
@@ -220,26 +168,7 @@
 														<li class="off"><i class="zmdi zmdi-star"></i></li>
 			    									</ul>
 												</div>
-												{{!-- <div class="review-field-rating d-flex">
-													<span>Price</span>
-													<ul class="rating d-flex">
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-			    									</ul>
-												</div>
-												<div class="review-field-rating d-flex">
-													<span>Value</span>
-													<ul class="rating d-flex">
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-														<li class="off"><i class="zmdi zmdi-star"></i></li>
-			    									</ul>
-												</div> --}}
+
 											</div>
 										</div>
 
@@ -261,14 +190,10 @@
 											</div>
 
 											{{/if}}
-											{{!-- <div class="input__box">
-												<span>Summary</span>
-												<input id="summery_field" type="text" name="summery">
-											</div> --}}
 											<div class="input__box">
 												<span>Nhận xét</span>
 												<textarea name="message"></textarea>
-												<input name="bookID" type="hidden" value="{{bookID}}">
+												<input name="bookID" type="hidden" value="{{book._id}}">
 											</div>
 
 											<div class="review-form-actions">
@@ -283,12 +208,41 @@
 	                        	<!-- End Single Tab Content -->
 	                        </div>
         				</div>
-						<div class="wn__related__product pt--80 pb--50">
+						
+        			</div>
+        			<div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+        				<div class="shop__sidebar">
+        					<aside class="wedget__categories poroduct--cat">
+        						<h3 class="wedget__title">Các thể loại sách</h3>
+        						<ul>
+        							{{#each CATEGORY}}
+									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
+									{{/each}}
+        						</ul>
+        					</aside>
+        					
+        					<aside class="wedget__categories poroduct--tag">
+        						<h3 class="wedget__title">Các từ khóa</h3>
+        						<ul>
+        							{{#each CATEGORY}}
+									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
+									{{/each}}
+        						</ul>
+        					</aside>
+
+        					<aside class="wedget__categories sidebar--banner">
+								<img img src="/images/others/banner_left.jpg" alt="banner images">
+
+        					</aside>
+        				</div>
+        			</div>
+        		</div>
+				<div class="wn__related__product pt--80 pb--50">
 							<div class="section__title text-center">
-								<h2 class="title__be--2">Sách có liên quan</h2>
+								<h2 class="title__be--2">Sản phẩm tương tự</h2>
 							</div>
 							<div class="row mt--60">
-								<div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
+								<div class="furniture--4 arrows_style owl-carousel owl-theme">
 									<!-- Start Single Product -->
 									{{#each relatedBooks}}
 									<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
@@ -307,8 +261,8 @@
 											<div class="action">
 												<div class="actions_inner">
 													<ul class="add_to_links">
-														<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-														<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+														<li><a class="cart add-to-cart" data-id ="{{_id}}"><i class="bi bi-shopping-cart-full"></i></a></li>
+														{{!-- <li><a class="wishlist" href="/wishlist"><i class="bi bi-shopping-cart-full"></i></a></li> --}}
 														<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
 														<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
 													</ul>
@@ -335,10 +289,10 @@
 								<h2 class="title__be--2">Sách bán chạy</h2>
 							</div>
 							<div class="row mt--60">
-								<div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
+								<div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
 									<!-- Start Single Product -->
 									{{#each upsellProducts}}
-									<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+									<div class="product product__style--4 col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product__thumb">
 											<a class="first__img" href="/book-detail/{{_id}}"><img src={{cover}} alt="title"></a>
 											<div class="hot__box">
@@ -354,8 +308,8 @@
 											<div class="action">
 												<div class="actions_inner">
 													<ul class="add_to_links">
-														<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-														<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+														<li><a class="cart add-to-cart" data-id ="{{_id}}"><i class="bi bi-shopping-cart-full"></i></a></li>
+														{{!-- <li><a class="wishlist" href="/wishlist"><i class="bi bi-shopping-cart-full"></i></a></li> --}}
 														<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
 														<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
 													</ul>
@@ -377,64 +331,7 @@
 								</div>
 							</div>
 						</div>
-        			</div>
-        			<div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
-        				<div class="shop__sidebar">
-        					<aside class="wedget__categories poroduct--cat">
-        						<h3 class="wedget__title">Các thể loại sách</h3>
-        						<ul>
-        							{{#each CATEGORY}}
-									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
-									{{/each}}
-        						</ul>
-        					</aside>
-        					
-        					<aside class="wedget__categories poroduct--tag">
-        						<h3 class="wedget__title">Các từ khóa</h3>
-        						<ul>
-        							{{#each CATEGORY}}
-									<li><a href="/book-shop?catId={{_id}}">{{nameOfCategory}} <span>({{numberOfProduct}})</span></a></li>
-									{{/each}}
-        						</ul>
-        					</aside>
-							<aside class="wedget__categories pro--range">
-        						<h3 class="wedget__title">Lọc theo giá</h3>
-        						<div class="content-shopby">
-        						    <div class="price_filter s-filter clear">
-        						        <form action="#" method="GET">
-        						            <div id="slider-range"></div>
-        						            <div class="slider__range--output">
-        						                <div class="price__output--wrap">
-        						                    <div class="price--output">
-        						                        <span>Giá :</span><input type="text" id="amount" readonly="">
-        						                    </div>
-        						                    <div class="price--filter">
-        						                        <a href="#">Lọc</a>
-        						                    </div>
-        						                </div>
-        						            </div>
-        						        </form>
-        						    </div>
-        						</div>
-        					</aside>
-        					<aside class="wedget__categories poroduct--compare">
-        						<h3 class="wedget__title">Compare</h3>
-        						<ul>
-        							<li><a href="#">x</a><a href="#">Condimentum posuere</a></li>
-        							<li><a href="#">x</a><a href="#">Condimentum posuere</a></li>
-        							<li><a href="#">x</a><a href="#">Dignissim venenatis</a></li>
-        						</ul>
-        					</aside>
-        					<aside class="wedget__categories sidebar--banner">
-								<img src="" alt="banner images">
-								<div class="text">
-									<h2>new products</h2>
-									<h6>save up to <br> <strong>40%</strong>off</h6>
-								</div>
-        					</aside>
-        				</div>
-        			</div>
-        		</div>
+
         	</div>
         </div>
         <!-- End main Content -->
@@ -527,7 +424,7 @@
 		                                </div>
 		                            </div>
 		                            <div class="addtocart-btn">
-		                                <a href="#">Add to cart</a>
+		                                <a class="add-to-cart" data-id ="{{book._id}}">Add to cart</a>
 		                            </div>
 		                        </div><!-- .product-info -->
 		                    </div><!-- .modal-product -->
@@ -540,3 +437,11 @@
 		<!-- END QUICKVIEW PRODUCT -->
 
 	<!-- //Main wrapper -->
+
+<script>
+	function addItemToCart(id){
+		let rs = document.getElementById('qty');
+		let quantity = rs.value;
+		addItemsToCart(id,quantity);
+	}
+</script>

@@ -1,12 +1,12 @@
 const bcrypt = require("bcrypt");
-const userMongooseModel = require("../model/mongooseModel/userMongooseModel");
+const userModal = require("../model/userModel");
 
 exports.validAccount = async (req, res, next) => {
   const { user_name, user_email, password, re_password } = req.body;
 
-  const checkUserName = await userMongooseModel.findOne({user_name});
+  const checkUserName = await userModal.findOne({ user_name });
 
-  const checkUserEmail = await userMongooseModel.findOne({user_email});
+  const checkUserEmail = await userModal.findOne({ user_email });
 
   if (checkUserName) {
     res.render("pages/register", {
@@ -41,17 +41,17 @@ exports.checkPassword = async (req, res, next) => {
   let checkPassword = await bcrypt.compare(cur_password, req.user.password);
   let checkNewPassword = await bcrypt.compare(new_password, req.user.password);
   if (!checkPassword) {
-    res.render('pages/passwordChange', {
-      title: 'Change Password',
-      result: 'Mật khẩu hiện tại không chính xác',
+    res.render("pages/passwordChange", {
+      title: "Change Password",
+      result: "Mật khẩu hiện tại không chính xác",
     });
     return;
   }
 
   if (checkNewPassword) {
-    res.render('pages/passwordChange', {
-      title: 'Change Password',
-      result: 'Mật khẩu mới trùng với mật khẩu hiện tại',
+    res.render("pages/passwordChange", {
+      title: "Change Password",
+      result: "Mật khẩu mới trùng với mật khẩu hiện tại",
     });
     return;
   }
@@ -63,8 +63,6 @@ exports.checkPassword = async (req, res, next) => {
     });
     return;
   }
-  
+
   next();
-}
-
-
+};

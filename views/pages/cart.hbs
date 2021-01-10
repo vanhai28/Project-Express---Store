@@ -1,4 +1,6 @@
 
+<link rel="stylesheet" href="/css/style.css">
+
 	<!-- Main wrapper -->
 	<div class="wrapper" id="wrapper">
 		
@@ -18,16 +20,16 @@
 		</div>
 		<!-- End Search Popup -->
         <!-- Start Bradcaump area -->
-        <div class="ht__bradcaump__area bg-image--3">
+        <div class="ht__bradcaump__area bg-image--2">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="bradcaump__inner text-center">
-                        	<h2 class="bradcaump-title">Shopping Cart</h2>
+                        	<h2 class="bradcaump-title">Giỏ hàng</h2>
                             <nav class="bradcaump-content">
-                              <a class="breadcrumb_item" href="index.html">Home</a>
+                              <a class="breadcrumb_item" href="/">Trang chủ</a>
                               <span class="brd-separetor">/</span>
-                              <span class="breadcrumb_item active">Shopping Cart</span>
+                              <span class="breadcrumb_item active">Giỏ hàng</span>
                             </nav>
                         </div>
                     </div>
@@ -36,6 +38,7 @@
         </div>
         <!-- End Bradcaump area -->
         <!-- cart-main-area start -->
+        {{#with cart}}
         <div class="cart-main-area section-padding--lg bg--white">
             <div class="container">
                 <div class="row">
@@ -45,49 +48,41 @@
                                 <table>
                                     <thead>
                                         <tr class="title-top">
-                                            <th class="product-thumbnail">Image</th>
-                                            <th class="product-name">Product</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product-quantity">Quantity</th>
-                                            <th class="product-subtotal">Total</th>
-                                            <th class="product-remove">Remove</th>
+                                            <th class="product-thumbnail">Hình Ảnh</th>
+                                            <th class="product-name">Sách</th>
+                                            <th class="product-price">Giá</th>
+                                            <th class="product-quantity">Số lượng</th>
+                                            <th class="product-subtotal">Thành tiền</th>
+                                            <th class="product-remove">Xóa</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="images/product/sm-3/1.jpg" alt="product img"></a></td>
-                                            <td class="product-name"><a href="#">Natoque penatibus</a></td>
-                                            <td class="product-price"><span class="amount">$165.00</span></td>
-                                            <td class="product-quantity"><input type="number" value="1"></td>
-                                            <td class="product-subtotal">$165.00</td>
-                                            <td class="product-remove"><a href="#">X</a></td>
+                                    <tbody id="cart-body">
+                                        {{#each items}}
+                                        <tr id="item{{item._id}}">
+                                            <td class="product-thumbnail"><a href="book-detail/{{item._id}}"><img src="{{item.cover}}" alt="product img"></a></td>
+                                            <td class="product-name"><a href="book-detail/{{item._id}}">{{item.title}}</a></td>
+                                            <td class="product-price"><span class="amount">{{item.price}}</span></td>
+                                            {{!-- <td class="product-quantity"><input id="sst{{item._id}}" type="number" value="{{quantity}}" ></td> --}}
+                                            <td class="product-quantity">
+                                                <input type="button" value="-" class="decreaseVal" onclick="decreaseValue('{{item._id}}')">
+                                                <input type="number" id="sst{{item._id}}" min="1" max="22" value="{{quantity}}" class="val" disabled>
+                                                <input type="button" value="+" class="increaseVal" onclick="encreaseValue('{{item._id}}')">
+                                            </td>
+                                            
+                                            <td class="product-subtotal" id="price{{item._id}}">{{price}}</td>
+                                            <td class="product-remove"><a onclick="removeCartItem('{{item._id}}')">X</a></td>
                                         </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="images/product/sm-3/2.jpg" alt="product img"></a></td>
-                                            <td class="product-name"><a href="#">Quisque fringilla</a></td>
-                                            <td class="product-price"><span class="amount">$50.00</span></td>
-                                            <td class="product-quantity"><input type="number" value="1"></td>
-                                            <td class="product-subtotal">$50.00</td>
-                                            <td class="product-remove"><a href="#">X</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="images/product/sm-3/3.jpg" alt="product img"></a></td>
-                                            <td class="product-name"><a href="#">Vestibulum suscipit</a></td>
-                                            <td class="product-price"><span class="amount">$50.00</span></td>
-                                            <td class="product-quantity"><input type="number" value="1"></td>
-                                            <td class="product-subtotal">$50.00</td>
-                                            <td class="product-remove"><a href="#">X</a></td>
-                                        </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>
                         </form> 
                         <div class="cartbox__btn">
                             <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
-                                <li><a href="#">Coupon Code</a></li>
-                                <li><a href="#">Apply Code</a></li>
-                                <li><a href="#">Update Cart</a></li>
-                                <li><a href="#">Check Out</a></li>
+                                <li><a href="#">Nhận mã giảm giá</a></li>
+                                <li><a href="/book-shop">Tiếp tục mua sắm</a></li>
+                                <li><a onclick="clearCart()">Xóa toàn bộ</a></li>
+                                <li><a onclick="checkQuantity('{{totalQuantity}}')">Thanh toán</a></li>
                             </ul>
                         </div>
                     </div>
@@ -95,7 +90,7 @@
                 <div class="row">
                     <div class="col-lg-6 offset-lg-6">
                         <div class="cartbox__total__area">
-                            <div class="cartbox-total d-flex justify-content-between">
+                            {{!-- <div class="cartbox-total d-flex justify-content-between">
                                 <ul class="cart__total__list">
                                     <li>Cart total</li>
                                     <li>Sub Total</li>
@@ -104,72 +99,47 @@
                                     <li>$70</li>
                                     <li>$70</li>
                                 </ul>
-                            </div>
+                            </div> --}}
                             <div class="cart__total__amount">
-                                <span>Grand Total</span>
-                                <span>$140</span>
+                                <span>Tổng số tiền: </span>
+                                <span id="total-price">{{totalPrice}} VNĐ</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>  
         </div>
+        {{/with}}
         <!-- cart-main-area end -->
 		<!-- Footer Area -->
-		<footer id="wn__footer" class="footer__area bg__cat--8 brown--color">
-			<div class="footer-static-top">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="footer__widget footer__menu">
-								<div class="ft__logo">
-									<a href="index.html">
-										<img src="images/logo/3.png" alt="logo">
-									</a>
-									<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered duskam alteration variations of passages</p>
-								</div>
-								<div class="footer__content">
-									<ul class="social__net social__net--2 d-flex justify-content-center">
-										<li><a href="#"><i class="bi bi-facebook"></i></a></li>
-										<li><a href="#"><i class="bi bi-google"></i></a></li>
-										<li><a href="#"><i class="bi bi-twitter"></i></a></li>
-										<li><a href="#"><i class="bi bi-linkedin"></i></a></li>
-										<li><a href="#"><i class="bi bi-youtube"></i></a></li>
-									</ul>
-									<ul class="mainmenu d-flex justify-content-center">
-										<li><a href="index.html">Trending</a></li>
-										<li><a href="index.html">Best Seller</a></li>
-										<li><a href="index.html">All Product</a></li>
-										<li><a href="index.html">Wishlist</a></li>
-										<li><a href="index.html">Blog</a></li>
-										<li><a href="index.html">Contact</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="copyright__wrapper">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-6 col-md-6 col-sm-12">
-							<div class="copyright">
-								<div class="copy__right__inner text-left">
-									<p>Copyright <i class="fa fa-copyright"></i> <a href="https://freethemescloud.com/">Free themes Cloud.</a> All Rights Reserved</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-12">
-							<div class="payment text-right">
-								<img src="images/icons/payment.png" alt="" />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
 		<!-- //Footer Area -->
 
 	</div>
 	<!-- //Main wrapper -->
+    <script>
+        function encreaseValue(id) {
+            let rs = document.getElementById(`sst${id}`);
+            rs.value = parseInt(rs.value) + 1;
+            updateCart(id,rs.value); 
+        }
+
+        function decreaseValue(id) {
+            let rs = document.getElementById(`sst${id}`);
+            if(rs.value <=1){
+                removeCartItem(id);
+            }
+            else{
+                rs.value = parseInt(rs.value) -1;
+                updateCart(id,rs.value); 
+            }
+        }
+
+        function checkQuantity(value){
+            if(parseInt(value)==0){
+                confirm("Hãy thêm sản phẩm vào giỏ hàng trước khi thanh toán !");
+            }
+            else{
+                window.location.href = "/checkout";
+            }
+        }
+    </script>

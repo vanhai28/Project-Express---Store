@@ -1,9 +1,14 @@
 const bcrypt = require("bcrypt");
 const randomstring = require("randomstring");
+<<<<<<< HEAD:model/userService.js
 const mailer = require("../misc/mailer");
 const mongoose = require("mongoose");
 
 const userMongooseModel = require("./mongooseModel/userMongooseModel");
+=======
+const userMongooseModel = require("../model/userModel");
+const mailer = require("../misc/mailer");
+>>>>>>> a47e59ba8016c2e77af4868a4e7d63d21c632450:service/userService.js
 
 exports.addUser = async (newUser) => {
   //---------- Add user into database ---------
@@ -42,7 +47,7 @@ module.exports.getAccount = async (id) => {
   try {
     account = await userMongooseModel.findOne({ _id: id }).lean();
   } catch (error) {
-    console.log(err);
+    console.log(error);
     return null;
   }
   return account;
@@ -160,6 +165,7 @@ module.exports.sendForgetPasswordEmail = async (email) => {
     html
   );
 };
+<<<<<<< HEAD:model/userService.js
 
 module.exports.checkUsernameAndEmail = (username, email) => {
   return userMongooseModel.findOne({ user_name: username, user_email: email });
@@ -172,4 +178,9 @@ exports.saveLastestTimeAccess = async (_id) => {
     { _id: mongoose.Types.ObjectId(_id) },
     { Lastest_Time_Access: current_datetime }
   );
+=======
+
+module.exports.checkUsernameAndEmail = (username, email) => {
+  return userMongooseModel.findOne({ user_name: username, user_email: email });
+>>>>>>> a47e59ba8016c2e77af4868a4e7d63d21c632450:service/userService.js
 };
