@@ -133,30 +133,14 @@ module.exports.postVerify = async (req, res) => {
   try {
     userService.verify(user._id);
   } catch (err) {
-<<<<<<< HEAD
-    console.log(err);
-=======
     console.error(err);
->>>>>>> a47e59ba8016c2e77af4868a4e7d63d21c632450
   }
   res.redirect("/");
 };
 
-<<<<<<< HEAD
-module.exports.getLogout = async (req, res) => {
-  try {
-    await userService.saveLastestTimeAccess(req.user._id);
-
-    req.logout();
-    res.redirect(req.headers.referer);
-  } catch (error) {
-    res.redirect("/");
-  }
-=======
 module.exports.getLogout = (req, res) => {
   req.logout();
   res.redirect(req.headers.referer);
->>>>>>> a47e59ba8016c2e77af4868a4e7d63d21c632450
 };
 
 module.exports.getForgetPassword = (req, res) => {
@@ -177,8 +161,6 @@ module.exports.postForgetPassword = async (req, res) => {
     });
   }
 };
-<<<<<<< HEAD
-=======
 
 module.exports.APIaddFollower = async (req, res, next) => {
   if (!req.query || !req.query.email_follower) {
@@ -200,4 +182,3 @@ module.exports.APIaddFollower = async (req, res, next) => {
     res.send("Fail!!");
   }
 };
->>>>>>> a47e59ba8016c2e77af4868a4e7d63d21c632450

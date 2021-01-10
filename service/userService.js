@@ -1,14 +1,8 @@
 const bcrypt = require("bcrypt");
 const randomstring = require("randomstring");
-<<<<<<< HEAD:model/userService.js
-const mailer = require("../misc/mailer");
-const mongoose = require("mongoose");
 
-const userMongooseModel = require("./mongooseModel/userMongooseModel");
-=======
-const userMongooseModel = require("../model/userModel");
+const userModal = require("../model/userModel");
 const mailer = require("../misc/mailer");
->>>>>>> a47e59ba8016c2e77af4868a4e7d63d21c632450:service/userService.js
 
 exports.addUser = async (newUser) => {
   //---------- Add user into database ---------
@@ -17,7 +11,7 @@ exports.addUser = async (newUser) => {
     "https://res.cloudinary.com/dzhnjuvzt/image/upload/v1608481217/user/dafault.png";
   await bcrypt.genSalt(saltRounds, function (err, salt) {
     bcrypt.hash(newUser.password, salt, function (err, hash) {
-      let user = new userMongooseModel({
+      let user = new userModal({
         user_name: newUser.user_name,
         user_email: newUser.user_email,
         password: hash,
@@ -45,7 +39,7 @@ exports.addUser = async (newUser) => {
 module.exports.getAccount = async (id) => {
   let account;
   try {
-    account = await userMongooseModel.findOne({ _id: id }).lean();
+    account = await userModal.findOne({ _id: id }).lean();
   } catch (error) {
     console.log(error);
     return null;
@@ -54,14 +48,14 @@ module.exports.getAccount = async (id) => {
 };
 
 module.exports.getUser = (id) => {
-  return userMongooseModel.findOne({ _id: id });
+  return userModal.findOne({ _id: id });
 };
 
 module.exports.modifyAccount = async (account) => {
   try {
     if (!account.avatar_image) delete account.avatar_image;
 
-    await userMongooseModel.findByIdAndUpdate(account._id, account);
+    await userModal.findByIdAndUpdate(account._id, account);
   } catch (error) {
     console.log(error);
     return false;
@@ -75,7 +69,7 @@ module.exports.modifyAccount = async (account) => {
  * @param {*} password
  */
 module.exports.checkCredential = async (user_name, password) => {
-  const user = await userMongooseModel.findOne({ user_name: user_name });
+  const user = await userModal.findOne({ user_name: user_name });
   if (!user) return false;
 
   let checkPassword = await bcrypt.compare(password, user.password);
@@ -89,29 +83,23 @@ module.exports.changePassword = async (id, password) => {
   const saltRounds = 10;
   await bcrypt.genSalt(saltRounds, (err, salt) => {
     bcrypt.hash(password, salt, async (err, hash) => {
-      await userMongooseModel.updateOne({ _id: id }, { password: hash });
+      await userModal.updateOne({ _id: id }, { password: hash });
     });
   });
 };
 
 module.exports.checkVerifyToken = async (verifyToken) => {
-  return await userMongooseModel.findOne({ verify_token: verifyToken });
+  return await userModal.findOne({ verify_token: verifyToken });
 };
 
 module.exports.verify = async (id) => {
-  await userMongooseModel.updateOne(
-    { _id: id },
-    { isVerify: true, verify_token: "" }
-  );
+  await userModal.updateOne({ _id: id }, { isVerify: true, verify_token: "" });
 };
 
 module.exports.sendVerifyEmail = async (user) => {
   const verifyToken = randomstring.generate(7);
   const userEmail = user.user_email;
-  await userMongooseModel.updateOne(
-    { _id: user._id },
-    { verify_token: verifyToken }
-  );
+  await userModal.updateOne({ _id: user._id }, { verify_token: verifyToken });
   const html = `Chào bạn,
   <br/>
   Cảm ơn bạn đã đăng ký tài khoản tại Bookstore. Đây là email được gửi để xác thực tài khoản của bạn.
@@ -139,10 +127,7 @@ module.exports.sendForgetPasswordEmail = async (email) => {
   const saltRounds = 10;
   await bcrypt.genSalt(saltRounds, (err, salt) => {
     bcrypt.hash(newPassword, salt, async (err, hash) => {
-      await userMongooseModel.updateOne(
-        { user_email: email },
-        { password: hash }
-      );
+      await userModal.updateOne({ user_email: email }, { password: hash });
     });
   });
 
@@ -165,22 +150,7 @@ module.exports.sendForgetPasswordEmail = async (email) => {
     html
   );
 };
-<<<<<<< HEAD:model/userService.js
 
 module.exports.checkUsernameAndEmail = (username, email) => {
-  return userMongooseModel.findOne({ user_name: username, user_email: email });
-};
-
-exports.saveLastestTimeAccess = async (_id) => {
-  let current_datetime = new Date();
-
-  await userMongooseModel.updateOne(
-    { _id: mongoose.Types.ObjectId(_id) },
-    { Lastest_Time_Access: current_datetime }
-  );
-=======
-
-module.exports.checkUsernameAndEmail = (username, email) => {
-  return userMongooseModel.findOne({ user_name: username, user_email: email });
->>>>>>> a47e59ba8016c2e77af4868a4e7d63d21c632450:service/userService.js
+  return userModal.findOne({ user_name: username, user_email: email });
 };
