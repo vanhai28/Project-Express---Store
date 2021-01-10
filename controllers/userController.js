@@ -1,7 +1,7 @@
 const formidable = require("formidable");
 const upload = require("../service/uploadFileService");
-const userService = require("../model/userService");
-const { model } = require("../model/mongooseModel/userMongooseModel");
+const userService = require("../service/userService");
+const followerService = require("../service/followerServices");
 
 module.exports.getRegister = function (req, res) {
   res.render("pages/register", { title: "Register" });
@@ -93,75 +93,92 @@ module.exports.postAccount = async (req, res, next) => {
   });
 };
 
-module.exports.getPassword = (req, res) =>{
+module.exports.getPassword = (req, res) => {
   res.render("pages/passwordChange", { title: "Change Password" });
-}
+};
 
-module.exports.postPassword = (req, res)=>{
+module.exports.postPassword = (req, res) => {
   const new_password = req.body.new_password;
   const id = req.user._id;
-  try{
+  try {
     userService.changePassword(id, new_password);
-    res.render('pages/passwordChange',{
-      title: 'Change Password',
-      result: 'Thay đổi mật khẩu thành công'
-    })
-    }catch(err){
-      res.render("pages/passwordChange",{
-        title: 'Change Password',
-        result: 'Thay đổi mật khẩu không thành công'
-      });
-    }
-}
+    res.render("pages/passwordChange", {
+      title: "Change Password",
+      result: "Thay đổi mật khẩu thành công",
+    });
+  } catch (err) {
+    res.render("pages/passwordChange", {
+      title: "Change Password",
+      result: "Thay đổi mật khẩu không thành công",
+    });
+  }
+};
 
-module.exports.getVerify = (req, res) =>{
+module.exports.getVerify = (req, res) => {
   userService.sendVerifyEmail(req.user);
-  res.render('pages/verify', {title: 'Verify'});
-}
+  res.render("pages/verify", { title: "Verify" });
+};
 
 module.exports.postVerify = async (req, res) => {
-  const {verifyToken} = req.body;
+  const { verifyToken } = req.body;
   const user = req.user;
   const isValid = await userService.checkVerifyToken(verifyToken);
-  if(!isValid){
-    return res.render('pages/verify',{
-      title: 'Verify',
-      message: 'Mã xác thực không hợp lệ'
+  if (!isValid) {
+    return res.render("pages/verify", {
+      title: "Verify",
+      message: "Mã xác thực không hợp lệ",
     });
   }
 
-  try{
+  try {
     userService.verify(user._id);
-  }catch(err){
-    console.log(err);
+  } catch (err) {
+    console.error(err);
   }
-  res.redirect('/');  
-}
+  res.redirect("/");
+};
 
-module.exports.getLogout = (req, res) =>{
+module.exports.getLogout = (req, res) => {
   req.logout();
   res.redirect(req.headers.referer);
-}
+};
 
-module.exports.getForgetPassword = (req, res) =>{
+module.exports.getForgetPassword = (req, res) => {
   res.render("pages/forgetPassword", { title: "Forget Password" });
-}
+};
 
-module.exports.postForgetPassword = async (req,res) =>{
+module.exports.postForgetPassword = async (req, res) => {
   const email = req.body.email.trim();
-  const username =  req.body.username.trim();
-  const isValid = await userService.checkUsernameAndEmail(username,email);
-  if(isValid){
+  const username = req.body.username.trim();
+  const isValid = await userService.checkUsernameAndEmail(username, email);
+  if (isValid) {
     userService.sendForgetPasswordEmail(email);
-    res.redirect('/user/login');
-  }
-  else{
-    res.render('pages/forgetPassword',{
-      title: 'Forget Password',
-      message: 'Email hoặc Username không chính xác. Vui lòng nhập lại.'
+    res.redirect("/user/login");
+  } else {
+    res.render("pages/forgetPassword", {
+      title: "Forget Password",
+      message: "Email hoặc Username không chính xác. Vui lòng nhập lại.",
     });
   }
-}
+};
 
+module.exports.APIaddFollower = async (req, res, next) => {
+  if (!req.query || !req.query.email_follower) {
+    res.statusCode = 400;
+    res.send();
+  }
+  let email = req.query.email_follower;
+  let isSuccess = await followerService.addFollower(email);
 
-
+  if (isSuccess == 1) {
+    res.statusCode = 200;
+    res.send("Successfull !!");
+    await followerService.sendEmailIntroToFollower(email);
+  } else if (isSuccess == 0) {
+    res.statusCode = 200;
+    res.send("Email is already exist ");
+  } else {
+    res.statusCode = 400;
+    res.send("Fail!!");
+  }
+};

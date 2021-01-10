@@ -1,11 +1,13 @@
 const bcrypt = require("bcrypt");
 const randomstring = require("randomstring");
-const userMongooseModel = require("./mongooseModel/userMongooseModel");
-const mailer = require('../misc/mailer');
+const userMongooseModel = require("../model/userModel");
+const mailer = require("../misc/mailer");
+
 exports.addUser = async (newUser) => {
   //---------- Add user into database ---------
   const saltRounds = 10;
-  const defaultAvt = 'https://res.cloudinary.com/dzhnjuvzt/image/upload/v1608481217/user/dafault.png';
+  const defaultAvt =
+    "https://res.cloudinary.com/dzhnjuvzt/image/upload/v1608481217/user/dafault.png";
   await bcrypt.genSalt(saltRounds, function (err, salt) {
     bcrypt.hash(newUser.password, salt, function (err, hash) {
       let user = new userMongooseModel({
@@ -23,7 +25,7 @@ exports.addUser = async (newUser) => {
 
       user
         .save()
-        .then((doc) => { })
+        .then((doc) => {})
         .then((err) => {
           console.log(err);
         });
@@ -46,7 +48,7 @@ module.exports.getAccount = async (id) => {
 
 module.exports.getUser = (id) => {
   return userMongooseModel.findOne({ _id: id });
-}
+};
 
 module.exports.modifyAccount = async (account) => {
   try {
@@ -62,42 +64,47 @@ module.exports.modifyAccount = async (account) => {
 
 /**
  * Check for valid username and password, Return user's infor if it's valid
- * @param {*} user_name 
- * @param {*} password 
+ * @param {*} user_name
+ * @param {*} password
  */
 module.exports.checkCredential = async (user_name, password) => {
   const user = await userMongooseModel.findOne({ user_name: user_name });
-  if (!user)
-    return false;
+  if (!user) return false;
 
   let checkPassword = await bcrypt.compare(password, user.password);
   if (checkPassword) {
     return user;
   }
   return false;
-}
+};
 
 module.exports.changePassword = async (id, password) => {
   const saltRounds = 10;
   await bcrypt.genSalt(saltRounds, (err, salt) => {
     bcrypt.hash(password, salt, async (err, hash) => {
       await userMongooseModel.updateOne({ _id: id }, { password: hash });
-    })
-  })
-}
+    });
+  });
+};
 
 module.exports.checkVerifyToken = async (verifyToken) => {
   return await userMongooseModel.findOne({ verify_token: verifyToken });
-}
+};
 
 module.exports.verify = async (id) => {
-  await userMongooseModel.updateOne({ _id: id }, { isVerify: true, verify_token: "" });
-}
+  await userMongooseModel.updateOne(
+    { _id: id },
+    { isVerify: true, verify_token: "" }
+  );
+};
 
 module.exports.sendVerifyEmail = async (user) => {
   const verifyToken = randomstring.generate(7);
   const userEmail = user.user_email;
-  await userMongooseModel.updateOne({ _id: user._id }, { verify_token: verifyToken });
+  await userMongooseModel.updateOne(
+    { _id: user._id },
+    { verify_token: verifyToken }
+  );
   const html = `Chào bạn,
   <br/>
   Cảm ơn bạn đã đăng ký tài khoản tại Bookstore. Đây là email được gửi để xác thực tài khoản của bạn.
@@ -110,8 +117,13 @@ module.exports.sendVerifyEmail = async (user) => {
   <br/>
   Bookstore
   `;
-  await mailer.sendEmail('admin@bookstore.com', userEmail, 'Xác thực Email', html);
-}
+  await mailer.sendEmail(
+    "admin@bookstore.com",
+    userEmail,
+    "Xác thực Email",
+    html
+  );
+};
 
 module.exports.sendForgetPasswordEmail = async (email) => {
   const newPassword = randomstring.generate(10);
@@ -120,9 +132,12 @@ module.exports.sendForgetPasswordEmail = async (email) => {
   const saltRounds = 10;
   await bcrypt.genSalt(saltRounds, (err, salt) => {
     bcrypt.hash(newPassword, salt, async (err, hash) => {
-      await userMongooseModel.updateOne({ user_email: email }, { password: hash });
-    })
-  })
+      await userMongooseModel.updateOne(
+        { user_email: email },
+        { password: hash }
+      );
+    });
+  });
 
   const html = `Chào bạn,
   <br/>
@@ -136,11 +151,14 @@ module.exports.sendForgetPasswordEmail = async (email) => {
   <br/>
   Bookstore
   `;
-  await mailer.sendEmail('admin@bookstore.com', userEmail, 'Reset Mật khẩu', html);
-}
+  await mailer.sendEmail(
+    "admin@bookstore.com",
+    userEmail,
+    "Reset Mật khẩu",
+    html
+  );
+};
 
 module.exports.checkUsernameAndEmail = (username, email) => {
   return userMongooseModel.findOne({ user_name: username, user_email: email });
-}
-
-
+};
