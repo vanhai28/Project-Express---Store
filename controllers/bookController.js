@@ -35,6 +35,7 @@ exports.bookShop = async function (req, res, next) {
       _id: book._id,
       cover: book.cover,
       title: book.title,
+      best_seller: book.best_seller,
       old_price: numberService.formatNumber(book.old_price),
       price: numberService.formatNumber(book.price),
     }
@@ -62,18 +63,30 @@ exports.bookDetail = async function (req, res, next) {
   const bookId = req.params.id;
 
   const book = await bookService.getBookById(bookId);
+  book.price = numberService.formatNumber(book.price);
+  book.old_price = numberService.formatNumber(book.old_price);
+
   const reviews = await bookService.getReviewOfBook(bookId);
 
   const genre = book.category;
-  const relatedBooks = await bookService.getBookByCategory(genre, 6);
-  const upsellProducts = await bookService.getBookByCategory(genre, 6);
+  let relatedBooks = await bookService.getBookByCategory(genre, 6);
   const category = await bookService.getCategory();
+
+  relatedBooks = relatedBooks.map((bookItem)=>{
+    return{
+      _id: bookItem._id,
+      cover: bookItem.cover,
+      title: bookItem.title,
+      best_seller: bookItem.best_seller,
+      old_price: numberService.formatNumber(bookItem.old_price),
+      price: numberService.formatNumber(bookItem.price),
+    }
+  });
 
   res.render("./pages/book/bookDetail", {
     title: "Detail",
     book: book,
     relatedBooks: relatedBooks,
-    upsellProducts: upsellProducts,
     reviews: reviews,
     CATEGORY: category,
   });
