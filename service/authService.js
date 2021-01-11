@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const userMongooseModel = require("./mongooseModel/userMongooseModel");
+const userMongooseModel = require("../model/userModel");
 
 exports.authLoginAcc = async (emailOrUserName, pass) => {
   let err = "";

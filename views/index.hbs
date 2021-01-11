@@ -1,15 +1,16 @@
+
 <body>
+
 	<!-- Main wrapper -->
 	<div class="wrapper" id="wrapper">
-
+	<div class="message_box">
+		<p id="message_alert" class="alert alert-primary"></p>
+	</div>
 		<!-- Start Search Popup -->
 		<div class="box-search-content search_active block-bg close__top">
 			<form id="search_mini_form" class="minisearch" action="/book-shop" method="GET">
 				<div class="field__search">
 					<input name="q" type="text" placeholder="Search entire store here...">
-					{{!-- <div class="action">
-						<a href="/book-shop/?q=nhan"><i class="zmdi zmdi-search"></i></a>
-					</div> --}}
 				</div>
 			</form>
 			<div class="close__wrap">
@@ -234,10 +235,10 @@
 						</div>
 						<div class="newsletter__block text-center">
 							<p>Đăng kí theo dõi để nhận được những thông tin cập nhất mới nhất về sản phẩm mà bạn quan tâm</p>
-							<form action="#">
+							<form action="#" onsubmit="subscribe(event)">
 								<div class="newsletter__box">
-									<input type="email" placeholder="Địa chỉ E-mail">
-									<button>Đăng ký</button>
+									<input type="email" id="follow_email" placeholder="Địa chỉ E-mail">
+									<button type="submit" >Đăng ký</button>
 								</div>
 							</form>
 						</div>
@@ -286,3 +287,4 @@
 		</section>
 	</div>
 	<!-- //Main wrapper -->
+	<script src="/js/custom.js"></script>

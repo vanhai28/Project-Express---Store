@@ -1,6 +1,6 @@
-const bookService = require("../model/bookService");
+const bookService = require("../service/bookService");
 const numberService = require("../service/numberService");
-const Book = require("../model/mongooseModel/bookMongooseModel");
+const Book = require("../model/bookModel");
 const ITEM_PER_PAGE = 12;
 
 exports.bookShop = async function (req, res, next) {
@@ -21,27 +21,26 @@ exports.bookShop = async function (req, res, next) {
   }
 
   let paginate;
-  if(sort){
+  if (sort) {
     paginate = await bookService.listSortedBook(sort, page, ITEM_PER_PAGE);
-  }
-  else{
+  } else {
     paginate = await bookService.listBook(filter, page, ITEM_PER_PAGE);
   }
 
   const category = await bookService.getCategory();
 
-  let books = paginate.docs.map((book)=>{
-    return{
+  let books = paginate.docs.map((book) => {
+    return {
       _id: book._id,
       cover: book.cover,
       title: book.title,
       best_seller: book.best_seller,
       old_price: numberService.formatNumber(book.old_price),
       price: numberService.formatNumber(book.price),
-    }
+    };
   });
 
-  res.render('./pages/book/bookShop',{
+  res.render("./pages/book/bookShop", {
     title: "Book Shop",
     books,
     hasNextPage: paginate.hasNextPage,
@@ -55,7 +54,7 @@ exports.bookShop = async function (req, res, next) {
     catId: catId,
     CATEGORY: category,
     sort: sort,
-    srt: sort
+    srt: sort,
   });
 };
 
@@ -94,5 +93,4 @@ exports.bookDetail = async function (req, res, next) {
 
 exports.bookSearch = async (res, req, next) => {
   const f = await Book.find({ $text: { $search: "d" } });
-  console.log("f", f);
 };
