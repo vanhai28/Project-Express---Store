@@ -91,6 +91,3 @@ exports.bookDetail = async function (req, res, next) {
   });
 };
 
-exports.bookSearch = async (res, req, next) => {
-  const f = await Book.find({ $text: { $search: "d" } });
-};

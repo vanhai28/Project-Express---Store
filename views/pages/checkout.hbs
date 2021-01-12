@@ -68,7 +68,7 @@
         							</div>
         						</form>
         					</div> --}}
-							{{else}}
+							{{!-- {{else}}
         					<div class="checkout_info">
         						<span>Bạn có mã giảm giá? </span>
         						<a class="showcoupon" href="#">Nhập mã giảm giá của bạn ở đây</a>
@@ -80,7 +80,7 @@
         								<button>Xác nhận</button>
         							</div>
         						</form>
-        					</div>
+        					</div> --}}
 							{{/unless}}
         				</div>
         			</div>
@@ -88,40 +88,30 @@
         		<div class="row">
         			<div class="col-lg-6 col-12">
         				<div class="customer_details">
+
+							<form id="customerForm" method="POST" action="/checkout">
         					<h3>Chi tiết đơn hàng</h3>
         					<div class="customar__field">
         						<div class="margin_between">
 	        						<div class="input_box space_between">
 	        							<label>Họ <span>*</span></label>
-	        							<input type="text">
+	        							<input type="text" required name="customer_first_name">
 	        						</div>
 	        						<div class="input_box space_between">
 	        							<label>Tên <span>*</span></label>
-	        							<input type="text">
+	        							<input type="text" required name="customer_last_name">
 	        						</div>
         						</div>
         						<div class="input_box">
         							<label>Tên công ty <span>*</span></label>
-        							<input type="text">
-        						</div>
-        						<div class="input_box">
-        							<label>Quốc gia<span>*</span></label>
-        							<select class="select__option">
-										<option>Chọn quốc gia</option>
-										<option>Việt Nam</option>
-										<option>Trung Quốc</option>
-										<option>Singapore</option>
-										<option>Mỹ</option>
-										<option>Campuchia</option>
-										<option>Thái Lan</option>
-        							</select>
+        							<input type="text" required name="customer_company">
         						</div>
 
         						<div class="input_box">
         							<label>Tỉnh/ Thành phố<span>*</span></label>
-        							<select class="select__option">
+        							<select class="select__option" name="customer_city">
 										<option>Chọn tỉnh của bạn</option>
-										<option>TP Hồ Chí Minh</option>
+										<option selected="selected">TP Hồ Chí Minh</option>
 										<option>Hà Nội</option>
 										<option>Cần Thơ</option>
 										<option>Hải Phòng</option>
@@ -132,7 +122,7 @@
 
 								<div class="input_box">
         							<label>Địa chỉ <span>*</span></label>
-        							<input type="text" placeholder="Street address">
+        							<input type="text" placeholder="Street address" required name="customer_address">
         						</div>
 								{{!-- <div class="input_box">
 									<label>Postcode / ZIP <span>*</span></label>
@@ -141,15 +131,18 @@
 								<div class="margin_between">
 									<div class="input_box space_between">
 										<label>Số điện thoại <span>*</span></label>
-										<input type="text">
+										<input type="text" pattern="[0-9]{7,}" required name="customer_phone">
+										<small>Định dạng: 0763949737</small>
 									</div>
 
 									<div class="input_box space_between">
 										<label>Địa chỉ Email <span>*</span></label>
-										<input type="email">
+										<input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required name="customer_email">
+										<small>Định dạng: web@example.com</small>
 									</div>
 								</div>
         					</div>
+							</form>
         					{{!-- <div class="create__account">
         						<div class="wn__accountbox">
 	        						<input class="input-checkbox" name="createaccount" value="1" type="checkbox">
@@ -163,7 +156,8 @@
         						</div>
         					</div> --}}
         				</div>
-        				<div class="customer_details mt--20">
+						
+        				{{!-- <div class="customer_details mt--20">
         					<div class="differt__address">
 	        					<input name="ship_to_different_address" value="1" type="checkbox">
 	        					<span>Giao hàng đến địa chỉ khác ?</span>
@@ -172,16 +166,16 @@
         						<div class="margin_between">
 	        						<div class="input_box space_between">
 	        							<label>Họ người nhận <span>*</span></label>
-	        							<input type="text">
+	        							<input type="text" id="reciever_first_name">
 	        						</div>
 	        						<div class="input_box space_between">
 	        							<label>Tên người nhận <span>*</span></label>
-	        							<input type="text">
+	        							<input type="text" id="reciever_last_name">
 	        						</div>
         						</div>
         						<div class="input_box">
         							<label>Tên công ty <span>*</span></label>
-        							<input type="text">
+        							<input type="text" id="reciever_company">
         						</div>
         						<div class="input_box">
         							<label>Quốc gia<span>*</span></label>
@@ -198,9 +192,9 @@
 
         						<div class="input_box">
         							<label>Tỉnh/ Thành phố<span>*</span></label>
-        							<select class="select__option">
+        							<select class="select__option" id="reciever_city">
 										<option>Chọn tỉnh của bạn</option>
-										<option>TP Hồ Chí Minh</option>
+										<option selected="selected">TP Hồ Chí Minh</option>
 										<option>Hà Nội</option>
 										<option>Cần Thơ</option>
 										<option>Hải Phòng</option>
@@ -211,27 +205,28 @@
 
 								<div class="input_box">
         							<label>Địa chỉ <span>*</span></label>
-        							<input type="text" placeholder="Street address">
+        							<input type="text" placeholder="Street address" id="reciever_address">
         						</div>
-								{{!-- <div class="input_box">
+								<div class="input_box">
 									<label>Postcode / ZIP <span>*</span></label>
 									<input type="text">
-								</div> --}}
+								</div>
 								<div class="margin_between">
 									<div class="input_box space_between">
 										<label>Số điện thoại <span>*</span></label>
-										<input type="tel">
+										<input type="tel" id="reciever_phone">
 									</div>
 									<div class="input_box space_between">
 										<label>Địa chỉ Email <span>*</span></label>
-										<input type="email">
+										<input type="email" id="reciever_email">
 									</div>
 								</div>
         					</div>
-        				</div>
+        				</div> --}}
         			</div>
-					{{#with cart}}
+					
         			<div class="col-lg-6 col-12 md-mt-40 sm-mt-40">
+						{{#with cart}}
         				<div class="wn__order__box">
         					<h3 class="onder__title">Hóa đơn của bạn</h3>
         					<ul class="order__total">
@@ -276,7 +271,16 @@
         						<li>Số tiền phải trả <span id="total-cost">{{totalCost}} VNĐ</span></li>
         					</ul>
         				</div>
-					    <div id="accordion" class="checkout_accordion mt--30" role="tablist">
+						{{/with}}
+
+						{{#if user}}
+						<div class="text-center">
+							<br>
+							<button class="btn-lg btn-primary" form="customerForm" type ="submit">Thanh toán</a>
+						</div>
+						{{/if}}
+						
+					    {{!-- <div id="accordion" class="checkout_accordion mt--30" role="tablist">
 						    <div class="payment">
 						        <div class="che__header" role="tab" id="headingOne">
 						          	<a class="checkout__title" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -317,10 +321,10 @@
 					          		<div class="payment-body">Pay with cash upon delivery.</div>
 						        </div>
 						    </div>
-					    </div>
+					    </div> --}}
 
         			</div>
-					{{/with}}
+					
         		</div>
         	</div>
         </section>
@@ -337,4 +341,6 @@
 	function setShipN(){
 		updateShip(80000);
 	}
+
+
 </script>
