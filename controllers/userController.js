@@ -138,7 +138,8 @@ module.exports.postVerify = async (req, res) => {
   res.redirect("/");
 };
 
-module.exports.getLogout = (req, res) => {
+module.exports.getLogout = (req, res) =>{
+  req.session.cart.empty();
   req.logout();
   res.redirect(req.headers.referer);
 };
