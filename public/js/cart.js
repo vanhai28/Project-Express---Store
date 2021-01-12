@@ -10,9 +10,10 @@ function addToCart() {
         type: 'POST',
         data: { id, quantity },
         success: function (result) {
+            const totalPrice = formatNumber(result.totalPrice);
             $('#cart-badge').html(result.totalQuantity);
             $('#cart-total-quantity').html(result.totalQuantity + ' món');
-            $('#cart-total-price').html(result.totalPrice);
+            $('#cart-total-price').html(totalPrice);
         }
     })
 }
@@ -23,7 +24,7 @@ function addItemsToCart(id, quantity) {
         type: 'POST',
         data: { id, quantity },
         success: function (result) {
-            var totalPrice = formatNumber(result.totalPrice);
+            const totalPrice = formatNumber(result.totalPrice);
             $('#cart-badge').html(result.totalQuantity);
             $('#cart-total-quantity').html(result.totalQuantity + ' món');
             $('#cart-total-price').html(totalPrice);
@@ -46,9 +47,10 @@ function removeCartItem(id) {
         type: 'DELETE',
         data: { id },
         success: function (result) {
+            const totalPrice = formatNumber(result.totalPrice);
             $('#cart-badge').html(result.totalQuantity);
             $('#cart-total-quantity').html(result.totalQuantity + ' món');
-            $('#cart-total-price').html(result.totalPrice);
+            $('#cart-total-price').html(totalPrice);
             $('#total-price').html(result.totalPrice + ' VNĐ');
             $(`#item${id}`).remove();
         }

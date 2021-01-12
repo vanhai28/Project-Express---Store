@@ -24,7 +24,8 @@ module.exports = function Cart(oldCart) {
         for (var id in this.items) {
             price += parseFloat(this.items[id].price);
         }
-        price = (price);
+        price = numberService.formatNumber(price);
+        // price = (price);
         return price;
     };
 
