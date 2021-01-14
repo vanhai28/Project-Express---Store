@@ -160,9 +160,7 @@ module.exports.checkExistUsername = (username) => {
 
 module.exports.updateLastestAccessDate = async (_id) => {
   let timeDate = new Date();
-  console.log(timeDate);
-  let re = await userModel.findByIdAndUpdate(_id, {
+  await userModel.findByIdAndUpdate(_id, {
     lastest_access_date: timeDate,
   });
-  console.log(re);
 };
