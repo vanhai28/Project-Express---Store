@@ -5,7 +5,9 @@ const router = express.Router();
 router.get("/", (req, res) => {
   var cart = req.session.cart;
   res.locals.cart = cart.getCart();
-  res.render("pages/cart");
+  res.render("pages/cart",{
+    title: "Cart"
+  });
 });
 
 router.post("/", async (req, res, next) => {

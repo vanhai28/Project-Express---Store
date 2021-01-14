@@ -1,4 +1,4 @@
-const mailer = require("../misc/mailer");
+const mailer = require("./mailerService");
 const numberService = require("../service/numberService");
 
 module.exports.sendCheckoutEmail = async (customer, address, phone, userEmail, cart) => {

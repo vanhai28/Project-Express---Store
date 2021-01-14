@@ -80,6 +80,7 @@ module.exports.postAccount = async (req, res, next) => {
         }
 
         res.render("pages/accountManagement", {
+          title: "Account",
           userAccount: userAccount,
           result: result,
         });
@@ -183,3 +184,8 @@ module.exports.APIaddFollower = async (req, res, next) => {
     res.send("Fail!!");
   }
 };
+
+
+module.exports.isUsernameExist=async (req, res)=>{
+    res.json(await userService.checkExistUsername(req.query.username));
+}

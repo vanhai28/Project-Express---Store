@@ -14,7 +14,8 @@
                               <h3 class="account__title text-center">ĐĂNG KÝ</h3>
                             <div class="input__box">
                                 <label>Username <span>*</span></label>
-                                <input type="text" required name="user_name">
+                                <input type="text" required name="user_name" onchange="checkExist(this.value)">
+                                <span id="username-check"></span>
                             </div>
                             <div class="input__box">
                                 <label>Địa chỉ Email <span>*</span></label>
@@ -40,3 +41,6 @@
 </section>
 <!-- End My Account Area -->
 
+<script>
+
+</script>

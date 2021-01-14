@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const randomstring = require("randomstring");
 const userMongooseModel = require("../model/userModel");
-const mailer = require("../misc/mailer");
+const mailer = require("./mailerService");
 
 exports.addUser = async (newUser) => {
   //---------- Add user into database ---------
@@ -162,3 +162,7 @@ module.exports.sendForgetPasswordEmail = async (email) => {
 module.exports.checkUsernameAndEmail = (username, email) => {
   return userMongooseModel.findOne({ user_name: username, user_email: email });
 };
+
+module.exports.checkExistUsername = (username) =>{
+  return userMongooseModel.exists({user_name: username});
+}

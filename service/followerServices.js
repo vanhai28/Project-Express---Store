@@ -1,5 +1,5 @@
 const followerModel = require("../model/followersModel");
-const mailer = require("../misc/mailer");
+const mailer = require("./mailerService");
 
 module.exports.addFollower = async (email) => {
   if (!email) {

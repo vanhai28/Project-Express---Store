@@ -19,7 +19,7 @@ router.get("/login", userController.getLogin);
 
 router.post("/login", authController.postLogin, auth.isVerify);
 
-router.get("/account", userController.getAccount);
+router.get("/account", authController.postLogin, userController.getAccount);
 
 router.post("/account", userController.postAccount);
 
@@ -41,5 +41,7 @@ router.get("/logout", userController.getLogout);
  * APIs
  */
 router.post("/api/add/follower", userController.APIaddFollower);
+
+router.get("/api/is-exist-username", userController.isUsernameExist);
 
 module.exports = router;

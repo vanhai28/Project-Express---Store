@@ -1,11 +1,15 @@
 const express = require("express");
 const checkoutService = require("../service/checkoutService");
+const auth = require("../middleware/authenticate");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.render("pages/checkout");
+router.get("/", auth.isLogin, (req, res) => {
+  res.render("pages/checkout",{
+    title: "Checkout",
+  });
 });
+
 
 module.exports = router;
 
