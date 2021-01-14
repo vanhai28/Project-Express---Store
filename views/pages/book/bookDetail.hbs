@@ -66,8 +66,9 @@
 								</div>
 								<div>
 									<ul class="prize d-flex breadcrumb" style="font-size: 1.8rem;">
-										<li>{{book.price}} đ <strike class="old_price__small">{{book.old_price}}
-												đ</strike></li>
+										<li>{{book.price}} <sup>đ</sup><strike
+												class="old_price__small">{{book.old_price}}
+												<sup>đ</sup></strike></li>
 									</ul>
 								</div>
 
@@ -260,8 +261,8 @@
 						<div class="product__content content--center">
 							<h4><a href="/book-detail/{{_id}}">{{title}}</a></h4>
 							<ul class="prize d-flex">
-								<li>{{price}}</li>
-								<li class="old_prize">{{old_price}}</li>
+								<li>{{price}}<sup>đ</sup></li>
+								<li class="old_prize">{{old_price}}<sup>đ</sup></li>
 							</ul>
 							<div class="action">
 								<div class="actions_inner">
