@@ -35,8 +35,14 @@ function showAutoClosedAlert(alertItem, message) {
 function checkExist(username) {
   $.getJSON("/user/api/is-exist-username", { username }, (data) => {
     if (data)
-      $('#username-check').addClass('error').removeClass('success').html('Username đã được sử dụng');
+      $("#username-check")
+        .addClass("error")
+        .removeClass("success")
+        .html("Username đã được sử dụng");
     else
-      $('#username-check').addClass('success').removeClass('error').html('Username hợp lệ');
-  })
+      $("#username-check")
+        .addClass("success")
+        .removeClass("error")
+        .html("Username hợp lệ");
+  });
 }

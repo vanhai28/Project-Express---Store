@@ -13,7 +13,7 @@ const userSchema = new Schema(
     avatar_image: String,
     isVerify: Boolean,
     verify_token: String,
-    lastest_access_date: Date,
+    lastest_access_date: String,
   },
   { collection: "users" }
 );
