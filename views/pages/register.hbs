@@ -3,15 +3,15 @@
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-6 col-12 text-align-center">
-                   <div class="my__account__wrapper mt-5"> 
+                <div class="my__account__wrapper mt-5">
                     {{#if err}}
-                        <div class="alert alert-danger" role="alert">
-                            {{err}} 
-                        </div>
+                    <div class="alert alert-danger" role="alert">
+                        {{err}}
+                    </div>
                     {{/if}}
                     <form action="/user/register" method="POST">
                         <div class="account__form">
-                              <h3 class="account__title text-center">ĐĂNG KÝ</h3>
+                            <h3 class="account__title text-center">ĐĂNG KÝ</h3>
                             <div class="input__box">
                                 <label>Username <span>*</span></label>
                                 <input type="text" required name="user_name" onchange="checkExist(this.value)">
@@ -19,15 +19,22 @@
                             </div>
                             <div class="input__box">
                                 <label>Địa chỉ Email <span>*</span></label>
-                                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required name="user_email">
+                                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required
+                                    name="user_email">
                             </div>
                             <div class="input__box">
                                 <label>Mật khẩu<span>*</span></label>
-                                <input type="password" minlength="8" required name="password">
+                                <div class="password_input">
+                                    <input id="password" type="password" minlength="8" required name="password">
+                                    <i class="far fa-eye" id="togglePassword"></i>
+                                </div>
                             </div>
                             <div class="input__box">
                                 <label>Xác nhận mật khẩu<span>*</span></label>
-                                <input type="password" minlength="8" required name="re_password">
+                                <div class="password_input">
+                                    <input id="repassword" type="password" minlength="8" required name="re_password">
+                                    <i class="far fa-eye" id="toggleRePassword"></i>
+                                </div>
                             </div>
                             <div class="form__btn">
                                 <button>Đăng ký</button>
@@ -42,5 +49,23 @@
 <!-- End My Account Area -->
 
 <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+    });
 
+    const toggleRePassword = document.querySelector('#toggleRePassword');
+    const rePassword = document.querySelector('#repassword');
+    toggleRePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = rePassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        rePassword.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+    });
 </script>

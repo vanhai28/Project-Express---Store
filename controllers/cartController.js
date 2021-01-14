@@ -29,10 +29,8 @@ module.exports = function Cart(oldCart) {
     };
 
     this.getTotalCost = () => {
-        // let cost = (parseFloat(this.shipCost) + parseFloat(this.totalPrice)*1000);
         let cost = numberService.formatNumber((parseFloat(this.shipCost) + parseFloat(this.totalPrice)*1000));
-        // return parseFloat(cost);
-        return (cost);
+        return cost;
     }
 
     this.setShip = (value) =>{
@@ -73,8 +71,6 @@ module.exports = function Cart(oldCart) {
         var storedItem = this.items[id];
         if (storedItem && quantity >= 1) {
             storedItem.quantity = quantity;
-            // var price = numberService.formatNumber();
-            // storedItem.price = (storedItem.item.price * storedItem.quantity);
             storedItem.price = numberService.formatNumber((storedItem.item.price * storedItem.quantity)*1000);
             this.totalQuantity = this.getTotalQuantity();
             this.totalPrice = this.getTotalPrice();
