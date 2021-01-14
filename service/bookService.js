@@ -116,3 +116,11 @@ module.exports.getReviewOfBook = async (bookId) => {
 module.exports.getBookById = async (bookId) => {
   return await bookMongoose.findOne({ _id: bookId });
 };
+
+module.exports.updateOrder = async (bookId, quantity) =>
+{
+  const book = await this.getBookById(bookId);
+  const orderNum = book.orders;
+  const newOrder = orderNum + quantity;
+  await bookMongoose.updateOne({_id: bookId}, {orders: newOrder});
+};

@@ -21,12 +21,11 @@ module.exports.sendCheckoutEmail = async (customer, address, phone, userEmail, c
 
     for(var id in cart.items){
         let item = cart.items[id];
-        console.log(item);
         html+=`
         <div>
         <img src="${item.item.cover}" style="width: 200px; height: 200px; text-align: left"/>
         <h4> ${item.item.title} x ${item.quantity}</h4>
-        <span> ${item.price} Đ</span>
+        <span> ${numberService.formatNumber(item.price)} Đ</span>
         </div>
         <br/>
         `
@@ -50,3 +49,4 @@ module.exports.sendCheckoutEmail = async (customer, address, phone, userEmail, c
       html
     );
   };
+

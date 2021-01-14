@@ -1,8 +1,9 @@
 const formidable = require("formidable");
+const mongoose = require('mongoose');
 const upload = require("../service/uploadFileService");
 const userService = require("../service/userService");
 const followerService = require("../service/followerServices");
-
+const orderService = require("../service/orderService");
 module.exports.getRegister = function (req, res) {
   res.render("pages/register", { title: "Register" });
 };
@@ -189,3 +190,30 @@ module.exports.APIaddFollower = async (req, res, next) => {
 module.exports.isUsernameExist=async (req, res)=>{
     res.json(await userService.checkExistUsername(req.query.username));
 }
+
+const faqService = require("../service/faqService");
+
+module.exports.getPurchase = async (req, res) =>{
+    // const user = req.user;
+    // 
+    const user = req.user;
+    try {
+      const userID = mongoose.Types.ObjectId(user._id);
+      const order = await orderService.getOrderByUserId(userID);
+
+    res.render("pages/purchase", {
+      title: "Quản lý đơn hàng",
+      order,
+    });
+
+    } catch (error) {
+      res.redirect("/");
+      return;
+    }
+};
+
+module.exports.submitRecieving = async (req, res) =>{
+  const orderID = req.body.orderID;
+  await orderService.submitRecieving(orderID);
+  res.redirect("/user/purchase");
+};

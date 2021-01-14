@@ -85,7 +85,7 @@ app.use("/user", usersRouter);
 app.use("/reviews", require('./routes/reviewRouter'));
 app.use("/cart", require('./routes/cartRouter'));
 app.use("/checkout", require('./routes/checkoutRouter'));
-
+// app.use("/purchase", require('./routes/purchaseRout')
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

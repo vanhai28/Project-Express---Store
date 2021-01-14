@@ -37,6 +37,9 @@ router.post("/forget-password", userController.postForgetPassword);
 
 router.get("/logout", userController.getLogout);
 
+router.get("/purchase",userController.getPurchase);
+
+router.post("/purchase",userController.submitRecieving);
 /**
  * APIs
  */
