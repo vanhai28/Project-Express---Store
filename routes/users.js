@@ -19,7 +19,7 @@ router.get("/login", userController.getLogin);
 
 router.post("/login", authController.postLogin, auth.isVerify);
 
-router.get("/account", authController.postLogin, userController.getAccount);
+router.get("/account", auth.isLogin, userController.getAccount);
 
 router.post("/account", userController.postAccount);
 
