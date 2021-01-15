@@ -25,6 +25,7 @@ exports.getOrderByUserId = async (userId) => {
         ),
       },
       isSuccess: order.isSuccess,
+      order_status: order.order_status,
     };
   });
   return orders.sort((a, b) => Date(b.date) - Date(a.date));
@@ -69,6 +70,6 @@ module.exports.saveOrderToDB = async (customer, cart) => {
   return await order.save();
 };
 
-module.exports.submitRecieving = async (orderID) => {
-  await orderModel.updateOne({ _id: orderID }, { isSuccess: true });
-};
+// module.exports.submitRecieving = async (orderID) => {
+//   await orderModel.updateOne({ _id: orderID }, { isSuccess: true });
+// };

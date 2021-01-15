@@ -1,6 +1,7 @@
 const bookService = require("../service/bookService");
 const numberService = require("../service/numberService");
 const Book = require("../model/bookModel");
+const reviewService = require("../service/reviewService");
 const ITEM_PER_PAGE = 12;
 
 exports.bookShop = async function (req, res, next) {
@@ -60,12 +61,16 @@ exports.bookShop = async function (req, res, next) {
 
 exports.bookDetail = async function (req, res, next) {
   const bookId = req.params.id;
+  const page = +req.query.page || 1;
 
   const book = await bookService.getBookById(bookId);
   book.price = numberService.formatNumber(book.price);
   book.old_price = numberService.formatNumber(book.old_price);
 
-  const reviews = await bookService.getReviewOfBook(bookId);
+  let filter = {bookID: bookId};
+  // const reviews = await reviewService.listReview(bookId);
+  const paginate = await reviewService.listReview(filter, page, 3);
+  // const reviews = await bookService.getReviewOfBook(bookId);
 
   const genre = book.category;
   let relatedBooks = await bookService.getBookByCategory(genre, 6);
@@ -92,8 +97,15 @@ exports.bookDetail = async function (req, res, next) {
     title: "Detail",
     book: book,
     relatedBooks: relatedBooks,
-    reviews: reviews,
+    reviews: paginate.docs,
     CATEGORY: category,
+    hasNextPage: paginate.hasNextPage,
+    hasPreviousPage: paginate.hasPrevPage,
+    nextPage: paginate.nextPage,
+    prevPage: paginate.prevPage,
+    lastPage: paginate.totalPages,
+    ITEM_PER_PAGE: 3,
+    currentPage: paginate.page,
   });
 };
 

@@ -191,8 +191,6 @@ module.exports.isUsernameExist=async (req, res)=>{
     res.json(await userService.checkExistUsername(req.query.username));
 }
 
-const faqService = require("../service/faqService");
-
 module.exports.getPurchase = async (req, res) =>{
     // const user = req.user;
     // 

@@ -46,7 +46,7 @@
           <div id="accordion" class="wn_accordion" role="tablist">
             {{#each order}}
             <div class="card">
-                {{#unless isSuccess}}
+                {{!-- {{#unless isSuccess}}
                 <form method="POST" action="/user/purchase" id="formSubmitRecieving">
                     <input type="hidden" name="orderID" value="{{this._id}}" />
                 </form>
@@ -54,7 +54,8 @@
                 
                 {{else}}
                 <button class="btn-lg btn-secondary" disabled="disabled">Đã giao thành công</button>
-                {{/unless}}
+                {{/unless}} --}}
+                <button class="btn-lg btn-secondary" disabled="disabled">{{order_status}}</button>
               <div class="acc-header" role="tab" id={{headingId}}>
                 <h5>
                   <a data-toggle="collapse" href=#{{collapseId}} role="button" aria-expanded="true"
