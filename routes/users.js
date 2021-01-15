@@ -19,7 +19,7 @@ router.get("/login", userController.getLogin);
 
 router.post("/login", authController.postLogin, auth.isVerify);
 
-router.get("/account", userController.getAccount);
+router.get("/account", auth.isLogin, userController.getAccount);
 
 router.post("/account", userController.postAccount);
 
@@ -37,9 +37,14 @@ router.post("/forget-password", userController.postForgetPassword);
 
 router.get("/logout", userController.getLogout);
 
+router.get("/purchase",userController.getPurchase);
+
+router.post("/purchase",userController.submitRecieving);
 /**
  * APIs
  */
 router.post("/api/add/follower", userController.APIaddFollower);
+
+router.get("/api/is-exist-username", userController.isUsernameExist);
 
 module.exports = router;

@@ -60,17 +60,21 @@
                                         {{#each items}}
                                         <tr id="item{{item._id}}">
                                             <td class="product-thumbnail"><a href="book-detail/{{item._id}}"><img src="{{item.cover}}" alt="product img"></a></td>
-                                            <td class="product-name"><a href="book-detail/{{item._id}}">{{item.title}}</a></td>
-                                            <td class="product-price"><span class="amount">{{item.price}}</span></td>
-                                            {{!-- <td class="product-quantity"><input id="sst{{item._id}}" type="number" value="{{quantity}}" ></td> --}}
+                                            <td class="product-name"><a href="book-detail/{{item._id}}">{{item.title}}</a>
+                                            </td>
+                                            <td class="product-price"><span class="amount">{{item.price}}<sup>đ</sup></span></td>
+
                                             <td class="product-quantity">
                                                 <input type="button" value="-" class="decreaseVal" onclick="decreaseValue('{{item._id}}')">
-                                                <input type="number" id="sst{{item._id}}" min="1" max="22" value="{{quantity}}" class="val" disabled>
+                                                <input type="number" id="sst{{item._id}}" min="1" max="22" value="{{quantity}}" class="val quality_item" disabled>
                                                 <input type="button" value="+" class="increaseVal" onclick="encreaseValue('{{item._id}}')">
                                             </td>
                                             
-                                            <td class="product-subtotal" id="price{{item._id}}">{{price}}</td>
-                                            <td class="product-remove"><a onclick="removeCartItem('{{item._id}}')">X</a></td>
+                                            <td class="product-subtotal" id="price{{item._id}}">{{price}}<sup>đ</sup></td>
+                                            <td class="product-remove"><a onclick="removeCartItem('{{item._id}}')">
+                                                <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                         {{/each}}
                                     </tbody>
@@ -90,16 +94,6 @@
                 <div class="row">
                     <div class="col-lg-6 offset-lg-6">
                         <div class="cartbox__total__area">
-                            {{!-- <div class="cartbox-total d-flex justify-content-between">
-                                <ul class="cart__total__list">
-                                    <li>Cart total</li>
-                                    <li>Sub Total</li>
-                                </ul>
-                                <ul class="cart__total__tk">
-                                    <li>$70</li>
-                                    <li>$70</li>
-                                </ul>
-                            </div> --}}
                             <div class="cart__total__amount">
                                 <span>Tổng số tiền: </span>
                                 <span id="total-price">{{totalPrice}} VNĐ</span>

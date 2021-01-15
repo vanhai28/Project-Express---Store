@@ -116,3 +116,22 @@ module.exports.getReviewOfBook = async (bookId) => {
 module.exports.getBookById = async (bookId) => {
   return await bookMongoose.findOne({ _id: bookId });
 };
+
+module.exports.updateOrder = async (bookId, quantity) =>
+{
+  const book = await this.getBookById(bookId);
+  const orderNum = book.orders;
+  const newOrder = orderNum + quantity;
+  await bookMongoose.updateOne({_id: bookId}, {orders: newOrder});
+};
+
+module.exports.increaseView = async(id)=>{
+  const book = await bookMongoose.findById(id);
+  const view = book.views;
+  try{
+    return await bookMongoose.findOneAndUpdate({_id:id},{views: view +1});
+  }
+  catch(error){
+    console.log(error);
+  }
+}

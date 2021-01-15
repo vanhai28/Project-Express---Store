@@ -26,6 +26,39 @@ book detail
   margin: 10px auto;
 }
 
+.comment_user{
+  font-weight: bold !important;
+}
+/*LOGIN*/
+
+.password_input{
+  position: relative;
+}
+
+.password_input i {
+  margin-left: -30px;
+  margin-top: 12px;
+  cursor: pointer;
+  position: absolute;
+}
+
+/*CART*/
+
+.cartbox_active{
+  cursor: pointer;
+}
+
+a{
+  cursor: pointer;
+}
+
+.quality_item{
+  text-align: center;
+}
+
+.fa-trash{
+  margin-top: -15px;
+}
 /*------------------------------------------
 *       Home page
 //-----------------------------------------*/
@@ -35,4 +68,16 @@ book detail
   top: 10%;
   right: 0px;
   z-index: 100;
+}
+/*------------------------------------------
+*       Register
+//-----------------------------------------*/
+.success{
+  color: green;
+  font-style: italic;
+}
+
+.error{
+  color: red;
+  font-style: italic;
 }

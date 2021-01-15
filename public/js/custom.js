@@ -31,3 +31,18 @@ function showAutoClosedAlert(alertItem, message) {
       $(alertItem).slideUp(500);
     });
 }
+
+function checkExist(username) {
+  $.getJSON("/user/api/is-exist-username", { username }, (data) => {
+    if (data)
+      $("#username-check")
+        .addClass("error")
+        .removeClass("success")
+        .html("Username đã được sử dụng");
+    else
+      $("#username-check")
+        .addClass("success")
+        .removeClass("error")
+        .html("Username hợp lệ");
+  });
+}

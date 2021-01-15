@@ -45,21 +45,22 @@ module.exports.index = async function (req, res, next) {
 module.exports.aboutUs = async (req, res, next) => {
   const member = await memberService.getMember();
   res.render("pages/aboutUs", {
-    title: "About Us",
+    title: "Về chúng tôi",
     member,
   });
 };
 
 module.exports.checkout = (req, res, next) => {
-  res.render("pages/checkout", { title: "checkout" });
+  res.render("pages/checkout", { title: "Thanh toán" });
 };
+
 module.exports.contact = (req, res, next) => {
-  res.render("pages/contact", { title: "contact" });
+  res.render("pages/contact", { title: "Thông tin liên hệ" });
 };
 module.exports.faq = async (req, res, next) => {
   const faq = await faqService.getFAQ();
   res.render("pages/faq", {
-    title: "Frequently Asked Questions",
+    title: "Những câu hỏi thường gặp",
     faq,
   });
 };

@@ -9,6 +9,14 @@ exports.getReviewsByBookId = async (bookId) => {
   return reviews;
 };
 
+module.exports.listReview = async (filter, pageNumber, itemPerPage) => {
+  let listReview = await reviewMongoose.paginate(filter, {
+    page: pageNumber,
+    limit: itemPerPage,
+  });
+  return listReview;
+};
+
 exports.addReview = async (reviewInfo) => {
   const bookId = reviewInfo.bookID;
   const content = reviewInfo.content;

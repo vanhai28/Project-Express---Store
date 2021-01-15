@@ -41,21 +41,29 @@
                     {{#if result}}
                     <div class="alert alert-primary " id="addSucess" role="alert">{{result}}</div>
                     {{/if}}
+
+                    {{#unless userAccount.isVerify }}
+                    <div class="checkout_info">
+                        <span>Tài khoản chưa được xác thực. Xác thực</span>
+                        <a href="/user/verify"><b style="color: red">tại đây</b></a>
+                    </div>
+                    {{/unless}}
+
                     <div class="form-default">
                         <form method="POST" enctype="multipart/form-data" action="/user/account">
                             <div class="form-group d-none">
                                 <input type="text" name="_id" value="{{userAccount._id}}">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="shopInputFirstName" class="control-label">Họ </label>
-                                <input type="text" class="form-control" id="shopInputFirstName" value="{{userAccount.first_name}}" name="first_name"
-                                    value="" />
+                                <input type="text" class="form-control" id="shopInputFirstName"
+                                    value="{{userAccount.first_name}}" name="first_name" value="" />
                             </div>
                             <div class="form-group">
                                 <label for="shopInputLastName" class="control-label">Tên </label>
-                                <input type="text" class="form-control" id="shopInputLastName"  value="{{userAccount.last_name}}" name="last_name"
-                                    value="" />
+                                <input type="text" class="form-control" id="shopInputLastName"
+                                    value="{{userAccount.last_name}}" name="last_name" value="" />
                             </div>
                             <div class="form-group">
                                 <label for="username" class="control-label">Username </label>
@@ -64,24 +72,27 @@
                             </div>
                             <div class="form-group">
                                 <label for="shopPhone" class="control-label">Số Điện Thoại</label>
-                                <input type="text"  value="{{userAccount.phone_number}}" class="form-control" id="shopPhone" name="phone_number" value="" />
+                                <input type="text" value="{{userAccount.phone_number}}" class="form-control"
+                                    id="shopPhone" name="phone_number" value="" />
                             </div>
                             <div class="form-group">
                                 <label for="shopEmail" class="control-label">Địa chỉ email </label>
-                                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="shopEmail" name="user_email"
+                                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                    class="form-control" id="shopEmail" name="user_email"
                                     value="{{userAccount.user_email}}" />
                             </div>
-                  
-                            {{!-- <div class="row form-group"> --}}
-                            <label for="fileImageAvatar">Ảnh đại diện </label>
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top " src="{{userAccount.avatar_image}}" alt="Card image cap">
 
-                            </div>
-                            <div class="my-2">
-                                <input name="avatar_image" type="file" id="fileImageAvatar">
-                            </div>
-                            {{!-- </div> --}}
+                            {{!-- <div class="row form-group"> --}}
+                                <label for="fileImageAvatar">Ảnh đại diện </label>
+                                <div class="card" style="width: 18rem;">
+                                    <img class="card-img-top " src="{{userAccount.avatar_image}}" alt="Card image cap">
+
+                                </div>
+                                <div class="my-2">
+                                    <input name="avatar_image" type="file" id="fileImageAvatar">
+                                </div>
+                                {{!--
+                            </div> --}}
 
 
 

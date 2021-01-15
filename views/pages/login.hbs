@@ -5,9 +5,9 @@
             <div class="col-lg-6 col-12 text-center">
                 <div class="my__account__wrapper mt-5">
                     {{#if message}}
-                        <div class="alert alert-danger" role="alert">
-                            {{message}}
-                        </div>
+                    <div class="alert alert-danger" role="alert">
+                        {{message}}
+                    </div>
                     {{/if}}
                     <form action="/user/login" method="POST">
                         <div class="account__form">
@@ -18,15 +18,14 @@
                             </div>
                             <div class="input__box">
                                 <label>Mật khẩu<span>*</span></label>
-                                <input type="password" required name="password">
+                                <div class="password_input">
+                                    <input id="password" type="password" required name="password">
+                                    <i class="far fa-eye" id="togglePassword"></i>
+                                </div>
                             </div>
                             <div class="form__btn">
                                 <button>Đăng nhập</button>
-                                <label class="label-for-checkbox">
-                                    <input id="rememberme" class="input-checkbox" name="rememberme" value="forever"
-                                        type="checkbox">
-                                    <span>Nhớ mật khẩu</span>
-                                </label>
+
                             </div>
                             <div class="text-center">
                                 <a class="forget_pass .d-print-inline" href="/user/forget-password">Quên mật khẩu?</a>
@@ -45,3 +44,15 @@
     </div>
 </section>
 <!-- End My Account Area -->
+
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>

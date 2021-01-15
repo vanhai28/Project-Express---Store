@@ -8020,25 +8020,8 @@ a.checkout__title {
     padding-bottom: 60px;
   }
 }
-/* 
-.meninmenu li a{
-  text-decoration: none;
-}
 
-.dropdown-menu .dropdown-item a{
-  text-decoration: none;
-}
-
-.dropdown .btn a{
-  text-decoration: none;
-}
-
-.social__net li a{
-  text-decoration: none;
-
-} */
 
 a{
   text-decoration: none !important;
-
 }
