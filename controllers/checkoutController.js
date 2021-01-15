@@ -29,7 +29,7 @@ exports.submitCheckout = async (req, res) => {
 
   try {
     checkoutService.sendCheckoutEmail(customer, address, phone, email, cart);
-    orderService.saveOrderToDB(customer, cart);
+    await orderService.saveOrderToDB(customer, cart);
   } catch (error) {
     console.log(error);
   }
