@@ -129,19 +129,6 @@
 								<div>
 									<h2 class="comment_user" style="margin-bottom:10px;">{{user_name}}</h2>
 									<div class="review__ratings__type d-flex">
-										{{!-- <div class="review-ratings">
-											<div class="rating-summary d-flex">
-												<span>Chất lượng</span>
-												<ul class="rating d-flex">
-													<li><i class="zmdi zmdi-star"></i></li>
-													<li><i class="zmdi zmdi-star"></i></li>
-													<li><i class="zmdi zmdi-star"></i></li>
-													<li class="off"><i class="zmdi zmdi-star"></i></li>
-													<li class="off"><i class="zmdi zmdi-star"></i></li>
-												</ul>
-											</div>
-										</div> --}}
-
 										<div class="review-content">
 											{{!-- <p>Đánh giá bởi {{{user_name}}}</p> --}}
 											<p>{{this.date}}</p>
@@ -201,32 +188,14 @@
 							<div class="review-fieldset">
 								<h2>Bạn đang đánh giá cho:</h2>
 								<h3>{{book.title}}</h3>
-								{{!-- <div class="review-field-ratings">
-									<div class="product-review-table">
-										<div class="review-field-rating d-flex">
-											<span>Chất lượng</span>
-											<ul class="rating d-flex">
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-												<li class="off"><i class="zmdi zmdi-star"></i></li>
-											</ul>
-										</div>
-
-									</div>
-								</div> --}}
-
 								<form method="POST" action="/reviews">
 									<div class="review_form_field">
 
 										{{#if user}}
-
 										<div class="input__box">
 											<span>Bạn đang đánh giá với tên là <b>{{user.user_name}}</b></span>
 										</div>
 										<input type="hidden" name="user_name" value="{{user.user_name}}">
-
 										{{else}}
 
 										<div class="input__box">

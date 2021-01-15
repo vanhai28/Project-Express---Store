@@ -88,24 +88,13 @@
         							<label>Địa chỉ <span>*</span></label>
         							<input type="text" placeholder="Street address" required name="customer_address">
         						</div>
-								{{!-- <div class="input_box">
-									<label>Postcode / ZIP <span>*</span></label>
-									<input type="text">
-								</div> --}}
 								<div class="margin_between">
 									<div class="input_box space_between">
 										<label>Số điện thoại <span>*</span></label>
 										<input type="text" pattern="[0-9]{7,}" required name="customer_phone" value={{user.phone_number}}>
 										<small>Định dạng: 0763949737</small>
 									</div>
-{{!-- 
-									{{#if user}}
-									<div class="input_box space_between">
-										<label>Địa chỉ Email <span>*</span></label>
-										<input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required name="customer_email" value="{{user_email}}">
-										<small>Định dạng: web@example.com</small>
-									</div> --}}
-									{{!-- {{else}} --}}
+
 									<div class="input_box space_between">
 										<label>Địa chỉ Email <span>*</span></label>
 										<input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required name="customer_email" value={{user.user_email}}>
@@ -114,86 +103,7 @@
 								</div>
         					</div>
 							</form>
-        					{{!-- <div class="create__account">
-        						<div class="wn__accountbox">
-	        						<input class="input-checkbox" name="createaccount" value="1" type="checkbox">
-	        						<span>Create an account ?</span>
-        						</div>
-        						<div class="account__field">
-        							<form action="#">
-        								<label>Account password <span>*</span></label>
-        								<input type="text" placeholder="password">
-        							</form>
-        						</div>
-        					</div> --}}
         				</div>
-						
-        				{{!-- <div class="customer_details mt--20">
-        					<div class="differt__address">
-	        					<input name="ship_to_different_address" value="1" type="checkbox">
-	        					<span>Giao hàng đến địa chỉ khác ?</span>
-        					</div>
-        					<div class="customar__field differt__form mt--40">
-        						<div class="margin_between">
-	        						<div class="input_box space_between">
-	        							<label>Họ người nhận <span>*</span></label>
-	        							<input type="text" id="reciever_first_name">
-	        						</div>
-	        						<div class="input_box space_between">
-	        							<label>Tên người nhận <span>*</span></label>
-	        							<input type="text" id="reciever_last_name">
-	        						</div>
-        						</div>
-        						<div class="input_box">
-        							<label>Tên công ty <span>*</span></label>
-        							<input type="text" id="reciever_company">
-        						</div>
-        						<div class="input_box">
-        							<label>Quốc gia<span>*</span></label>
-										<select class="select__option">
-											<option>Chọn quốc gia</option>
-											<option>Việt Nam</option>
-											<option>Trung Quốc</option>
-											<option>Singapore</option>
-											<option>Mỹ</option>
-											<option>Campuchia</option>
-											<option>Thái Lan</option>
-										</select>
-        						</div>
-
-        						<div class="input_box">
-        							<label>Tỉnh/ Thành phố<span>*</span></label>
-        							<select class="select__option" id="reciever_city">
-										<option>Chọn tỉnh của bạn</option>
-										<option selected="selected">TP Hồ Chí Minh</option>
-										<option>Hà Nội</option>
-										<option>Cần Thơ</option>
-										<option>Hải Phòng</option>
-										<option>Huế</option>
-										<option>Đà Nẵng</option>
-        							</select>
-        						</div>
-
-								<div class="input_box">
-        							<label>Địa chỉ <span>*</span></label>
-        							<input type="text" placeholder="Street address" id="reciever_address">
-        						</div>
-								<div class="input_box">
-									<label>Postcode / ZIP <span>*</span></label>
-									<input type="text">
-								</div>
-								<div class="margin_between">
-									<div class="input_box space_between">
-										<label>Số điện thoại <span>*</span></label>
-										<input type="tel" id="reciever_phone">
-									</div>
-									<div class="input_box space_between">
-										<label>Địa chỉ Email <span>*</span></label>
-										<input type="email" id="reciever_email">
-									</div>
-								</div>
-        					</div>
-        				</div> --}}
         			</div>
 					
         			<div class="col-lg-6 col-12 md-mt-40 sm-mt-40">
@@ -207,9 +117,6 @@
         					<ul class="order_product">
 								{{#each items}}
         						<li>{{item.title}} × {{quantity}}<span>{{price}} VNĐ</span></li>
-        						{{!-- <li>Buscipit at magna × 1<span>$48.00</span></li>
-        						<li>Buscipit at magna × 1<span>$48.00</span></li>
-        						<li>Buscipit at magna × 1<span>$48.00</span></li> --}}
 								{{/each}}
         					</ul>
         					<ul class="shipping__method">
@@ -250,50 +157,6 @@
 							<button class="btn-lg btn-primary" form="customerForm" type ="submit">Thanh toán</a>
 						</div>
 						{{/if}}
-						
-					    {{!-- <div id="accordion" class="checkout_accordion mt--30" role="tablist">
-						    <div class="payment">
-						        <div class="che__header" role="tab" id="headingOne">
-						          	<a class="checkout__title" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						                <span>Direct Bank Transfer</span>
-						          	</a>
-						        </div>
-						        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-					            	<div class="payment-body">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</div>
-						        </div>
-						    </div>
-						    <div class="payment">
-						        <div class="che__header" role="tab" id="headingTwo">
-						          	<a class="collapsed checkout__title" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-							            <span>Cheque Payment</span>
-						          	</a>
-						        </div>
-						        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-					          		<div class="payment-body">Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</div>
-						        </div>
-						    </div>
-						    <div class="payment">
-						        <div class="che__header" role="tab" id="headingThree">
-						          	<a class="collapsed checkout__title" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-							            <span>Cash on Delivery</span>
-						          	</a>
-						        </div>
-						        <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-					          		<div class="payment-body">Pay with cash upon delivery.</div>
-						        </div>
-						    </div>
-						    <div class="payment">
-						        <div class="che__header" role="tab" id="headingFour">
-						          	<a class="collapsed checkout__title" data-toggle="collapse" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-							            <span>PayPal <img src="images/icons/payment.png" alt="payment images"> </span>
-						          	</a>
-						        </div>
-						        <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
-					          		<div class="payment-body">Pay with cash upon delivery.</div>
-						        </div>
-						    </div>
-					    </div> --}}
-
         			</div>
 					
         		</div>

@@ -59,6 +59,8 @@ exports.bookShop = async function (req, res, next) {
   });
 };
 
+const REVIEW_PER_PAGE = 3;
+
 exports.bookDetail = async function (req, res, next) {
   const bookId = req.params.id;
   const page = +req.query.page || 1;
@@ -68,9 +70,7 @@ exports.bookDetail = async function (req, res, next) {
   book.old_price = numberService.formatNumber(book.old_price);
 
   let filter = {bookID: bookId};
-  // const reviews = await reviewService.listReview(bookId);
-  const paginate = await reviewService.listReview(filter, page, 3);
-  // const reviews = await bookService.getReviewOfBook(bookId);
+  const paginate = await reviewService.listReview(filter, page, REVIEW_PER_PAGE);
 
   const genre = book.category;
   let relatedBooks = await bookService.getBookByCategory(genre, 6);
@@ -104,7 +104,7 @@ exports.bookDetail = async function (req, res, next) {
     nextPage: paginate.nextPage,
     prevPage: paginate.prevPage,
     lastPage: paginate.totalPages,
-    ITEM_PER_PAGE: 3,
+    ITEM_PER_PAGE: REVIEW_PER_PAGE,
     currentPage: paginate.page,
   });
 };

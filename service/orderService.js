@@ -70,6 +70,3 @@ module.exports.saveOrderToDB = async (customer, cart) => {
   return await order.save();
 };
 
-// module.exports.submitRecieving = async (orderID) => {
-//   await orderModel.updateOne({ _id: orderID }, { isSuccess: true });
-// };
