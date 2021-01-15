@@ -1,7 +1,9 @@
 const bcrypt = require("bcrypt");
 const randomstring = require("randomstring");
+
 const userModel = require("../model/userModel");
 const mailer = require("./mailerService");
+
 
 exports.addUser = async (newUser) => {
   //---------- Add user into database ---------
@@ -10,7 +12,9 @@ exports.addUser = async (newUser) => {
     "https://res.cloudinary.com/dzhnjuvzt/image/upload/v1608481217/user/dafault.png";
   await bcrypt.genSalt(saltRounds, function (err, salt) {
     bcrypt.hash(newUser.password, salt, function (err, hash) {
+
       let user = new userModel({
+
         user_name: newUser.user_name,
         user_email: newUser.user_email,
         password: hash,
@@ -53,7 +57,6 @@ module.exports.getUser = (id) => {
 module.exports.modifyAccount = async (account) => {
   try {
     if (!account.avatar_image) delete account.avatar_image;
-
     await userModel.findByIdAndUpdate(account._id, account);
   } catch (error) {
     console.log(error);
@@ -69,6 +72,7 @@ module.exports.modifyAccount = async (account) => {
  */
 module.exports.checkCredential = async (user_name, password) => {
   const user = await userModel.findOne({ user_name: user_name });
+  
   if (!user) return false;
 
   let checkPassword = await bcrypt.compare(password, user.password);
@@ -99,6 +103,7 @@ module.exports.sendVerifyEmail = async (user) => {
   const verifyToken = randomstring.generate(7);
   const userEmail = user.user_email;
   await userModel.updateOne({ _id: user._id }, { verify_token: verifyToken });
+
   const html = `Chào bạn,
   <br/>
   Cảm ơn bạn đã đăng ký tài khoản tại Bookstore. Đây là email được gửi để xác thực tài khoản của bạn.
