@@ -59,12 +59,9 @@
 									</ul>
 								</div>
 
-								<div class="mb-2">
-									<span>Lượt mua: {{book.orders}}</span>					
-								</div>
-
-								<div class="mb-2">
-									<span>Lượt xem: {{book.views}}</span>					
+								<div class="mb-2 row">
+									<span class="col-sm-6">Lượt mua: {{book.orders}} <i class="fas fa-shopping-bag"></i></span>
+									<span class="col-sm-6">Lượt xem: {{book.views}} <i class="far fa-eye"></i></span>						
 								</div>
 
 								<div class="box-tocart d-flex">
@@ -123,14 +120,14 @@
 								{{!-- <h1>Khách hàng đánh giá</h1> --}}
 								{{#each reviews}}
 								<div>
-									<h2 class="comment_user" style="margin-bottom:10px;">{{user_name}}</h2>
+									<h2 class="comment_user">{{user_name}} </h2><span class="">{{this.date}}</span>
 									<div class="review__ratings__type d-flex">
 										<div class="review-content">
 											{{!-- <p>Đánh giá bởi {{{user_name}}}</p> --}}
-											<p>{{this.date}}</p>
+											<p>{{content}}</p>
 										</div>
 									</div>
-									<p>{{content}}</p>
+									
 									<br>
 								</div>
 								{{/each}}
