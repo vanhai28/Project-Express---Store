@@ -3,13 +3,13 @@ const numberService = require("../service/numberService");
 
 module.exports.sendCheckoutEmail = async (customer, address, phone, userEmail, cart) => {
 
-    let html = `Chào ${customer},
+    let html = `Chào ${customer.nameCustomer},
     <br/>
     Cảm ơn bạn đã mua hàng tại Bookstore. 
     <br/>
     Đây là hóa đơn của bạn:
     <br/>
-    Tên khách hàng: <b>${customer}</b>
+    Tên khách hàng: <b>${customer.nameCustomer}</b>
     <br/>
     Địa chỉ: ${address}
     <br/>
@@ -42,7 +42,7 @@ module.exports.sendCheckoutEmail = async (customer, address, phone, userEmail, c
     <br/>
     Bookstore`;
 
-    await mailer.sendEmail(
+   await mailer.sendEmail(
       "admin@bookstore.com",
       userEmail,
       "Xác nhận mua hàng tại BookStore",

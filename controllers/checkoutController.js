@@ -29,15 +29,19 @@ exports.submitCheckout = async (req, res) => {
         phone: phone,
     }
 
-    await orderService.saveOrderToDB(customer, cart);
+    try {
+     checkoutService.sendCheckoutEmail(customer, address, phone, email, cart);
+     orderService.saveOrderToDB(customer, cart);
+    } catch (error) {
+        console.log(error)
+    }
 
     //reset cart
     req.session.cart.empty();
-    res.render("pages/checkoutSubmitting", {
+    return res.render("pages/checkoutSubmitting", {
         title: "Xác nhận mua hàng",
     });
 
-    await checkoutService.sendCheckoutEmail(customer, address, phone, email, cart);
 };
 
 

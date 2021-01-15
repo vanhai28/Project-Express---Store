@@ -40,7 +40,7 @@ module.exports.saveOrderToDB = async (customer, cart) => {
         date: Date.now(),
         isSuccess: false,
     });
-    order.save();
+    return await order.save();
 };
 
 module.exports.submitRecieving = async (orderID) => {
