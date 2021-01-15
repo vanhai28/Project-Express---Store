@@ -7,12 +7,12 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const hbs = require("express-handlebars");
 const hbshelpers = require("handlebars-helpers");
-const flash = require('connect-flash');
+const flash = require("connect-flash");
 
 const multihelpers = hbshelpers();
 
-const passport = require('./config/passport');
-const indexRouter = require("./routes/index");
+const passport = require("./config/passport");
+const pagesRouter = require("./routes/pagesRouter");
 const usersRouter = require("./routes/users");
 const mongoose = require("./config/db");
 const session = require("express-session");
@@ -45,6 +45,13 @@ app.engine(
   })
 );
 
+let hbsCustom = hbs.create({});
+
+// register new function
+hbsCustom.handlebars.registerHelper("formatNumber", function (number) {
+  return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+});
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -52,10 +59,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 //Passport middlewares
-app.use(session({ secret: process.env.SESSION_SECRET,
-cookie: {httpOnly: true, maxAge: 30 * 24 * 60 *60 * 1000},
-resave: false,
-saveUninitialized: false}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    cookie: { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 },
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -63,28 +74,28 @@ app.use(passport.session());
 app.use(flash());
 
 // Cart with session
-let Cart = require('./controllers/cartController');
+let Cart = require("./controllers/cartController");
 
-app.use((req,res,next) =>{
+app.use((req, res, next) => {
   var cart = new Cart(req.session.cart ? req.session.cart : {});
   req.session.cart = cart;
   res.locals.totalQuantity = cart.totalQuantity;
   res.locals.cart = cart;
   next();
-})
+});
 
 //Pass req.user to res.local
 app.use(function (req, res, next) {
   res.locals.user = req.user;
   next();
-})
+});
 
 //Routes
-app.use("/", indexRouter);
+app.use("/", pagesRouter);
 app.use("/user", usersRouter);
-app.use("/reviews", require('./routes/reviewRouter'));
-app.use("/cart", require('./routes/cartRouter'));
-app.use("/checkout", require('./routes/checkoutRouter'));
+app.use("/reviews", require("./routes/reviewRouter"));
+app.use("/cart", require("./routes/cartRouter"));
+app.use("/checkout", require("./routes/checkoutRouter"));
 // app.use("/purchase", require('./routes/purchaseRout')
 
 // catch 404 and forward to error handler

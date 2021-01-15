@@ -1,11 +1,11 @@
 const formidable = require("formidable");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const upload = require("../service/uploadFileService");
 const userService = require("../service/userService");
 const followerService = require("../service/followerServices");
 const orderService = require("../service/orderService");
 module.exports.getRegister = function (req, res) {
-  res.render("pages/register", { title: "Register" });
+  res.render("pages/account/register", { title: "Register" });
 };
 
 exports.postRegister = async function (req, res) {
@@ -22,7 +22,7 @@ exports.postRegister = async function (req, res) {
       res.redirect("/user/login");
     });
   } catch (err) {
-    res.render("pages/register", {
+    res.render("pages/account/register", {
       title: "Register",
       err: "You can’t create an account right now. Try again later!!",
     });
@@ -31,7 +31,7 @@ exports.postRegister = async function (req, res) {
 };
 
 module.exports.getLogin = function (req, res) {
-  res.render("pages/login", { title: "Login" });
+  res.render("pages/account/login", { title: "Login" });
 };
 
 module.exports.getAccount = async function (req, res) {
@@ -40,7 +40,7 @@ module.exports.getAccount = async function (req, res) {
     const account = await userService.getAccount(user._id);
     account.password = "";
 
-    res.render("pages/accountManagement", {
+    res.render("pages/account/accountManagement", {
       title: "Account",
       userAccount: account,
     });
@@ -80,13 +80,13 @@ module.exports.postAccount = async (req, res, next) => {
           result = "Có lỗi trong quá trình lưu";
         }
 
-        res.render("pages/accountManagement", {
+        res.render("pages/account/accountManagement", {
           title: "Account",
           userAccount: userAccount,
           result: result,
         });
       } catch (error) {
-        res.render("pages/accountManagement", {
+        res.render("pages/account/accountManagement", {
           userAccount: newInfor,
           result: "Đã xảy ra lỗi khi lấy thông tin người dùng",
         });
@@ -96,7 +96,7 @@ module.exports.postAccount = async (req, res, next) => {
 };
 
 module.exports.getPassword = (req, res) => {
-  res.render("pages/passwordChange", { title: "Change Password" });
+  res.render("pages/account/passwordChange", { title: "Change Password" });
 };
 
 module.exports.postPassword = (req, res) => {
@@ -104,12 +104,12 @@ module.exports.postPassword = (req, res) => {
   const id = req.user._id;
   try {
     userService.changePassword(id, new_password);
-    res.render("pages/passwordChange", {
+    res.render("pages/account/passwordChange", {
       title: "Change Password",
       result: "Thay đổi mật khẩu thành công",
     });
   } catch (err) {
-    res.render("pages/passwordChange", {
+    res.render("pages/account/passwordChange", {
       title: "Change Password",
       result: "Thay đổi mật khẩu không thành công",
     });
@@ -118,7 +118,7 @@ module.exports.postPassword = (req, res) => {
 
 module.exports.getVerify = (req, res) => {
   userService.sendVerifyEmail(req.user);
-  res.render("pages/verify", { title: "Verify" });
+  res.render("pages/account/verify", { title: "Verify" });
 };
 
 module.exports.postVerify = async (req, res) => {
@@ -126,7 +126,7 @@ module.exports.postVerify = async (req, res) => {
   const user = req.user;
   const isValid = await userService.checkVerifyToken(verifyToken);
   if (!isValid) {
-    return res.render("pages/verify", {
+    return res.render("pages/account/verify", {
       title: "Verify",
       message: "Mã xác thực không hợp lệ",
     });
@@ -140,14 +140,14 @@ module.exports.postVerify = async (req, res) => {
   res.redirect("/");
 };
 
-module.exports.getLogout = (req, res) =>{
+module.exports.getLogout = (req, res) => {
   req.session.cart.empty();
   req.logout();
   res.redirect(req.headers.referer);
 };
 
 module.exports.getForgetPassword = (req, res) => {
-  res.render("pages/forgetPassword", { title: "Forget Password" });
+  res.render("pages/account/forgetPassword", { title: "Forget Password" });
 };
 
 module.exports.postForgetPassword = async (req, res) => {
@@ -158,7 +158,7 @@ module.exports.postForgetPassword = async (req, res) => {
     userService.sendForgetPasswordEmail(email);
     res.redirect("/user/login");
   } else {
-    res.render("pages/forgetPassword", {
+    res.render("pages/account/forgetPassword", {
       title: "Forget Password",
       message: "Email hoặc Username không chính xác. Vui lòng nhập lại.",
     });
@@ -186,31 +186,29 @@ module.exports.APIaddFollower = async (req, res, next) => {
   }
 };
 
+module.exports.isUsernameExist = async (req, res) => {
+  res.json(await userService.checkExistUsername(req.query.username));
+};
 
-module.exports.isUsernameExist=async (req, res)=>{
-    res.json(await userService.checkExistUsername(req.query.username));
-}
+module.exports.getPurchase = async (req, res) => {
+  // const user = req.user;
+  //
+  const user = req.user;
+  try {
+    const userID = mongoose.Types.ObjectId(user._id);
+    const order = await orderService.getOrderByUserId(userID);
 
-module.exports.getPurchase = async (req, res) =>{
-    // const user = req.user;
-    // 
-    const user = req.user;
-    try {
-      const userID = mongoose.Types.ObjectId(user._id);
-      const order = await orderService.getOrderByUserId(userID);
-
-    res.render("pages/purchase", {
+    res.render("pages/orders/purchase", {
       title: "Quản lý đơn hàng",
       order,
     });
-
-    } catch (error) {
-      res.redirect("/");
-      return;
-    }
+  } catch (error) {
+    res.redirect("/");
+    return;
+  }
 };
 
-module.exports.submitRecieving = async (req, res) =>{
+module.exports.submitRecieving = async (req, res) => {
   const orderID = req.body.orderID;
   await orderService.submitRecieving(orderID);
   res.redirect("/user/purchase");

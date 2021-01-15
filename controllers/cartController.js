@@ -1,122 +1,123 @@
-'use strict';
+"use strict";
 const numberService = require("../service/numberService");
 
 module.exports = function Cart(oldCart) {
-    this.items = oldCart.items || {};
-    this.totalQuantity = oldCart.totalQuantity || 0;
-    this.totalPrice = oldCart.totalPrice || 0;
-    this.address = oldCart.address || {};
-    this.paymentMethod = oldCart.paymentMethod || "COD";
-    this.totalCost = oldCart.totalCost || 0;
-    this.shipTK = oldCart.shipTK || false;
-    this.shipCost = oldCart.shipCost || parseFloat(80000);
+  this.items = oldCart.items || {};
+  this.totalQuantity = oldCart.totalQuantity || 0;
+  this.totalPrice = oldCart.totalPrice || 0;
+  this.address = oldCart.address || {};
+  this.paymentMethod = oldCart.paymentMethod || "COD";
+  this.totalCost = oldCart.totalCost || 0;
+  this.shipTK = oldCart.shipTK || false;
+  this.shipCost = oldCart.shipCost || parseFloat(80000);
 
-    this.getTotalQuantity = () => {
-        var quantity = 0;
-        for (var id in this.items) {
-            quantity += parseInt(this.items[id].quantity);
-        }
-        return quantity;
-    };
-
-    this.getTotalPrice = () => {
-        var price = 0;
-        for (var id in this.items) {
-            price += parseFloat(this.items[id].price);
-        }
-        price = numberService.formatNumber(price*1000);
-        return price;
-    };
-
-    this.getTotalCost = () => {
-        let cost = numberService.formatNumber((parseFloat(this.shipCost) + parseFloat(this.totalPrice)*1000));
-        return cost;
+  this.getTotalQuantity = () => {
+    var quantity = 0;
+    for (var id in this.items) {
+      quantity += parseInt(this.items[id].quantity);
     }
+    return quantity;
+  };
 
-    this.setShip = (value) =>{
-        this.shipTK = !(this.shipTK);
-        let shipCost = parseFloat(value);
-        this.shipCost = shipCost;
-        this.totalCost = this.getTotalCost();
+  this.getTotalPrice = () => {
+    var price = 0;
+    for (var id in this.items) {
+      price += parseFloat(this.items[id].price);
     }
+    price = price;
+    return price;
+  };
 
-    this.add = (item, id, quantity) => {
-        var storedItem = this.items[id];
-        if (!storedItem) {
-            this.items[id] = { item: item, quantity: 0, price: 0 };
-            storedItem = this.items[id];
-        }
-        var itemPrice = numberService.formatNumber(storedItem.item.price);
-        storedItem.item.price = (itemPrice);
-        storedItem.quantity += parseInt(quantity);
-        var price = numberService.formatNumber(parseFloat(itemPrice) * storedItem.quantity*1000);
-        storedItem.price = (price);
-        this.totalQuantity = this.getTotalQuantity();
-        this.totalPrice = this.getTotalPrice();
-        this.totalCost = this.getTotalCost();
-        return this.getCartItem(id);
-    };
+  this.getTotalCost = () => {
+    let cost = parseFloat(this.shipCost) + parseFloat(this.totalPrice);
+    return cost;
+  };
 
-    this.remove = (id) => {
-        var storedItem = this.items[id]; 
-        if (storedItem) {
-            delete this.items[id];
-            this.totalQuantity = this.getTotalQuantity();
-            this.totalPrice = this.getTotalPrice();
-            this.totalCost = this.getTotalCost();
-        }
-    };
+  this.setShip = (value) => {
+    this.shipTK = !this.shipTK;
+    let shipCost = parseFloat(value);
+    this.shipCost = shipCost;
+    this.totalCost = this.getTotalCost();
+  };
 
-    this.update = (id, quantity) => {
-        var storedItem = this.items[id];
-        if (storedItem && quantity >= 1) {
-            storedItem.quantity = quantity;
-            storedItem.price = numberService.formatNumber((storedItem.item.price * storedItem.quantity)*1000);
-            this.totalQuantity = this.getTotalQuantity();
-            this.totalPrice = this.getTotalPrice();
-            this.totalCost = this.getTotalCost();
-        }
-        return this.getCartItem(id);
-    };
-
-    this.empty = () => {
-        this.items = {};
-        this.totalQuantity = 0;
-        this.totalPrice = 0;
-        this.totalCost =0;
-    };
-
-    this.generateArray = () => {
-        var arr = [];
-        for (var id in this.items) {
-            var itemPrice = numberService.formatNumber(this.items[id].item.price);
-            var price = numberService.formatNumber(this.items[id].price);
-            this.items[id].item.price = (itemPrice);
-            this.items[id].price = (price);
-            arr.push(this.items[id]);
-        }
-        return arr;
-    };
-
-    this.getCart = function() {
-        var totalPrice = numberService.formatNumber(this.totalPrice);
-        var cart = {
-            items: this.generateArray(),
-            totalQuantity: this.totalQuantity,
-            totalPrice: totalPrice,
-            address: this.address,
-            paymentMethod: this.paymentMethod
-        };
-        return cart;
+  this.add = (item, id, quantity) => {
+    var storedItem = this.items[id];
+    if (!storedItem) {
+      this.items[id] = { item: item, quantity: 0, price: 0 };
+      storedItem = this.items[id];
     }
+    var itemPrice = storedItem.item.price;
+    storedItem.item.price = itemPrice;
+    storedItem.quantity += parseInt(quantity);
+    var price = parseFloat(itemPrice) * storedItem.quantity;
+    storedItem.price = price;
+    this.totalQuantity = this.getTotalQuantity();
+    this.totalPrice = this.getTotalPrice();
+    this.totalCost = this.getTotalCost();
+    return this.getCartItem(id);
+  };
 
-    this.getCartItem = function(id) {
-        var totalPrice = numberService.formatNumber(this.totalPrice);
-        var cartItem = {
-            item: this.items[id],
-            totalQuantity: this.totalQuantity,
-            totalPrice: totalPrice,
-        }
-        return cartItem;
+  this.remove = (id) => {
+    var storedItem = this.items[id];
+    if (storedItem) {
+      delete this.items[id];
+      this.totalQuantity = this.getTotalQuantity();
+      this.totalPrice = this.getTotalPrice();
+      this.totalCost = this.getTotalCost();
     }
+  };
+
+  this.update = (id, quantity) => {
+    var storedItem = this.items[id];
+    if (storedItem && quantity >= 1) {
+      storedItem.quantity = quantity;
+      storedItem.price = storedItem.item.price * storedItem.quantity;
+
+      this.totalQuantity = this.getTotalQuantity();
+      this.totalPrice = this.getTotalPrice();
+      this.totalCost = this.getTotalCost();
+    }
+    return this.getCartItem(id);
+  };
+
+  this.empty = () => {
+    this.items = {};
+    this.totalQuantity = 0;
+    this.totalPrice = 0;
+    this.totalCost = 0;
+  };
+
+  this.generateArray = () => {
+    var arr = [];
+    for (var id in this.items) {
+      var itemPrice = this.items[id].item.price;
+      var price = this.items[id].price;
+      this.items[id].item.price = itemPrice;
+      this.items[id].price = price;
+      arr.push(this.items[id]);
+    }
+    return arr;
+  };
+
+  this.getCart = function () {
+    var totalPrice = this.totalPrice;
+    var cart = {
+      items: this.generateArray(),
+      totalQuantity: this.totalQuantity,
+      totalPrice: totalPrice,
+      address: this.address,
+      paymentMethod: this.paymentMethod,
+    };
+    return cart;
+  };
+
+  this.getCartItem = function (id) {
+    var totalPrice = this.totalPrice;
+    var cartItem = {
+      item: this.items[id],
+      totalQuantity: this.totalQuantity,
+      totalPrice: totalPrice,
+    };
+    return cartItem;
+  };
 };

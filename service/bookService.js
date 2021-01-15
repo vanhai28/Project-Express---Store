@@ -3,12 +3,14 @@ const categoryMongoose = require("../model/categoryModel");
 const reviewMongoose = require("../model/reviewModel");
 const numPagePerPagination = 4;
 MAX_NUMBER_PAGE = 9;
+const TOP_BESTSELLER = 10;
 
 module.exports.listBook = async (filter, pageNumber, itemPerPage) => {
   let listBook = await bookMongoose.paginate(filter, {
     page: pageNumber,
     limit: itemPerPage,
   });
+
   return listBook;
 };
 
@@ -135,4 +137,34 @@ module.exports.increaseView = async (id) => {
   } catch (error) {
     console.log(error);
   }
+};
+/**
+ * Update lastest top bestseller
+ */
+module.exports.updateBestSaler = async () => {
+  // Get current bestseller book
+  let currentBestSeller = await bookMongoose.find({ best_seller: true });
+
+  // Reset best_seller status by false
+  for (let index = 0; index < currentBestSeller.length; index++) {
+    const element = currentBestSeller[index];
+    await bookMongoose.findByIdAndUpdate(element._id, { best_seller: false });
+  }
+
+  //get latest TOP 10 book that sells in very large numbers
+  let listBook = await bookMongoose.paginate(
+    { isDelete: false },
+    {
+      sort: { orders: "desc" },
+      page: 1,
+      limit: TOP_BESTSELLER,
+    }
+  );
+
+  //update latest TOP 10 bestseller
+  listBook.docs.forEach(async (element) => {
+    let res = await bookMongoose.findByIdAndUpdate(element._id, {
+      best_seller: true,
+    });
+  });
 };

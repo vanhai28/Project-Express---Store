@@ -1,7 +1,3 @@
-<!--[if lte IE 9]>
-		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-	<![endif]-->
-
 <!-- Main wrapper -->
 
 <!-- Header -->
@@ -66,8 +62,8 @@
 								</div>
 								<div>
 									<ul class="prize d-flex breadcrumb" style="font-size: 1.8rem;">
-										<li>{{book.price}} <sup>đ</sup><strike
-												class="old_price__small">{{book.old_price}}
+										<li>{{formatNumber book.price}} <sup>đ</sup><strike
+												class="old_price__small">{{formatNumber book.old_price}}
 												<sup>đ</sup></strike></li>
 									</ul>
 								</div>
@@ -81,7 +77,7 @@
 									<div class="card-body">
 										<p class="badge badge-success">Phí vận chuyển</p>
 										<p>TP Hồ Chí Minh : 14.000 đ</p>
-										<p>Khu vực khác: 38.000 đ - 50.000 đ</p>
+										<p>Khu vực khác: 38.000 đ - 80.000 đ</p>
 									</div>
 								</div>
 								<div class="box-tocart">
@@ -274,16 +270,15 @@
 						<div class="product__content content--center">
 							<h4><a href="/book-detail/{{_id}}">{{title}}</a></h4>
 							<ul class="prize d-flex">
-								<li>{{price}}<sup>đ</sup></li>
-								<li class="old_prize">{{old_price}}<sup>đ</sup></li>
+								<li>{{formatNumber price}}<sup>đ</sup></li>
+								<li class="old_prize">{{formatNumber old_price}}<sup>đ</sup></li>
 							</ul>
 							<div class="action">
 								<div class="actions_inner">
 									<ul class="add_to_links">
 										<li><a class="cart add-to-cart" data-id="{{_id}}"><i
-													class="bi bi-shopping-cart-full"></i></a></li>
-										{{!-- <li><a class="wishlist" href="/wishlist"><i
-													class="bi bi-shopping-cart-full"></i></a></li> --}}
+											class="bi bi-shopping-cart-full"></i></a>
+										</li>								
 										<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
 										<li><a data-toggle="modal" title="Quick View"
 												class="quickview modal-view detail-link" href="#productmodal"><i

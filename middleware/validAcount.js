@@ -9,7 +9,7 @@ exports.validAccount = async (req, res, next) => {
   const checkUserEmail = await userModal.findOne({ user_email });
 
   if (checkUserName) {
-    res.render("pages/register", {
+    res.render("pages/account/register", {
       title: "Register",
       err: "Username đã được sử dụng.",
     });
@@ -17,7 +17,7 @@ exports.validAccount = async (req, res, next) => {
   }
 
   if (checkUserEmail) {
-    res.render("pages/register", {
+    res.render("pages/account/register", {
       title: "Register",
       err: "Email đã được sử dụng.",
     });
@@ -25,7 +25,7 @@ exports.validAccount = async (req, res, next) => {
   }
 
   if (password !== re_password) {
-    res.render("pages/register", {
+    res.render("pages/account/register", {
       title: "Register",
       err: "Mật khẩu không khớp",
     });
@@ -41,7 +41,7 @@ exports.checkPassword = async (req, res, next) => {
   let checkPassword = await bcrypt.compare(cur_password, req.user.password);
   let checkNewPassword = await bcrypt.compare(new_password, req.user.password);
   if (!checkPassword) {
-    res.render("pages/passwordChange", {
+    res.render("pages/account/passwordChange", {
       title: "Change Password",
       result: "Mật khẩu hiện tại không chính xác",
     });
@@ -49,7 +49,7 @@ exports.checkPassword = async (req, res, next) => {
   }
 
   if (checkNewPassword) {
-    res.render("pages/passwordChange", {
+    res.render("pages/account/passwordChange", {
       title: "Change Password",
       result: "Mật khẩu mới trùng với mật khẩu hiện tại",
     });
@@ -57,7 +57,7 @@ exports.checkPassword = async (req, res, next) => {
   }
 
   if (new_password !== re_password) {
-    res.render("pages/passwordChange", {
+    res.render("pages/account/passwordChange", {
       title: "Change Password",
       result: "Mật khẩu mới không trùng khớp",
     });

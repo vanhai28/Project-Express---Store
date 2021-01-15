@@ -16,13 +16,9 @@ exports.getOrderByUserId = async (userId) => {
       date: order.date,
       bill: {
         product: order.bill.product,
-        costBeforAddShippingCost: numberService.formatNumber(
-          order.bill.costBeforAddShippingCost
-        ),
-        shipping_cost: numberService.formatNumber(order.bill.shipping_cost),
-        costAfterAddShippingCost: numberService.formatNumber(
-          order.bill.costAfterAddShippingCost
-        ),
+        costBeforAddShippingCost: order.bill.costBeforAddShippingCost,
+        shipping_cost: order.bill.shipping_cost,
+        costAfterAddShippingCost: order.bill.costAfterAddShippingCost,
       },
       isSuccess: order.isSuccess,
       order_status: order.order_status,
@@ -69,4 +65,3 @@ module.exports.saveOrderToDB = async (customer, cart) => {
   });
   return await order.save();
 };
-

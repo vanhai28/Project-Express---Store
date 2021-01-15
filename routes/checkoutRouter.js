@@ -6,11 +6,10 @@ const auth = require("../middleware/authenticate");
 const router = express.Router();
 
 router.get("/", auth.isLogin, (req, res) => {
-  res.render("pages/checkout",{
+  res.render("pages/orders/checkout", {
     title: "Checkout",
   });
 });
-
 
 module.exports = router;
 

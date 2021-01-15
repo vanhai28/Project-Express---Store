@@ -28,7 +28,7 @@
                         <div class="block-minicart minicart__active">
                             <div class="minicart-content-wrapper">
                                 <div class="micart__close">
-                                    <span>Đóng</span>
+                                    
                                 </div>
                                 {{#with cart}}
                                 <div class="items-total d-flex justify-content-between">
@@ -36,7 +36,7 @@
                                     <span>Tổng tiền</span>
                                 </div>
                                 <div class="total_amount text-right">
-                                    <span id="cart-total-price">{{totalPrice}}</span><span> VNĐ</span>
+                                    <span id="cart-total-price">{{formatNumber totalPrice}}</span><span> VNĐ</span>
                                 </div>
                                 <div class="mini_action checkout">
                                     <a class="checkout__btn" href="/cart">Kiểm tra giỏ hàng</a>

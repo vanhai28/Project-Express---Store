@@ -116,11 +116,11 @@
         					</ul>
         					<ul class="order_product">
 								{{#each items}}
-        						<li>{{item.title}} × {{quantity}}<span>{{price}} VNĐ</span></li>
+        						<li>{{item.title}} × {{quantity}}<span>{{formatNumber price}} VNĐ</span></li>
 								{{/each}}
         					</ul>
         					<ul class="shipping__method">
-        						<li>Tổng tiền <span>{{totalPrice}} VNĐ</span></li>
+        						<li>Tổng tiền <span>{{formatNumber totalPrice}} VNĐ</span></li>
         						<li>Phí ship
         							<ul>
 										{{#if shipTK}}
@@ -146,7 +146,7 @@
         						</li>
         					</ul>
         					<ul class="total__amount">
-        						<li>Số tiền phải trả <span id="total-cost">{{totalCost}} VNĐ</span></li>
+        						<li>Số tiền phải trả <span id="total-cost">{{formatNumber totalCost}} VNĐ</span></li>
         					</ul>
         				</div>
 						{{/with}}
