@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const randomstring = require("randomstring");
+
 const orderModel = require("../model/orderModel");
 const bookService = require("./bookService");
 const numberService = require("../service/numberService");
@@ -21,7 +23,7 @@ exports.getOrderByUserId = async (userId) => {
             isSuccess: order.isSuccess,
         };
     });
-    return orders.sort((a, b) => b.date - a.date);
+    return orders.sort((a, b) => Date(b.date) - Date(a.date));
 };
 
 module.exports.saveOrderToDB = async (customer, cart) => {
@@ -48,13 +50,16 @@ module.exports.saveOrderToDB = async (customer, cart) => {
         costAfterAddShippingCost: parseInt(totalCost) * 1000,
     };
     //////
+    const date = new Date();
+    const orderCODE = randomstring.generate(10);
     const order = new orderModel({
+        orderCODE: orderCODE,
         customerID: mongoose.Types.ObjectId(customer.customerID),
-        nameCustomer: customer.name,
+        nameCustomer: customer.nameCustomer,
         address: customer.address,
         phone: customer.phone,
         bill: bill,
-        date: Date.now(),
+        date: date.toString(),
         isSuccess: false,
     });
     return await order.save();
