@@ -8,7 +8,7 @@ module.exports.postLogin = (req, res, next) => {
     }
 
     if (!user) {
-      return res.render("pages/login", {
+      return res.render("pages/account/login", {
         title: "Login",
         message: "Username hoặc mật khẩu không chính xác",
       });
