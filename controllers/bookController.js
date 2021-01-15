@@ -90,6 +90,8 @@ exports.bookDetail = async function (req, res, next) {
       best_seller: bookItem.best_seller,
       old_price: numberService.formatNumber(bookItem.old_price),
       price: numberService.formatNumber(bookItem.price),
+      views: bookItem.views,
+      orders: bookItem.orders,
     }
   });
 

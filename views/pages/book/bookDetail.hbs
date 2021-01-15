@@ -55,15 +55,6 @@
 						<div class="col-lg-6 col-12">
 							<div class="product__info__main">
 								<h1>{{book.title}}</h1>
-								<div class="product-reviews-summary d-flex">
-									<ul class="rating-summary d-flex">
-										<li><i class="zmdi zmdi-star-outline"></i></li>
-										<li><i class="zmdi zmdi-star-outline"></i></li>
-										<li><i class="zmdi zmdi-star-outline"></i></li>
-										<li class="off"><i class="zmdi zmdi-star-outline"></i></li>
-										<li class="off"><i class="zmdi zmdi-star-outline"></i></li>
-									</ul>
-								</div>
 								<div>
 									<ul class="prize d-flex breadcrumb" style="font-size: 1.8rem;">
 										<li>{{book.price}} <sup>đ</sup><strike
@@ -72,11 +63,20 @@
 									</ul>
 								</div>
 
+								<div class="mb-2">
+									<span>Lượt mua: {{book.orders}}</span>					
+								</div>
+
+								<div class="mb-2">
+									<span>Lượt xem: {{book.views}}</span>					
+								</div>
+
 								<div class="box-tocart d-flex">
 									<span>Số lượng</span>
 									<input id="qty" class="input-text qty" name="qty" min="1" value="1" title="Qty"
 										type="number">
-								</div>
+								</div>						
+
 								<div class="card mb-2">
 									<div class="card-body">
 										<p class="badge badge-success">Phí vận chuyển</p>
