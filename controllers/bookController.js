@@ -71,6 +71,12 @@ exports.bookDetail = async function (req, res, next) {
   let relatedBooks = await bookService.getBookByCategory(genre, 6);
   const category = await bookService.getCategory();
 
+  try {
+    await bookService.increaseView(bookId);
+  } catch (error) {
+    console.log(error);
+  }
+
   relatedBooks = relatedBooks.map((bookItem)=>{
     return{
       _id: bookItem._id,
