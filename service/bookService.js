@@ -14,7 +14,7 @@ module.exports.listBook = async (filter, pageNumber, itemPerPage) => {
 
 module.exports.listSortedBook = async (sortType, pageNumber, itemPerPage) => {
   let listBook = await bookMongoose.paginate(
-    {},
+    { isDelete: false },
     {
       sort: { price: sortType },
       page: pageNumber,
@@ -117,21 +117,22 @@ module.exports.getBookById = async (bookId) => {
   return await bookMongoose.findOne({ _id: bookId });
 };
 
-module.exports.updateOrder = async (bookId, quantity) =>
-{
+module.exports.updateOrder = async (bookId, quantity) => {
   const book = await this.getBookById(bookId);
   const orderNum = book.orders;
   const newOrder = orderNum + quantity;
-  await bookMongoose.updateOne({_id: bookId}, {orders: newOrder});
+  await bookMongoose.updateOne({ _id: bookId }, { orders: newOrder });
 };
 
-module.exports.increaseView = async(id)=>{
+module.exports.increaseView = async (id) => {
   const book = await bookMongoose.findById(id);
   const view = book.views;
-  try{
-    return await bookMongoose.findOneAndUpdate({_id:id},{views: view +1});
-  }
-  catch(error){
+  try {
+    return await bookMongoose.findOneAndUpdate(
+      { _id: id },
+      { views: view + 1 }
+    );
+  } catch (error) {
     console.log(error);
   }
-}
+};
