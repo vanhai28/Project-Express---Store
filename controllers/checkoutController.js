@@ -15,6 +15,12 @@ exports.submitCheckout = async (req, res) => {
     const cart = req.session.cart;
     const user = req.user;
 
+    if (user.status == "blocked") {
+        return res.render("pages/checkout", {
+            title: "Checkout",
+            message: "error",
+        })
+    }
     //customer
     const customer = {
         customerID: user._id,
@@ -22,16 +28,16 @@ exports.submitCheckout = async (req, res) => {
         address: address,
         phone: phone,
     }
-    
-    await orderService.saveOrderToDB(customer,cart);
+
+    await orderService.saveOrderToDB(customer, cart);
 
     //reset cart
     req.session.cart.empty();
     res.render("pages/checkoutSubmitting", {
-    title: "Xác nhận mua hàng",
+        title: "Xác nhận mua hàng",
     });
 
-    await checkoutService.sendCheckoutEmail(customer,address,phone,email, cart);
+    await checkoutService.sendCheckoutEmail(customer, address, phone, email, cart);
 };
 
 
