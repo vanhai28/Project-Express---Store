@@ -15,6 +15,7 @@ exports.bookShop = async function (req, res, next) {
     filter = {};
   }
 
+  filter.isDelete = false;
   if (catId) {
     filter.idCategory = catId;
   }
@@ -47,7 +48,7 @@ exports.bookDetail = async function (req, res, next) {
 
   const book = await bookService.getBookById(bookId);
 
-  let filter = { bookID: bookId };
+  let filter = { bookID: bookId, isDelete: false };
   const paginate = await reviewService.listReview(
     filter,
     page,
