@@ -12,7 +12,7 @@ exports.modifyArray = (arr) => {
       _id: book._id,
       cover: book.cover,
       title: book.title,
-      old_price: numberService.formatNumber(book.old_price),
+      old_price: numberService.formatNumber(book.old_price || book.price),
       price: numberService.formatNumber(book.price),
     }
   });
